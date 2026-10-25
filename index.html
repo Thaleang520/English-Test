@@ -571,6 +571,7 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
 .role:hover{transform:translateY(-4px);filter:brightness(1.15)}
 .role:active{transform:scale(.96)}
 @media (max-width:420px){.role{min-height:118px}.role b{font-size:.95rem;letter-spacing:.1em}.role small{font-size:.78rem}.role i{font-size:1.7rem}}
+.sent{margin-top:14px;font-weight:700;width:100%;max-width:420px}.sent p{margin:6px 0}.sent .fld{text-align:center;font-size:.8rem}
 </style></head>
 <body><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
 <script>
@@ -750,7 +751,7 @@ function examScreen(){
     h+=`<div class="res"><div class="ring" style="--p:${sc/tot*100}"><div><span>${sc}<small>out of ${tot}</small></span></div></div>
     <h3>${S.timeout?"Time is up! ":""}${sc>=tot*.9?"Excellent work!":sc>=tot*.7?"Great job!":sc>=tot*.5?"Good effort!":"Keep practising!"}</h3>
     <span style="color:var(--mut)">Review your answers below: green is correct, red is your mistake.</span>
-    ${S.sent?`<p class="sent" style="margin:14px 0 0;font-weight:700">${S.sent}</p>`:""}<div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
+    ${S.sent?`<div class="sent">${S.sent}</div>`:""}<div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
   }
   for(let k=0;k<CONFIG.perPage;k++){              // the questions of this page
     const n=p*CONFIG.perPage+k,q=Q[n],a=ans[n],show=done||a!==undefined;
@@ -884,7 +885,9 @@ document.addEventListener("keydown",e=>{const q=document.getElementById("q");   
    Claude with the shared database on, it is saved there too.
    ===================================================================== */
 const LSg={get:k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let CLOUD=(LSg.get("ce_cloud")||"").replace(/\/+$/,"");   // optional online database URL (teacher sets it, links carry it to students)
+/* >>> To make online sync work for EVERY student who only types name + code, paste your database URL between the quotes below, then re-upload the file <<< */
+const DEFAULT_CLOUD="";
+let CLOUD=(LSg.get("ce_cloud")||DEFAULT_CLOUD).replace(/\/+$/,"");   // optional online database URL (teacher sets it, links carry it to students)
 let JOIN=null;                                              // group data carried inside a share link
 const cj=async(m,path,body)=>{const r=await fetch(CLOUD+"/"+path+".json",{method:m,body:body===undefined?undefined:JSON.stringify(body)});if(!r.ok)throw new Error(r.status);return r.json()};
 const vals=o=>o?Object.values(o):[];
@@ -939,9 +942,10 @@ function openGroupExam(g,name,key){
 }
 function saveGroupResult(St,sc){
   const tot=St.list.length*CONFIG.perPage;
-  store.saveResult({key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()}).then(st=>{
-    St.sent=st=="ok"?"✔ Your result was sent to your teacher.":st=="local"?"Result saved on this device only (online sync is off). Tell your teacher your score.":"⚠ Could not send your result online. Tell your teacher your score.";
-    const r=document.querySelector(".res");if(r&&S===St&&!r.querySelector(".sent"))r.insertAdjacentHTML("beforeend",`<p class="sent" style="margin:14px 0 0;font-weight:700">${St.sent}</p>`)});
+  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()},rc=b64e({c:r.code,n:r.name,s:sc,t:tot});
+  store.saveResult(r).then(st=>{
+    St.sent=st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."} Send this <b>result code</b> to your teacher:</p><input class="fld" readonly value="${rc}" onfocus="this.select()">`;
+    const b=document.querySelector(".res");if(b&&S===St&&!b.querySelector(".sent"))b.insertAdjacentHTML("beforeend",`<div class="sent">${St.sent}</div>`)});
 }
 
 /* ---- student login ---- */
@@ -987,7 +991,7 @@ async function teacherScreen(){
   <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
   ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
   <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
-  <div class="gbar"><button class="ghost" data-a="tlink">Share link</button><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  <div class="gbar"><button class="ghost" data-a="tlink">Share link</button><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
   scrollTo(0,0);
 }
 async function teacherAction(a,b){
@@ -1005,7 +1009,7 @@ async function teacherAction(a,b){
   if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
     if(u&&!/^https:\/\/.+/.test(u)){e.textContent="The URL must start with https://";return}
     CLOUD=u;LSg.set("ce_cloud",u);
-    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";e.textContent="Connected. New groups are shared online."}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
+    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";e.textContent="Connected. For students who only type name + code, also paste this URL into DEFAULT_CLOUD near the top of section 9 in the file and re-upload it."}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
     else{e.style.color="var(--mut)";e.textContent="Online sync is off."}
     const mine=LSg.get("ce_groups")||[];if(CLOUD)for(const g of mine){try{await cj("PUT","groups/"+g.code,g)}catch(x){}}
     return}
@@ -1017,6 +1021,13 @@ async function teacherAction(a,b){
     card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
     try{await navigator.clipboard.writeText(link);card.querySelector(".rbox .meta").insertAdjacentHTML("afterbegin","<b>Copied!</b> ")}catch(x){}
   }
+  else if(a=="timport"){
+    const t=prompt("Paste the student's result code:");if(!t)return;
+    try{const x=b64d(t.trim());if(x.c!=code||!x.n)throw 0;
+      await store.saveResult({key:code+"_"+ghash(String(x.n).toLowerCase()).toString(36),code,name:String(x.n),score:+x.s,total:+x.t,at:Date.now()});
+      card.querySelector('[data-a=tres]').click()}
+    catch(e){alert("This result code is not valid for this group.")}
+  }
   else if(a=="tres"){
     const r=await store.results(code);
     card.querySelector(".rbox").innerHTML=r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`;
@@ -1027,7 +1038,7 @@ document.addEventListener("click",e=>{
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|make|res|close|del|link|cloudsave)$/.test(a))teacherAction(a,b);
+  else if(/^t(all|none|make|res|close|del|link|cloudsave|import)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
