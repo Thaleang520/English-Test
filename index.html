@@ -4,7 +4,7 @@
 <title>English Tenses Exam - Class Mode</title>
 <link rel="icon" type="image/png" href="Piece of Cake.png">
 <meta name="theme-color" content="#07050f">
-<!-- <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%2300f0ff'/%3E%3Cstop%20offset='1'%20stop-color='%23ff2bd6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M0%200H52L64%2012V64H12L0%2052Z'%20fill='url(%23g)'/%3E%3Cpath%20d='M16%2017H48V26H36V50H28V26H16Z'%20fill='%2305030d'/%3E%3C/svg%3E"> -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%2300f0ff'/%3E%3Cstop%20offset='1'%20stop-color='%23ff2bd6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M0%200H52L64%2012V64H12L0%2052Z'%20fill='url(%23g)'/%3E%3Cpath%20d='M16%2017H48V26H36V50H28V26H16Z'%20fill='%2305030d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap">
 <style>
 :root{--font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;--font-head:"Orbitron",sans-serif;--font-mono:"Share Tech Mono",Consolas,monospace;color-scheme:light dark;--bg:#f3f4fb;--card:#ffffff;--ink:#1b1f3b;--mut:#6a7090;--bd:#e4e6f3;--ac:#5b5bf0;--ac2:#a259ff;--ok:#16a34a;--okb:#dcfce7;--bad:#dc2626;--badb:#fee2e2;--selb:#ebebff;--sh:0 10px 30px rgba(60,60,140,.12)}
@@ -883,18 +883,22 @@ document.addEventListener("keydown",e=>{const q=document.getElementById("q");   
    Data is saved in this browser (localStorage). If the page runs inside
    Claude with the shared database on, it is saved there too.
    ===================================================================== */
-let gdb=null;
 const LSg={get:k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let CLOUD=(LSg.get("ce_cloud")||"").replace(/\/+$/,"");   // optional online database URL (teacher sets it, links carry it to students)
+let JOIN=null;                                              // group data carried inside a share link
+const cj=async(m,path,body)=>{const r=await fetch(CLOUD+"/"+path+".json",{method:m,body:body===undefined?undefined:JSON.stringify(body)});if(!r.ok)throw new Error(r.status);return r.json()};
+const vals=o=>o?Object.values(o):[];
 const store={
- async groups(){if(gdb){try{return (await gdb.collection("groups").get()).docs.map(d=>d.data())}catch(e){}}return LSg.get("ce_groups")||[]},
- async group(c){if(gdb){try{const d=await gdb.collection("groups").doc(c).get();if(d.exists)return d.data()}catch(e){}}return (LSg.get("ce_groups")||[]).find(g=>g.code==c)||null},
- async saveGroup(g){if(gdb){try{await gdb.collection("groups").doc(g.code).set(g)}catch(e){}}const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a)},
- async delGroup(c){if(gdb){try{await gdb.collection("groups").doc(c).delete()}catch(e){}}LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c))},
- async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(gdb){try{const d=(await gdb.collection("results").where("code","==",c).get()).docs.map(x=>x.data()),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
- async saveResult(r){if(gdb){try{await gdb.collection("results").doc(r.key).set(r)}catch(e){}}const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a)},
- async done(k){if(gdb){try{if((await gdb.collection("results").doc(k).get()).exists)return true}catch(e){}}return !!(LSg.get("ce_res")||[]).find(x=>x.key==k)}
+ async groups(){if(CLOUD){try{return vals(await cj("GET","groups"))}catch(e){}}return LSg.get("ce_groups")||[]},
+ async group(c){if(CLOUD){try{const g=await cj("GET","groups/"+c);if(g)return g}catch(e){}}return (LSg.get("ce_groups")||[]).find(g=>g.code==c)||null},
+ async saveGroup(g){const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a);if(CLOUD){try{await cj("PUT","groups/"+g.code,g)}catch(e){}}},
+ async delGroup(c){LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c));if(CLOUD){try{await cj("DELETE","groups/"+c);await cj("DELETE","results/"+c)}catch(e){}}},
+ async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(CLOUD){try{const d=vals(await cj("GET","results/"+c)),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
+ async saveResult(r){const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a);if(CLOUD){try{await cj("PUT","results/"+r.code+"/"+r.key.slice(r.code.length+1),r)}catch(e){}}},
+ async done(k,c){if((LSg.get("ce_res")||[]).find(x=>x.key==k))return true;if(CLOUD){try{if(await cj("GET","results/"+c+"/"+k.slice(c.length+1)))return true}catch(e){}}return false}
 };
-if(window.claude&&claude.use)claude.use("db").then(d=>{gdb=d}).catch(()=>{});
+const b64e=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const b64d=t=>JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,"+").replace(/_/g,"/")))));
 
 const nav=h=>{if(location.hash.slice(1)==h)route();else location.hash=h};
 const gesc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -929,18 +933,19 @@ function loginScreen(){
   leaveExam();
   app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Student</span><h2>Exam login</h2><p class="sub2">Enter your name and the code from your teacher.</p>
   <label class="l" for="gname">Your name</label><input class="fld" id="gname" autocomplete="name" placeholder="Your full name">
-  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
+  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN?JOIN.c:""}" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
   <p class="gerr" id="gerr"></p><button class="cta-btn start-btn" data-a="glogin"><span class="st"><b>Enter exam</b></span><span class="cta-a">→</span></button></div>`;
   scrollTo(0,0);
 }
 async function doLogin(){
   const name=document.getElementById("gname").value.trim().replace(/\s+/g," "),code=document.getElementById("gcode").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,""),e=document.getElementById("gerr");
   if(!name||!code){e.textContent="Please enter your name and the group code.";return}
-  const g=await store.group(code);
-  if(!g){e.textContent="Group code not found. Ask your teacher.";return}
+  let g=await store.group(code);
+  if(!g&&JOIN&&JOIN.c==code)g={code:JOIN.c,name:JOIN.n,tenses:JOIN.t,page:JOIN.p,created:0,closed:false};
+  if(!g){e.textContent="Group code not found. Use the link your teacher shared, or check the code.";return}
   if(g.closed){e.textContent="This exam is closed.";return}
-  const key=code+"_"+name.toLowerCase().replace(/[^a-z0-9]+/g,"-");
-  if(await store.done(key)){e.textContent="This name has already finished the exam.";return}
+  const key=code+"_"+ghash(name.toLowerCase()).toString(36);
+  if(await store.done(key,code)){e.textContent="This name has already finished the exam.";return}
   openGroupExam(g,name,key);
 }
 
@@ -959,10 +964,13 @@ async function teacherScreen(){
   <label class="l" for="tp">Pages for students</label>
   <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
   <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
+  <div class="panel"><h2>Online sync</h2><p class="sub2">So students on <b>other devices</b> can log in and you can see their scores, paste a free <b>Firebase Realtime Database</b> URL (create a project, then Build &rarr; Realtime Database &rarr; Create in test mode).</p>
+  <label class="l" for="tcloud">Database URL</label><input class="fld" id="tcloud" value="${gesc(CLOUD)}" placeholder="https://your-project-default-rtdb.firebaseio.com">
+  <p class="gerr" id="cerr"></p><button class="btn" data-a="tcloudsave">Save URL</button></div>
   <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
   ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
   <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
-  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  <div class="gbar"><button class="ghost" data-a="tlink">Share link</button><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
   scrollTo(0,0);
 }
 async function teacherAction(a,b){
@@ -978,9 +986,21 @@ async function teacherAction(a,b){
     if(await store.group(code)){e.textContent="That code is already used. Press New code.";return}
     await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
   }
+  if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
+    if(u&&!/^https:\/\/.+/.test(u)){e.textContent="The URL must start with https://";return}
+    CLOUD=u;LSg.set("ce_cloud",u);
+    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";e.textContent="Connected. New groups are shared online."}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
+    else{e.style.color="var(--mut)";e.textContent="Online sync is off."}
+    const mine=LSg.get("ce_groups")||[];if(CLOUD)for(const g of mine){try{await cj("PUT","groups/"+g.code,g)}catch(x){}}
+    return}
   const card=b.closest(".gcard"),code=card&&card.dataset.c;if(!code)return;
   if(a=="tdel"){if(confirm("Delete this group and its results?")){await store.delGroup(code);teacherScreen()}}
   else if(a=="tclose"){const g=await store.group(code);g.closed=!g.closed;await store.saveGroup(g);teacherScreen()}
+  else if(a=="tlink"){
+    const g=await store.group(code),link=location.href.split("#")[0]+"#join="+b64e({c:g.code,n:g.name,t:g.tenses,p:g.page,d:CLOUD});
+    card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
+    try{await navigator.clipboard.writeText(link);card.querySelector(".rbox .meta").insertAdjacentHTML("afterbegin","<b>Copied!</b> ")}catch(x){}
+  }
   else if(a=="tres"){
     const r=await store.results(code);
     card.querySelector(".rbox").innerHTML=r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`;
@@ -991,10 +1011,10 @@ document.addEventListener("click",e=>{
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|code|make|res|close|del)$/.test(a))teacherAction(a,b);
+  else if(/^t(all|none|code|make|res|close|del|link|cloudsave)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
-function route(){const id=location.hash.slice(1);if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
+function route(){const id=location.hash.slice(1);if(id.startsWith("join=")){try{JOIN=b64d(id.slice(5));if(JOIN.d)CLOUD=JOIN.d.replace(/\/+$/,"")}catch(e){JOIN=null}loginScreen()}else if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
 addEventListener("hashchange",route);route();
 </script></body></html>
