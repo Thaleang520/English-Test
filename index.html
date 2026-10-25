@@ -742,7 +742,7 @@ function examScreen(){
   const left=done?S.left:secLeft(), first=S.list[0];
   let h=`<div class="top" style="${cv(T)}"><div class="th"><button class="ghost" data-a="home">← Home</button>
     <div style="flex:1;min-width:0"><b>${T.name}</b><br><small>Page ${p+1} of ${CONFIG.pages} · Questions ${p*CONFIG.perPage+1}–${(p+1)*CONFIG.perPage}</small></div>
-    </div>
+    ${S.group&&!done?`<button class="btn p" data-a="submit">Finish exam</button>`:""}</div>
     <div class="bar"><i style="width:${cnt/tot*100}%"></i></div><div class="pct">${cnt}/${tot} answered · ${MINUTES} minutes per page</div></div>
     <div style="${cv(T)}">${S.note&&!done?`<div class="note">${S.note}</div>`:""}`;
   if(done){                                       // result box
@@ -750,7 +750,7 @@ function examScreen(){
     h+=`<div class="res"><div class="ring" style="--p:${sc/tot*100}"><div><span>${sc}<small>out of ${tot}</small></span></div></div>
     <h3>${S.timeout?"Time is up! ":""}${sc>=tot*.9?"Excellent work!":sc>=tot*.7?"Great job!":sc>=tot*.5?"Good effort!":"Keep practising!"}</h3>
     <span style="color:var(--mut)">Review your answers below: green is correct, red is your mistake.</span>
-    <div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
+    ${S.sent?`<p class="sent" style="margin:14px 0 0;font-weight:700">${S.sent}</p>`:""}<div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
   }
   for(let k=0;k<CONFIG.perPage;k++){              // the questions of this page
     const n=p*CONFIG.perPage+k,q=Q[n],a=ans[n],show=done||a!==undefined;
@@ -843,7 +843,7 @@ document.addEventListener("click",e=>{
   if(a=="sel"){S.sel=b.dataset.v=="all"?"all":+b.dataset.v;examScreen();return}
   if(a=="start"){startWithFx(b,e);return}
   if(a=="pick"){const n=+b.dataset.n;if(S.done||S.ans[n]!==undefined)return;S.ans[n]=+b.dataset.j;autoFinish();const y=scrollY;examScreen();scrollTo(0,y);return}
-  if(a=="submit"){finishExam();return}
+  if(a=="submit"){if(S.group&&!S.done&&!confirm("Finish the exam now and send your result?"))return;finishExam();return}
   if(a=="retry"){openExam(S.T.id,S.run+1,S.sel);return}
   if(a=="go")S.p=+b.dataset.p;
   else if(a=="next"){if(!S.done){nextPage(false);return}S.p=Math.min(S.last,S.p+1)}
@@ -894,7 +894,7 @@ const store={
  async saveGroup(g){const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a);if(CLOUD){try{await cj("PUT","groups/"+g.code,g)}catch(e){}}},
  async delGroup(c){LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c));if(CLOUD){try{await cj("DELETE","groups/"+c);await cj("DELETE","results/"+c)}catch(e){}}},
  async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(CLOUD){try{const d=vals(await cj("GET","results/"+c)),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
- async saveResult(r){const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a);if(CLOUD){try{await cj("PUT","results/"+r.code+"/"+r.key.slice(r.code.length+1),r)}catch(e){}}},
+ async saveResult(r){const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a);if(CLOUD){try{await cj("PUT","results/"+r.code+"/"+r.key.slice(r.code.length+1),r);return"ok"}catch(e){return"fail"}}return"local"},
  async done(k,c){if((LSg.get("ce_res")||[]).find(x=>x.key==k))return true;if(CLOUD){try{if(await cj("GET","results/"+c+"/"+k.slice(c.length+1)))return true}catch(e){}}return false}
 };
 const b64e=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
@@ -903,6 +903,20 @@ const b64d=t=>JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,"+").repl
 const nav=h=>{if(location.hash.slice(1)==h)route();else location.hash=h};
 const gesc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ghash=x=>{let h=7;for(const c of x)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
+const ALPH="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+/* The code itself carries the exam: 12 bits = tenses, 3 bits = page, 15 bits = random. Any device can read it, no database needed. */
+function mkExamCode(ids,page){
+  let mask=0;TENSES.forEach((t,i)=>{if(ids.includes(t.id))mask|=1<<i});
+  const pv=page=="all"?7:+page,n=((mask<<18)|(pv<<15)|Math.floor(Math.random()*32768))>>>0;
+  let c="";for(let i=5;i>=0;i--)c+=ALPH[(n>>>(i*5))&31];return c;
+}
+function readExamCode(c){
+  if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c))return null;
+  let n=0;for(const ch of c)n=n*32+ALPH.indexOf(ch);
+  const mask=Math.floor(n/262144)&4095,pv=Math.floor(n/32768)&7;
+  if(!mask||(pv>4&&pv!=7))return null;
+  return {code:c,name:"Class exam",tenses:TENSES.filter((t,i)=>mask&(1<<i)).map(t=>t.id),page:pv==7?"all":pv,created:0,closed:false};
+}
 const mkCode=()=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s};
 const leaveExam=()=>{if(S){clearInterval(S.timer);S=null}};
 const topBar=()=>`<div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>`;
@@ -925,7 +939,9 @@ function openGroupExam(g,name,key){
 }
 function saveGroupResult(St,sc){
   const tot=St.list.length*CONFIG.perPage;
-  store.saveResult({key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()});
+  store.saveResult({key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()}).then(st=>{
+    St.sent=st=="ok"?"✔ Your result was sent to your teacher.":st=="local"?"Result saved on this device only (online sync is off). Tell your teacher your score.":"⚠ Could not send your result online. Tell your teacher your score.";
+    const r=document.querySelector(".res");if(r&&S===St&&!r.querySelector(".sent"))r.insertAdjacentHTML("beforeend",`<p class="sent" style="margin:14px 0 0;font-weight:700">${St.sent}</p>`)});
 }
 
 /* ---- student login ---- */
@@ -942,6 +958,7 @@ async function doLogin(){
   if(!name||!code){e.textContent="Please enter your name and the group code.";return}
   let g=await store.group(code);
   if(!g&&JOIN&&JOIN.c==code)g={code:JOIN.c,name:JOIN.n,tenses:JOIN.t,page:JOIN.p,created:0,closed:false};
+  if(!g)g=readExamCode(code);
   if(!g){e.textContent="Group code not found. Use the link your teacher shared, or check the code.";return}
   if(g.closed){e.textContent="This exam is closed.";return}
   const key=code+"_"+ghash(name.toLowerCase()).toString(36);
@@ -957,10 +974,10 @@ async function teacherScreen(){
   app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Teacher</span><h2>Create a group</h2>
   <p class="sub2">Make a group, choose the exam, then give the code to your students.</p>
   <div class="g2"><div><label class="l" for="tn">Group name</label><input class="fld" id="tn" placeholder="e.g. Class 7A"></div>
-  <div><label class="l" for="tc">Student code</label><input class="fld" id="tc" maxlength="8" value="${mkCode()}" style="text-transform:uppercase;letter-spacing:.2em"></div></div>
+  <div><label class="l" for="tc">Student code</label><input class="fld" id="tc" readonly value="Made when you press Create" style="color:var(--mut)"></div></div>
   <label class="l">Exam tenses (choose one or more)</label>
   <div class="tgrid">${TENSES.map(t=>`<label class="tg"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
-  <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button><button class="ghost" data-a="tcode">New code</button></div>
+  <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button></div>
   <label class="l" for="tp">Pages for students</label>
   <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
   <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
@@ -977,13 +994,12 @@ async function teacherAction(a,b){
   const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")];
   if(a=="tall"){boxes().forEach(x=>x.checked=true);return}
   if(a=="tnone"){boxes().forEach(x=>x.checked=false);return}
-  if(a=="tcode"){$("tc").value=mkCode();return}
+  
   if(a=="tmake"){
-    const name=$("tn").value.trim(),code=$("tc").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,""),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pg=$("tp").value;
+    const name=$("tn").value.trim(),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pg=$("tp").value;
     if(!name){e.textContent="Enter a group name.";return}
-    if(code.length<4){e.textContent="The code needs at least 4 letters or numbers.";return}
     if(!tenses.length){e.textContent="Choose at least one tense for the exam.";return}
-    if(await store.group(code)){e.textContent="That code is already used. Press New code.";return}
+    let code;do{code=mkExamCode(tenses,pg)}while(await store.group(code));
     await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
   }
   if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
@@ -1011,7 +1027,7 @@ document.addEventListener("click",e=>{
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|code|make|res|close|del|link|cloudsave)$/.test(a))teacherAction(a,b);
+  else if(/^t(all|none|make|res|close|del|link|cloudsave)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
