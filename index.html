@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>English Tenses Exam - Class Mode</title>
+<title>English Tenses Exam</title>
 <link rel="icon" type="image/png" href="Piece of Cake.png">
 <meta name="theme-color" content="#07050f">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%2300f0ff'/%3E%3Cstop%20offset='1'%20stop-color='%23ff2bd6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M0%200H52L64%2012V64H12L0%2052Z'%20fill='url(%23g)'/%3E%3Cpath%20d='M16%2017H48V26H36V50H28V26H16Z'%20fill='%2305030d'/%3E%3C/svg%3E">
@@ -520,58 +520,69 @@ body{min-height:100dvh}
   .go{font-size:.62rem;padding:6px 14px}
 }
 
-/* ================= TEACHER / STUDENT CLASS MODE ================= */
-[hidden]{display:none!important}
-.panel{max-width:660px;margin:22px auto;padding:26px 20px;background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--ac);animation:fade .4s ease}
-.panel h2{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px;font-size:1.5rem;text-shadow:0 0 14px var(--ac)}
-.panel p.sub2{margin:0 0 6px;color:var(--mut)}
-.panel label.l{display:block;margin:16px 0 6px;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
-.fld{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--ink);font-family:var(--font-mono);font-size:1.05rem;border-radius:0}
-.fld:focus{outline:none;border-color:var(--ac);box-shadow:0 0 14px color-mix(in srgb,var(--ac) 35%,transparent)}
-select.fld option{background:#0e0a20;color:#e6f7ff}
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
-.tg{display:flex;gap:8px;align-items:center;padding:9px 10px;border:1px solid var(--bd);cursor:pointer;font-weight:600}
-.tg input{accent-color:var(--ac);width:16px;height:16px}
-.tg:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,transparent)}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.gbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.gerr{color:var(--bad);min-height:1.4em;margin:12px 0 0;font-family:var(--font-mono)}
-.gcode{font-family:var(--font-head);font-size:1.7rem;letter-spacing:.2em;color:var(--ac);text-shadow:0 0 12px var(--ac)}
-.gcard{margin-top:16px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--ac2);background:rgba(255,255,255,.02)}
-.gcard h3{margin:0;font-family:var(--font-head);font-size:1.05rem;text-transform:uppercase;letter-spacing:.05em}
-.gcard .meta{color:var(--mut);font-size:.92rem;margin:4px 0 10px}
-.gtop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.gtab{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}
-.gtab th,.gtab td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd)}
-.gtab th{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
-.hero .cta .btn.big{min-width:210px}
-@media (max-width:560px){.g2{grid-template-columns:1fr}}
+/* ================= CLASSROOM: teacher page, student login ================= */
+.roles{display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.hero h1.hello{font-size:clamp(1.3rem,5vw,2.4rem);overflow-wrap:anywhere}
+.intro.pg .sub{margin-bottom:18px}
+.intro.pg.wide{max-width:900px}
+.intro.pg .fld{display:block;text-align:left;margin:14px 0}
+.fld span{display:block;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.fld input{width:100%;height:52px;padding:0 14px;background:#05030d;border:1px solid var(--bd);border-left:3px solid var(--ac);color:var(--ink);font:600 1.05rem var(--font-mono);letter-spacing:.04em;outline:none;border-radius:0}
+.fld input:focus{border-color:var(--ac);box-shadow:0 0 16px color-mix(in srgb,var(--ac) 35%,transparent)}
+.fld input::placeholder{color:var(--mut);font-weight:400;text-transform:none}
+.note.okk{background:var(--okb);color:var(--ok)}
+.demo{margin:0 0 14px;padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.82rem;color:#ffd21f;background:rgba(255,210,31,.08);border-left:3px solid #ffd21f}
+.tsel{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:12px}
+.tp{border:1px solid var(--bd);background:rgba(255,255,255,.03);color:var(--ink);padding:11px 12px 11px 34px;text-align:left;cursor:pointer;position:relative;font-weight:700;font-size:.95rem;line-height:1.2;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);transition:all .15s}
+.tp::before{content:"";position:absolute;left:11px;top:50%;width:14px;height:14px;margin-top:-7px;border:2px solid var(--c1)}
+.tp.on{border-color:var(--c1);background:color-mix(in srgb,var(--c1) 16%,transparent);color:var(--c1);text-shadow:0 0 10px var(--c1)}
+.tp.on::before{background:var(--c1);box-shadow:0 0 8px var(--c1)}
+.tp.on::after{content:"✓";position:absolute;left:13px;top:50%;margin-top:-9px;font-size:.8rem;color:#05030d;text-shadow:none;font-weight:900}
+.mini2{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.svs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.sv{border:1px solid var(--bd);border-left:3px solid var(--ac);background:rgba(255,255,255,.03);padding:12px 14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.sv:hover{border-color:var(--ac)}
+.sv small{font-family:var(--font-mono);color:var(--ac);letter-spacing:.2em}
+.cbox{margin:10px 0 6px;padding:18px 14px;border:1px solid var(--bd);border-left:3px solid var(--ac);background:rgba(255,255,255,.03)}
+.cbox small{font-family:var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-size:.74rem}
+.codebig{font-family:var(--font-head);font-weight:900;font-size:clamp(1.8rem,8vw,3rem);letter-spacing:.22em;color:var(--ac);text-shadow:0 0 16px var(--ac);margin:6px 0 10px;overflow-wrap:anywhere}
+.btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.linkline{margin-top:10px;font-family:var(--font-mono);font-size:.74rem;color:var(--mut);overflow-wrap:anywhere}
+.sec{margin-top:26px}
+.mutp{color:var(--mut);font-size:.95rem;margin:12px 0 0}
+.tw{overflow-x:auto;margin-top:14px;text-align:left}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px}
+.tbl th,.tbl td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:center;white-space:nowrap}
+.tbl th{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;white-space:normal;color:var(--mut)}
+.tbl td.nm,.tbl th:first-child{text-align:left;font-weight:700;white-space:normal}
+.tbl td.hi{color:var(--ok);font-weight:700}.tbl td.md{color:#ffd21f;font-weight:700}.tbl td.lo{color:var(--bad);font-weight:700}.tbl td.na{color:var(--mut)}
+.sent{margin-top:12px;padding:8px 12px;font-family:var(--font-mono);font-size:.9rem;border-left:3px solid currentColor;text-align:left}
+.sent.ok{color:var(--ok)}.sent.err{color:var(--bad)}.sent.saving,.sent:not(.ok):not(.err){color:var(--mut)}
+.sent .btn{margin-left:8px;padding:6px 12px}
+@media (max-width:640px){.intro.pg{padding:26px 14px}.tsel{grid-template-columns:1fr 1fr;gap:6px}.tp{font-size:.8rem;padding:10px 8px 10px 30px}.tp::before{left:8px}.tp.on::after{left:10px}}
 
-/* ================= BETTER BUTTONS ================= */
-.btn,.ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 22px;font-family:var(--font-head);font-size:.78rem;font-weight:700;letter-spacing:.12em;transition:background .18s,color .18s,transform .15s,filter .18s,box-shadow .18s}
-.btn:hover,.ghost:hover{transform:translateY(-2px)}
-.btn:active,.ghost:active{transform:translateY(0) scale(.97)}
-.btn:focus-visible,.ghost:focus-visible,.role:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
-.btn.p{box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 40%,transparent) inset}
-.btn.big{min-height:54px;padding:14px 34px;font-size:.9rem}
-.ghost.dng{border-color:var(--bad);color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,transparent)}
-.ghost.dng:hover{background:var(--bad);color:#05030d}
-.gbar{gap:8px}.gbar .ghost{flex:1 1 0;min-width:104px}
-.panel .btn.big,.panel .cta-btn{width:100%}
-.panel .cta-wrap,.panel>.cta-btn{margin-top:6px}
-.th .ghost{min-height:40px;padding:8px 18px}
-/* Student + Teacher side by side */
-.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:580px;margin:0 auto}
-.role{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:132px;padding:18px 12px;text-align:center;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));transition:transform .2s,filter .2s}
-.role i{font-style:normal;font-size:2rem;line-height:1;margin-bottom:4px}
-.role b{font-family:var(--font-head);font-size:1.1rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-.role small{font-size:.86rem;font-weight:600;opacity:.85}
-.role.st{color:#05030d;background:linear-gradient(120deg,var(--ac),var(--ac2))}
-.role.te{color:var(--ac);background:linear-gradient(color-mix(in srgb,var(--ac) 10%,var(--bg)),color-mix(in srgb,var(--ac) 10%,var(--bg)));box-shadow:inset 0 0 0 2px var(--ac)}
-.role:hover{transform:translateY(-4px);filter:brightness(1.15)}
-.role:active{transform:scale(.96)}
-@media (max-width:420px){.role{min-height:118px}.role b{font-size:.95rem;letter-spacing:.1em}.role small{font-size:.78rem}.role i{font-size:1.7rem}}
-.sent{margin-top:14px;font-weight:700;width:100%;max-width:420px}.sent p{margin:6px 0}.sent .fld{text-align:center;font-size:.8rem}
+/* ================= HOME: STUDENT / TEACHER BUTTONS ================= */
+.roles{gap:14px;margin-top:20px}
+.role{all:unset;box-sizing:border-box;position:relative;cursor:pointer;display:flex;align-items:center;gap:14px;min-width:268px;padding:14px 20px;
+  --a:var(--ac);--b:var(--ac2);border:2px solid transparent;
+  background:linear-gradient(#0b0720,#0b0720) padding-box,linear-gradient(135deg,var(--a),var(--b)) border-box;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  box-shadow:inset 0 0 22px color-mix(in srgb,var(--a) 14%,transparent);text-align:left;
+  transition:transform .2s,box-shadow .25s,background .25s;-webkit-tap-highlight-color:transparent}
+.role.teach{--a:#fcee09;--b:#ff7a00}
+.role svg{flex:none;width:34px;height:34px;padding:7px;fill:none;stroke:#05030d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;background:linear-gradient(135deg,var(--a),var(--b));clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.role span{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.role b{font-family:var(--font-head);font-size:.92rem;letter-spacing:.1em;text-transform:uppercase;color:var(--a);text-shadow:0 0 12px color-mix(in srgb,var(--a) 70%,transparent)}
+.role small{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.03em;color:var(--mut)}
+.role i{font-style:normal;font-size:1.3rem;color:var(--b);transition:transform .2s}
+.role:hover,.role:focus-visible{transform:translateY(-3px);box-shadow:inset 0 0 36px color-mix(in srgb,var(--a) 34%,transparent)}
+.role:hover i,.role:focus-visible i{transform:translateX(6px)}
+.role:active{transform:scale(.97)}
+.role:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+@media (hover:none){.role:hover{transform:none}}
+@media (max-width:640px){.roles{flex-direction:column;align-items:stretch;gap:10px}.role{min-width:0;width:100%;padding:12px 16px}}
+
+.pgp{justify-content:flex-start;margin-top:10px}
 </style></head>
 <body><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
 <script>
@@ -599,7 +610,10 @@ const CONFIG={
   navLabel:"v2.0",
   tagLine:"System online // Grammar practice",
   heroTitle:"Master English", heroWord:"Tenses",
-  chips:["I play","She is playing","They played","We will play"]   // floating words (wide screens)
+  chips:["I play","She is playing","They played","We will play"],   // floating words (wide screens)
+  // ONLINE DATABASE for the teacher / student pages (free Firebase Firestore). Leave both empty = demo mode (this device only).
+  // projectId: Firebase console > Project settings > General > Project ID.   apiKey: the "Web API Key" of the same page.
+  firebase:{projectId:"",apiKey:""}
 };
 const TOTAL=CONFIG.pages*CONFIG.perPage, SECS=CONFIG.secondsPerPage;
 const RED_AT=SECS*CONFIG.redAtPercent/100, YELLOW_AT=SECS*CONFIG.yellowAtPercent/100;
@@ -713,7 +727,10 @@ function homeScreen(){
     <span class="tag"><i class="pulse"></i>${CONFIG.tagLine}</span>
     <h1>${CONFIG.heroTitle}<br><span class="ul">${CONFIG.heroWord}</span></h1>
     <div class="cta"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input id="q" type="search" placeholder="Search tenses…" autocomplete="off" spellcheck="false" aria-label="Search tenses"><kbd>/</kbd></label></div>
-    <div class="cta"><div class="roles"><button class="role st" data-a="tologin"><i>🎓</i><b>Student</b><small>Log in with name + code</small></button><button class="role te" data-a="toteacher"><i>🧑‍🏫</i><b>Teacher</b><small>Create groups &amp; exams</small></button></div></div>
+    <div class="roles">
+      <button class="role" data-t="nav" data-dest="login"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span><b>Student login</b><small>Enter your name and code</small></span><i>→</i></button>
+      <button class="role teach" data-t="nav" data-dest="teacher"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/><path d="M21 9v6"/></svg><span><b>Teacher</b><small>Make groups and choose exams</small></span><i>→</i></button>
+    </div>
     <div class="stats">${stat(0,TENSES.length,"Tenses")}${stat(1,TOTAL,"Questions each")}${stat(2,TOTAL*TENSES.length,"Total questions")}</div>
   </div>
   <div class="grid">`+TENSES.map((T,k)=>{const b=best("best-"+T.id);
@@ -731,8 +748,8 @@ function introScreen(){            // the screen with the Start button and page 
   <div class="intro${fresh?" enter":""}"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><p class="sub">${T.d}</p><div class="exq">${T.ex}</div>
   <div class="mini"><div><b>${sel=="all"?TOTAL:CONFIG.perPage}</b><span>Questions</span></div><div><b>${sel=="all"?CONFIG.pages:1}</b><span>${sel=="all"?"Pages":"Page"}</span></div><div><b>${MINUTES}</b><span>Min per page</span></div></div>
   <div class="cw"><small>Time per page</small><div class="clock big">${clock(SECS)}</div></div>
-  <div class="pkh" ${S.group?"hidden":""}>Choose a page</div>
-  <div class="pks" ${S.group?"hidden":""}>${pick("all","All pages",TOTAL+" questions")}${pageNums.map(i=>pick(i,"Page "+(i+1),"Q "+(i*CONFIG.perPage+1)+"–"+(i+1)*CONFIG.perPage)).join("")}</div>
+  ${STU?"":`  <div class="pkh">Choose a page</div>
+  <div class="pks">${pick("all","All pages",TOTAL+" questions")}${pageNums.map(i=>pick(i,"Page "+(i+1),"Q "+(i*CONFIG.perPage+1)+"–"+(i+1)*CONFIG.perPage)).join("")}</div>`}
   <ul class="rules">${rules.map(r=>`<li>${r}</li>`).join("")}</ul>
   <span class="cta-wrap"><button class="cta-btn start-btn" data-a="start"><span class="st"><b>${sel=="all"?"Start Full Exam":"Start Page "+(sel+1)}</b><small>${sel=="all"?TOTAL+" questions · "+MINUTES+" min per page":CONFIG.perPage+" questions · "+MINUTES+" min"}</small></span><span class="cta-a">→</span></button></span></div></div>`;
 }
@@ -743,7 +760,7 @@ function examScreen(){
   const left=done?S.left:secLeft(), first=S.list[0];
   let h=`<div class="top" style="${cv(T)}"><div class="th"><button class="ghost" data-a="home">← Home</button>
     <div style="flex:1;min-width:0"><b>${T.name}</b><br><small>Page ${p+1} of ${CONFIG.pages} · Questions ${p*CONFIG.perPage+1}–${(p+1)*CONFIG.perPage}</small></div>
-    ${S.group&&!done?`<button class="btn p" data-a="submit">Finish exam</button>`:""}</div>
+    </div>
     <div class="bar"><i style="width:${cnt/tot*100}%"></i></div><div class="pct">${cnt}/${tot} answered · ${MINUTES} minutes per page</div></div>
     <div style="${cv(T)}">${S.note&&!done?`<div class="note">${S.note}</div>`:""}`;
   if(done){                                       // result box
@@ -751,7 +768,8 @@ function examScreen(){
     h+=`<div class="res"><div class="ring" style="--p:${sc/tot*100}"><div><span>${sc}<small>out of ${tot}</small></span></div></div>
     <h3>${S.timeout?"Time is up! ":""}${sc>=tot*.9?"Excellent work!":sc>=tot*.7?"Great job!":sc>=tot*.5?"Good effort!":"Keep practising!"}</h3>
     <span style="color:var(--mut)">Review your answers below: green is correct, red is your mistake.</span>
-    ${S.sent?`<div class="sent">${S.sent}</div>`:""}<div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
+    ${STU?`<div id="sent" class="sent ${S.send||""}">${sentHtml()}</div>`:""}
+    <div class="b"><button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button></div></div>`;
   }
   for(let k=0;k<CONFIG.perPage;k++){              // the questions of this page
     const n=p*CONFIG.perPage+k,q=Q[n],a=ans[n],show=done||a!==undefined;
@@ -772,9 +790,10 @@ function examScreen(){
 const scoreOf=()=>S.Q.reduce((x,q,i)=>x+(S.list.includes(pageOf(i))&&S.ans[i]===q.a?1:0),0);
 
 function openExam(id,run,sel){                    // go to the start screen of a tense
-  const T=TENSES.find(x=>x.id==id);if(!T)return homeScreen();
+  const T=TENSES.find(x=>x.id==id);if(!T){location.hash="";return}
+  if(STU&&!STU.group.tenses.includes(id)){location.hash="me";return}
   if(S)clearInterval(S.timer);
-  S={T,run:run||0,sel:sel===undefined?"all":sel,p:0,ans:{},done:false,started:false,fresh:true};
+  S={T,run:run||0,sel:STU?pagesOf(STU.group):(sel===undefined?"all":sel),p:0,ans:{},done:false,started:false,fresh:true};
   S.Q=build(T,S.run);examScreen();scrollTo(0,0);
 }
 function startExam(){
@@ -802,8 +821,10 @@ function autoFinish(){                             // last page fully answered -
 function finishExam(){
   clearInterval(S.timer);S.left=secLeft();S.done=true;S.p=S.list[0];
   const sc=scoreOf(),key="best-"+S.T.id+(S.sel=="all"?"":"-p"+S.sel);
-  if(S.group)saveGroupResult(S,sc);else try{if(sc>(+localStorage.getItem(key)||0))localStorage.setItem(key,sc)}catch(e){}
+  try{if(sc>(+localStorage.getItem(key)||0))localStorage.setItem(key,sc)}catch(e){}
+  if(STU){S.payload={name:STU.name,tense:S.T.id,tn:S.T.name,score:sc,total:S.list.length*CONFIG.perPage,run:S.run,timeout:!!S.timeout,at:Date.now()};S.send="saving"}
   examScreen();scrollTo(0,0);
+  if(STU)sendResult();
 }
 
 /* ---- click animation on a tense card: card pops, others fade, colour wipe grows from the click, then the exam opens ---- */
@@ -839,12 +860,12 @@ document.addEventListener("click",e=>{
   if(a=="theme"){document.documentElement.classList.toggle("alt");return}            // switch neon colours
   if(a=="scroll"){document.querySelector(".grid").scrollIntoView({behavior:"smooth"});return}
   if(a=="open"){openWithFx(b,e);return}
-  if(a=="home"){if(S&&S.group){clearInterval(S.timer);S=null;nav("login");return}location.hash="";if(!location.hash)homeScreen();return}
+  if(a=="home"){goHome();return}
   if(!S)return;
   if(a=="sel"){S.sel=b.dataset.v=="all"?"all":+b.dataset.v;examScreen();return}
   if(a=="start"){startWithFx(b,e);return}
   if(a=="pick"){const n=+b.dataset.n;if(S.done||S.ans[n]!==undefined)return;S.ans[n]=+b.dataset.j;autoFinish();const y=scrollY;examScreen();scrollTo(0,y);return}
-  if(a=="submit"){if(S.group&&!S.done&&!confirm("Finish the exam now and send your result?"))return;finishExam();return}
+  if(a=="submit"){finishExam();return}
   if(a=="retry"){openExam(S.T.id,S.run+1,S.sel);return}
   if(a=="go")S.p=+b.dataset.p;
   else if(a=="next"){if(!S.done){nextPage(false);return}S.p=Math.min(S.last,S.p+1)}
@@ -868,6 +889,282 @@ document.addEventListener("pointermove",e=>{          // 3D tilt of cards under 
 document.addEventListener("pointerout",e=>{const c=e.target.closest&&e.target.closest(".tc");
   if(c&&!c.contains(e.relatedTarget)){c.style.removeProperty("--rx");c.style.removeProperty("--ry")}});
 
+/* ---------- 9. CLASSROOM: online database, teacher page, student login ----------
+   Teacher page:  #teacher      Student login:  #login  (or #login/CODE)      Student home:  #me
+   To connect every phone to ONE shared database, fill CONFIG.firebase (see the setup guide).
+   Without it the app runs in DEMO MODE: data is kept on this device only. */
+const AL="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const newCode=()=>[...Array(6)].map(()=>AL[Math.floor(Math.random()*AL.length)]).join("");
+const cleanCode=v=>(v||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,12);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hash=s=>{let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}
+  a=Math.imul(a^a>>>16,2246822507)^Math.imul(b^b>>>13,3266489909);b=Math.imul(b^b>>>16,2246822507)^Math.imul(a^a>>>13,3266489909);
+  return(4294967296*(2097151&b)+(a>>>0)).toString(36)};
+const fmtTime=t=>{try{return new Date(t).toLocaleString([],{dateStyle:"short",timeStyle:"short"})}catch(e){return ""}};
+function leaveExam(){if(S)clearInterval(S.timer);S=null}
+function goHome(){if(location.hash)location.hash="";else route()}
+
+/* --- database: Firebase Firestore through its REST address (no extra library). Falls back to this device. --- */
+const DB=(()=>{
+  const F=CONFIG.firebase||{},live=!!(F.projectId&&F.apiKey);
+  const root=`https://firestore.googleapis.com/v1/projects/${F.projectId}/databases/(default)/documents`,key="key="+encodeURIComponent(F.apiKey||"");
+  const H={"Content-Type":"application/json"};
+  const pack=o=>JSON.stringify({fields:{data:{stringValue:JSON.stringify(o)}}});
+  const read=d=>JSON.parse(d.fields.data.stringValue);
+  async function call(path,opt,q){
+    let r;try{r=await fetch(`${root}/${path}?${q?q+"&":""}${key}`,opt)}catch(e){throw new Error("No internet connection.")}
+    if(r.status==404)return null;
+    if(r.status==409)throw new Error("EXISTS");
+    if(!r.ok)throw new Error(r.status==403?"The database refused the request. Check the Firestore rules in the setup guide.":"Database error ("+r.status+").");
+    return r.json();
+  }
+  const L={get(){try{return JSON.parse(localStorage.getItem("cake-db"))||{g:{},r:{}}}catch(e){return{g:{},r:{}}}},set(d){try{localStorage.setItem("cake-db",JSON.stringify(d))}catch(e){}}};
+  return{live,
+    async createGroup(code,g){if(live){await call("groups",{method:"POST",headers:H,body:pack(g)},"documentId="+code);return}
+      const d=L.get();if(d.g[code])throw new Error("EXISTS");d.g[code]=g;d.r[code]=[];L.set(d)},
+    async getGroup(code){if(live){const x=await call("groups/"+code);return x?read(x):null}return L.get().g[code]||null},
+    async saveGroup(code,g){if(live){await call("groups/"+code,{method:"PATCH",headers:H,body:pack(g)},"updateMask.fieldPaths=data");return}
+      const d=L.get();d.g[code]=g;L.set(d)},
+    async addResult(code,r){if(live){await call(`groups/${code}/results`,{method:"POST",headers:H,body:pack(r)});return}
+      const d=L.get();(d.r[code]=d.r[code]||[]).push(r);L.set(d)},
+    async listResults(code){if(!live)return L.get().r[code]||[];
+      const out=[];let tok="";
+      do{const x=await call(`groups/${code}/results`,{},"pageSize=300"+(tok?"&pageToken="+encodeURIComponent(tok):""));
+        if(!x)break;(x.documents||[]).forEach(d=>{try{out.push(read(d))}catch(e){}});tok=x.nextPageToken||""}while(tok);
+      return out}
+  };
+})();
+
+/* --- shared bits --- */
+const shell=(inner,wide)=>`<div style="--c1:var(--ac);--c2:var(--ac2)"><div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div><div class="intro pg${wide?" wide":""}">${inner}</div></div>`;
+const demoBanner=()=>DB.live?"":`<div class="demo">Demo mode: no online database is connected, so data stays on <b>this device only</b>. Add your Firebase keys in <b>CONFIG.firebase</b> to connect every phone.</div>`;
+const picker=(sel,w)=>`<div class="tsel">`+TENSES.map(T=>`<button type="button" class="tp${sel.includes(T.id)?" on":""}" style="${cv(T)}" data-t="tog" data-w="${w}" data-id="${T.id}">${T.name}</button>`).join("")+
+  `</div><div class="mini2"><button type="button" class="ghost" data-t="all" data-w="${w}">Select all</button><button type="button" class="ghost" data-t="none" data-w="${w}">Clear</button></div>`;
+const savedGroups=()=>{try{return JSON.parse(localStorage.getItem("cake-groups"))||[]}catch(e){return[]}};
+const rememberGroup=(code,name,pin)=>{try{const a=savedGroups().filter(g=>g.code!==code);a.unshift({code,name,pin});localStorage.setItem("cake-groups",JSON.stringify(a.slice(0,12)))}catch(e){}};
+
+/* --- which pages the students take: "all" or one page (0 = page 1) --- */
+const pagesOf=g=>Number.isInteger(g&&g.pages)&&g.pages>=0&&g.pages<CONFIG.pages?g.pages:"all";
+const pagesLabel=g=>pagesOf(g)==="all"?"all pages":`page ${pagesOf(g)+1} of ${CONFIG.pages}`;
+const pagePicker=(sel,w)=>`<div class="pks pgp">`+["all",...pageNums].map(v=>`<button type="button" class="pk${sel===v?" on":""}" data-t="pg" data-w="${w}" data-v="${v}"><b>${v==="all"?"All pages":"Page "+(v+1)}</b><small>${v==="all"?TOTAL+" questions":"Q "+(v*CONFIG.perPage+1)+"–"+(v+1)*CONFIG.perPage}</small></button>`).join("")+`</div>`;
+
+/* --- TEACHER --- */
+const blankForm=()=>({name:"",pin:"",code:"",tenses:[],code2:"",pin2:"",pages:"all"});
+let TS={view:"start",tab:"new",form:blankForm(),msg:"",ok:"",busy:false,group:null,code:"",pin:"",edit:[],editPages:"all",results:null,rerr:""};
+let TT=null;
+const tmsgs=()=>(TS.msg?`<div class="note">${esc(TS.msg)}</div>`:"")+(TS.ok?`<div class="note okk">${esc(TS.ok)}</div>`:"");
+function paintT(){const y=scrollY;(TS.view=="dash"&&TS.group?renderDash():renderStart());scrollTo(0,y)}
+const terr=m=>{TS.msg=m;TS.ok="";paintT()};
+
+function teacherScreen(){leaveExam();TS.msg=TS.ok="";if(TS.view=="dash"&&TS.group){renderDash();loadResults()}else{TS.view="start";renderStart()}}
+
+function renderStart(){
+  const f=TS.form,saved=savedGroups(),b=TS.busy?"disabled":"";
+  const tabs=`<div class="pks"><button class="pk${TS.tab=="new"?" on":""}" data-t="tab" data-v="new"><b>Create group</b></button><button class="pk${TS.tab=="open"?" on":""}" data-t="tab" data-v="open"><b>Open my group</b></button></div>`;
+  let body;
+  if(TS.tab=="new"){
+    body=`<label class="fld"><span>Group name</span><input data-f="name" value="${esc(f.name)}" placeholder="e.g. Class 8A" maxlength="40" autocomplete="off"></label>
+    <label class="fld"><span>Teacher PIN (you need it to open the group later)</span><input data-f="pin" type="password" value="${esc(f.pin)}" placeholder="at least 4 characters" maxlength="30" autocomplete="new-password"></label>
+    <label class="fld"><span>Group code (optional, leave empty to get one)</span><input data-f="code" value="${esc(f.code)}" placeholder="e.g. CLASS8A" maxlength="12" autocomplete="off" style="text-transform:uppercase"></label>
+    <div class="pkh">Choose the exams for your students</div>${picker(f.tenses,"new")}
+    <div class="pkh">Pages students take</div>${pagePicker(f.pages,"new")}
+    <span class="cta-wrap" style="margin-top:22px"><button class="cta-btn" data-t="create" ${b}><span>${TS.busy?"Creating…":"Create group"}</span><span class="cta-a">→</span></button></span>`;
+  }else{
+    body=(saved.length?`<div class="pkh">Groups on this device</div><div class="svs">${saved.map(g=>`<button class="sv" data-t="openSaved" data-code="${esc(g.code)}"><b>${esc(g.name)}</b><small>${esc(g.code)}</small></button>`).join("")}</div>`:"")+
+    `<div class="pkh">Or type the code and PIN</div>
+    <label class="fld"><span>Group code</span><input data-f="code2" value="${esc(f.code2)}" placeholder="e.g. K7M2QX" maxlength="12" autocomplete="off" style="text-transform:uppercase"></label>
+    <label class="fld"><span>Teacher PIN</span><input data-f="pin2" type="password" value="${esc(f.pin2)}" maxlength="30" autocomplete="current-password"></label>
+    <span class="cta-wrap" style="margin-top:22px"><button class="cta-btn" data-t="open" ${b}><span>${TS.busy?"Opening…":"Open group"}</span><span class="cta-a">→</span></button></span>`;
+  }
+  app.innerHTML=shell(`<span class="tag">Teacher</span><h2>Teacher page</h2><p class="sub">Make a group, choose the exams, and give the code to your students.</p>${demoBanner()}${tmsgs()}${tabs}${body}`);
+}
+
+async function createGroupAction(){
+  if(TS.busy)return;
+  const f=TS.form,name=f.name.trim(),pin=f.pin.trim();let code=cleanCode(f.code);const custom=!!code;
+  if(!name)return terr("Please type a group name.");
+  if(pin.length<4)return terr("The teacher PIN needs at least 4 characters.");
+  if(custom&&code.length<4)return terr("The code needs at least 4 letters or numbers.");
+  if(!f.tenses.length)return terr("Choose at least one exam.");
+  TS.msg=TS.ok="";TS.busy=true;paintT();
+  let made=null;
+  try{
+    for(let i=0;i<8&&!made;i++){
+      if(!custom)code=newCode();
+      const g={name,tenses:f.tenses.slice(),pages:f.pages,open:true,pin:hash(pin+code),created:Date.now()};
+      try{await DB.createGroup(code,g);made=g}
+      catch(e){if(e.message!="EXISTS")throw e;if(custom)throw new Error("That code is already used. Choose another one.")}
+    }
+    if(!made)throw new Error("Could not make a code. Please try again.");
+    TS.group=made;TS.code=code;TS.pin=pin;TS.edit=made.tenses.slice();TS.editPages=pagesOf(made);TS.results=[];TS.view="dash";TS.form=blankForm();
+    rememberGroup(code,name,pin);TS.ok="Group created! Give the code to your students.";
+  }catch(e){TS.msg=e.message}
+  TS.busy=false;paintT();
+  if(TS.view=="dash")loadResults();
+}
+async function openGroupAction(code,pin){
+  if(TS.busy)return;
+  code=cleanCode(code);pin=(pin||"").trim();TS.msg=TS.ok="";
+  if(!code||!pin)return terr("Please type the group code and your PIN.");
+  TS.busy=true;paintT();
+  try{
+    const g=await DB.getGroup(code);
+    if(!g)throw new Error("No group with that code.");
+    if(g.pin!==hash(pin+code))throw new Error("Wrong PIN.");
+    TS.group=g;TS.code=code;TS.pin=pin;TS.edit=g.tenses.slice();TS.editPages=pagesOf(g);TS.results=null;TS.view="dash";rememberGroup(code,g.name,pin);
+  }catch(e){TS.msg=e.message}
+  TS.busy=false;paintT();
+  if(TS.view=="dash")loadResults();
+}
+
+function aggregate(results){
+  const m=new Map();
+  results.forEach(r=>{const k=String(r.name||"").trim().toLowerCase();let s=m.get(k);
+    if(!s){s={name:String(r.name||"").trim(),best:{},total:{},n:0,last:0};m.set(k,s)}
+    s.n++;s.last=Math.max(s.last,r.at||0);s.best[r.tense]=Math.max(s.best[r.tense]??-1,r.score);s.total[r.tense]=r.total});
+  return[...m.values()].sort((a,b)=>a.name.localeCompare(b.name));
+}
+function resultsTable(){
+  if(TS.rerr&&!TS.results)return `<div class="note">${esc(TS.rerr)}</div>`;
+  if(!TS.results)return `<p class="mutp">Loading results…</p>`;
+  const ts=TS.group.tenses.map(i=>TENSES.find(t=>t.id==i)).filter(Boolean),rows=aggregate(TS.results);
+  if(!rows.length)return `<p class="mutp">No student has finished an exam yet. Results appear here by themselves.</p>`;
+  return `<div class="tw"><table class="tbl"><thead><tr><th>Student</th>${ts.map(t=>`<th style="color:${t.c1}">${t.name}</th>`).join("")}<th>Tries</th><th>Last</th></tr></thead><tbody>`+
+   rows.map(s=>`<tr><td class="nm">${esc(s.name)}</td>`+ts.map(t=>{const v=s.best[t.id];if(v===undefined)return `<td class="na">–</td>`;const o=s.total[t.id]||TOTAL,p=v/o;return `<td class="${p>=.7?"hi":p>=.5?"md":"lo"}">${v}/${o}</td>`}).join("")+`<td>${s.n}</td><td>${fmtTime(s.last)}</td></tr>`).join("")+`</tbody></table></div>`;
+}
+function renderDash(){
+  const g=TS.group,link=location.href.split("#")[0]+"#login/"+TS.code,b=TS.busy?"disabled":"";
+  clearInterval(TT);TT=setInterval(loadResults,20000);
+  app.innerHTML=shell(`<span class="tag">Teacher</span><h2>${esc(g.name)}</h2>${demoBanner()}${tmsgs()}
+  <div class="cbox"><small>Group code for students</small><div class="codebig">${esc(TS.code)}</div>
+    <div class="btnrow"><button class="btn" data-t="copycode">Copy code</button><button class="btn" data-t="copylink">Copy student link</button></div>
+    <div class="linkline">${esc(link)}</div></div>
+  <div class="sec"><div class="pkh">Exams for this group</div>${picker(TS.edit,"edit")}
+    <div class="pkh">Pages students take</div>${pagePicker(TS.editPages,"edit")}
+    <div class="btnrow" style="margin-top:14px"><button class="btn p" data-t="saveex" ${b}>Save changes</button>
+    <button class="btn" data-t="toggleopen" ${b}>${g.open===false?"Open group for students":"Close group"}</button></div>
+    <p class="mutp">${g.open===false?"The group is CLOSED: students cannot log in.":"The group is open: students can log in with the code."}</p></div>
+  <div class="sec"><div class="pkh">Student results</div>
+    <div class="btnrow"><button class="btn" data-t="refresh">Refresh</button><button class="btn" data-t="csv">Download CSV</button></div>
+    ${resultsTable()}</div>
+  <div class="btnrow" style="margin-top:26px"><button class="ghost" data-t="tlogout">Close this group</button></div>`,true);
+}
+async function loadResults(){
+  if(TS.view!="dash"||!TS.code)return;
+  try{TS.results=await DB.listResults(TS.code);TS.rerr=""}catch(e){TS.rerr=e.message}
+  if(TS.view=="dash"&&location.hash=="#teacher")paintT();
+}
+async function saveExams(){
+  if(!TS.edit.length)return terr("Choose at least one exam.");
+  TS.busy=true;TS.msg=TS.ok="";paintT();
+  try{const g={...TS.group,tenses:TS.edit.slice(),pages:TS.editPages};await DB.saveGroup(TS.code,g);TS.group=g;TS.ok="Saved. Students see the change next time they open their page."}catch(e){TS.msg=e.message}
+  TS.busy=false;paintT();
+}
+async function toggleOpen(){
+  TS.busy=true;TS.msg=TS.ok="";paintT();
+  try{const g={...TS.group,open:TS.group.open===false};await DB.saveGroup(TS.code,g);TS.group=g;TS.ok=g.open?"Group opened.":"Group closed."}catch(e){TS.msg=e.message}
+  TS.busy=false;paintT();
+}
+function copyText(txt,label){
+  const done=()=>{TS.ok=label+" copied.";TS.msg="";paintT()};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>prompt("Copy this:",txt));else prompt("Copy this:",txt);
+}
+function downloadCsv(){
+  const fix=c=>/^[=+\-@]/.test(String(c))?"'"+c:c,rows=[["Student","Exam","Score","Out of","Percent","Attempt","Time","Timed out"]];
+  (TS.results||[]).slice().sort((a,b)=>String(a.name).localeCompare(String(b.name))||a.at-b.at).forEach(r=>rows.push([fix(r.name),r.tn,r.score,r.total,Math.round(r.score/r.total*100)+"%",(r.run||0)+1,fmtTime(r.at),r.timeout?"yes":"no"]));
+  const csv="﻿"+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="results-"+TS.code+".csv";document.body.appendChild(a);a.click();a.remove();
+}
+
+/* --- STUDENT --- */
+let STU=(()=>{try{return JSON.parse(localStorage.getItem("cake-stu"))}catch(e){return null}})();
+let LF={name:"",code:""},LM="",LB=false;
+const saveStu=()=>{try{STU?localStorage.setItem("cake-stu",JSON.stringify(STU)):localStorage.removeItem("cake-stu")}catch(e){}};
+function loginScreen(pre){
+  leaveExam();
+  if(STU){location.hash="me";return}
+  if(pre)LF.code=cleanCode(pre);
+  LM="";paintLogin();
+}
+function paintLogin(){
+  app.innerHTML=shell(`<span class="tag">Student</span><h2>Student login</h2><p class="sub">Type your name and the code from your teacher.</p>${demoBanner()}${LM?`<div class="note">${esc(LM)}</div>`:""}
+  <label class="fld"><span>Your name</span><input data-lf="name" value="${esc(LF.name)}" placeholder="Name and surname" maxlength="40" autocomplete="name"></label>
+  <label class="fld"><span>Group code</span><input data-lf="code" value="${esc(LF.code)}" placeholder="e.g. K7M2QX" maxlength="12" autocomplete="off" style="text-transform:uppercase"></label>
+  <span class="cta-wrap" style="margin-top:22px"><button class="cta-btn" data-t="login" ${LB?"disabled":""}><span>${LB?"Checking…":"Log in"}</span><span class="cta-a">→</span></button></span>`);
+}
+async function loginStudent(){
+  if(LB)return;
+  const name=LF.name.trim().replace(/\s+/g," "),code=cleanCode(LF.code);LM="";
+  if(name.length<2){LM="Please type your name.";return paintLogin()}
+  if(!code){LM="Please type the group code.";return paintLogin()}
+  LB=true;paintLogin();
+  try{
+    const g=await DB.getGroup(code);
+    if(!g)throw new Error("We could not find that code. Check it with your teacher.");
+    if(g.open===false)throw new Error("This group is closed. Ask your teacher.");
+    STU={name,code,group:g};saveStu();LB=false;location.hash="me";return;
+  }catch(e){LM=e.message}
+  LB=false;paintLogin();
+}
+async function studentHome(){
+  leaveExam();
+  if(!STU){location.hash="login";return}
+  const head=`<header class="nav"><div class="brand"><span class="logo"><img src="${CONFIG.logoImages[0]}" data-i="0" alt="" onerror="nextLogo(this)"></span><b>${CONFIG.brand}</b></div><button class="ghost" data-t="logout" style="margin-right:6px">Log out</button></header>`;
+  app.innerHTML=head+`<div class="hero" style="padding-bottom:20px"><span class="tag">Group · ${esc(STU.group.name)}</span><h1 class="hello">Hello, ${esc(STU.name)}</h1><p>Loading your exams…</p></div>`;
+  let res=[];
+  try{const g=await DB.getGroup(STU.code);if(g){STU.group=g;saveStu()}}catch(e){}
+  try{res=await DB.listResults(STU.code)}catch(e){res=[]}
+  if(location.hash!=="#me"||!STU)return;
+  const mine=res.filter(r=>String(r.name||"").trim().toLowerCase()==STU.name.toLowerCase()),best={};
+  mine.forEach(r=>{best[r.tense]=Math.max(best[r.tense]??-1,r.score)});
+  const g=STU.group,TOT=pagesOf(g)==="all"?TOTAL:CONFIG.perPage,list=g.open===false?[]:g.tenses.map(i=>TENSES.find(t=>t.id==i)).filter(Boolean);
+  app.innerHTML=head+`<div class="hero" style="padding-bottom:20px"><span class="tag">Group · ${esc(g.name)}</span><h1 class="hello">Hello, ${esc(STU.name)}</h1>
+    <p>${g.open===false?"This group is closed. Ask your teacher.":"Choose an exam below ("+pagesLabel(g)+"). Your result goes straight to your teacher."}</p></div>
+  <div class="grid">`+list.map((T,k)=>`<button class="tc" style="${cv(T)};--d:${(k%2)*140}ms" data-n="${pad(k+1)}" data-a="open" data-id="${T.id}"><i class="shine"></i><small>Exam ${k+1}</small><h2>${T.name}</h2><p>${T.d}</p><em>${T.ex}</em><div class="row"><span>${best[T.id]!==undefined?"Best "+best[T.id]+"/"+TOT:"Not done yet"}</span><span class="go">Start</span></div></button>`).join("")+`</div>`;
+  effects();scrollTo(0,0);
+}
+const sentHtml=()=>!S?"":S.send=="ok"?"✓ Your result was sent to your teacher.":S.send=="err"?`Could not send your result: ${esc(S.sendErr||"")} <button class="btn" data-t="resend">Try again</button>`:"Sending your result to your teacher…";
+function paintSent(me){if(S!==me)return;const el=document.getElementById("sent");if(el){el.className="sent "+(S.send||"");el.innerHTML=sentHtml()}}
+function sendResult(){
+  const me=S;me.send="saving";paintSent(me);
+  DB.addResult(STU.code,me.payload).then(()=>{me.send="ok";paintSent(me)}).catch(e=>{me.send="err";me.sendErr=e.message;paintSent(me)});
+}
+
+/* --- clicks and typing for the classroom pages --- */
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-t]");if(!b)return;const t=b.dataset.t,w=b.dataset.w;
+  if(t=="nav"){location.hash=b.dataset.dest;return}
+  if(t=="tab"){TS.tab=b.dataset.v;TS.msg=TS.ok="";paintT();return}
+  if(t=="tog"||t=="all"||t=="none"){
+    const arr=w=="new"?TS.form.tenses:TS.edit;let n;
+    if(t=="tog")n=arr.includes(b.dataset.id)?arr.filter(x=>x!=b.dataset.id):[...arr,b.dataset.id];
+    else n=t=="all"?TENSES.map(x=>x.id):[];
+    n=TENSES.map(x=>x.id).filter(id=>n.includes(id));
+    if(w=="new")TS.form.tenses=n;else TS.edit=n;paintT();return}
+  if(t=="pg"){const v=b.dataset.v=="all"?"all":+b.dataset.v;if(w=="new")TS.form.pages=v;else TS.editPages=v;paintT();return}
+  if(t=="create"){createGroupAction();return}
+  if(t=="open"){openGroupAction(TS.form.code2,TS.form.pin2);return}
+  if(t=="openSaved"){const g=savedGroups().find(x=>x.code==b.dataset.code);if(g)openGroupAction(g.code,g.pin);return}
+  if(t=="saveex"){saveExams();return}
+  if(t=="toggleopen"){toggleOpen();return}
+  if(t=="copycode"){copyText(TS.code,"Code");return}
+  if(t=="copylink"){copyText(location.href.split("#")[0]+"#login/"+TS.code,"Link");return}
+  if(t=="refresh"){TS.msg=TS.ok="";TS.results=null;paintT();loadResults();return}
+  if(t=="csv"){downloadCsv();return}
+  if(t=="tlogout"){clearInterval(TT);TS.view="start";TS.group=null;TS.code="";TS.msg=TS.ok="";TS.results=null;renderStart();scrollTo(0,0);return}
+  if(t=="login"){loginStudent();return}
+  if(t=="logout"){STU=null;saveStu();LF={name:"",code:""};location.hash="";if(!location.hash)route();return}
+  if(t=="resend"){if(S&&S.payload&&STU)sendResult();return}
+});
+document.addEventListener("input",e=>{const el=e.target;
+  if(el.dataset.f!==undefined)TS.form[el.dataset.f]=el.value;
+  else if(el.dataset.lf!==undefined)LF[el.dataset.lf]=el.value});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter")return;const el=e.target;
+  if(el.dataset&&el.dataset.lf!==undefined)loginStudent();
+  else if(el.dataset&&el.dataset.f!==undefined){TS.tab=="new"?createGroupAction():openGroupAction(TS.form.code2,TS.form.pin2)}
+});
+
 function filterTenses(v){                          // search bar: hide cards that do not match
   v=v.trim().toLowerCase();let n=0;
   document.querySelectorAll(".tc").forEach((c,i)=>{const T=TENSES[i];
@@ -879,171 +1176,13 @@ document.addEventListener("input",e=>{if(e.target.id=="q")filterTenses(e.target.
 document.addEventListener("keydown",e=>{const q=document.getElementById("q");        // press / to jump to the search bar
   if(e.key=="/"&&q&&document.activeElement!==q){e.preventDefault();q.focus()}
   else if(e.key=="Escape"&&q&&document.activeElement===q){q.value="";filterTenses("");q.blur()}});
-/* =====================================================================
-   9. CLASS MODE - teacher creates groups, students log in with name + code
-   Data is saved in this browser (localStorage). If the page runs inside
-   Claude with the shared database on, it is saved there too.
-   ===================================================================== */
-const LSg={get:k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-/* >>> To make online sync work for EVERY student who only types name + code, paste your database URL between the quotes below, then re-upload the file <<< */
-const DEFAULT_CLOUD="";
-let CLOUD=(LSg.get("ce_cloud")||DEFAULT_CLOUD).replace(/\/+$/,"");   // optional online database URL (teacher sets it, links carry it to students)
-let JOIN=null;                                              // group data carried inside a share link
-const cj=async(m,path,body)=>{const r=await fetch(CLOUD+"/"+path+".json",{method:m,body:body===undefined?undefined:JSON.stringify(body)});if(!r.ok)throw new Error(r.status);return r.json()};
-const vals=o=>o?Object.values(o):[];
-const store={
- async groups(){if(CLOUD){try{return vals(await cj("GET","groups"))}catch(e){}}return LSg.get("ce_groups")||[]},
- async group(c){if(CLOUD){try{const g=await cj("GET","groups/"+c);if(g)return g}catch(e){}}return (LSg.get("ce_groups")||[]).find(g=>g.code==c)||null},
- async saveGroup(g){const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a);if(CLOUD){try{await cj("PUT","groups/"+g.code,g)}catch(e){}}},
- async delGroup(c){LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c));if(CLOUD){try{await cj("DELETE","groups/"+c);await cj("DELETE","results/"+c)}catch(e){}}},
- async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(CLOUD){try{const d=vals(await cj("GET","results/"+c)),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
- async saveResult(r){const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a);if(CLOUD){try{await cj("PUT","results/"+r.code+"/"+r.key.slice(r.code.length+1),r);return"ok"}catch(e){return"fail"}}return"local"},
- async done(k,c){if((LSg.get("ce_res")||[]).find(x=>x.key==k))return true;if(CLOUD){try{if(await cj("GET","results/"+c+"/"+k.slice(c.length+1)))return true}catch(e){}}return false}
-};
-const b64e=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
-const b64d=t=>JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g,"+").replace(/_/g,"/")))));
-
-const nav=h=>{if(location.hash.slice(1)==h)route();else location.hash=h};
-const gesc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const ghash=x=>{let h=7;for(const c of x)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
-const ALPH="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-/* The code itself carries the exam: 12 bits = tenses, 3 bits = page, 15 bits = random. Any device can read it, no database needed. */
-function mkExamCode(ids,page){
-  let mask=0;TENSES.forEach((t,i)=>{if(ids.includes(t.id))mask|=1<<i});
-  const pv=page=="all"?7:+page,n=((mask<<18)|(pv<<15)|Math.floor(Math.random()*32768))>>>0;
-  let c="";for(let i=5;i>=0;i--)c+=ALPH[(n>>>(i*5))&31];return c;
+function route(){                                  // #ps opens Present Simple, #teacher / #login / #me = classroom pages, empty = home
+  clearInterval(TT);const h=location.hash.slice(1);
+  if(h=="teacher")return teacherScreen();
+  if(h=="login"||h.startsWith("login/"))return loginScreen(h.split("/")[1]||"");
+  if(h=="me")return studentHome();
+  if(!h)return STU?studentHome():homeScreen();
+  openExam(h);
 }
-function readExamCode(c){
-  if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c))return null;
-  let n=0;for(const ch of c)n=n*32+ALPH.indexOf(ch);
-  const mask=Math.floor(n/262144)&4095,pv=Math.floor(n/32768)&7;
-  if(!mask||(pv>4&&pv!=7))return null;
-  return {code:c,name:"Class exam",tenses:TENSES.filter((t,i)=>mask&(1<<i)).map(t=>t.id),page:pv==7?"all":pv,created:0,closed:false};
-}
-const mkCode=()=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s};
-const leaveExam=()=>{if(S){clearInterval(S.timer);S=null}};
-const topBar=()=>`<div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>`;
-
-function buildGroup(g,ts){            // same code = same questions for every student of the group
-  const r=mulberry(ghash(g.code)),list=[];
-  for(let i=0;i<TOTAL;i++){
-    const t=ts[i%ts.length],s=SUBJECTS[Math.floor(r()*SUBJECTS.length)],v=VERBS[Math.floor(r()*VERBS.length)],right=t.f(s,v);
-    const wrong=[...new Set(TENSES.filter(x=>x!==t&&!clash(t,x)).map(x=>x.f(s,v)))].filter(x=>x!==right).sort(()=>r()-.5).slice(0,3);
-    const o=[right,...wrong].sort(()=>r()-.5);
-    list.push({q:`${s} ___ (${v[0]}) ${v[5]} ${t.t[Math.floor(r()*t.t.length)]}.`,o,a:o.indexOf(right)});
-  }
-  return list;
-}
-function openGroupExam(g,name,key){
-  const ts=TENSES.filter(t=>g.tenses.includes(t.id));
-  const P={id:"grp",name:g.name,d:ts.map(t=>t.name).join(" · "),ex:"Student: "+name,c1:ts[0].c1,c2:ts[0].c2};
-  S={T:P,run:0,sel:g.page,p:0,ans:{},done:false,started:false,fresh:true,group:g,student:name,key};
-  S.Q=buildGroup(g,ts);examScreen();scrollTo(0,0);
-}
-function saveGroupResult(St,sc){
-  const tot=St.list.length*CONFIG.perPage;
-  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()},rc=b64e({c:r.code,n:r.name,s:sc,t:tot});
-  store.saveResult(r).then(st=>{
-    St.sent=st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."} Send this <b>result code</b> to your teacher:</p><input class="fld" readonly value="${rc}" onfocus="this.select()">`;
-    const b=document.querySelector(".res");if(b&&S===St&&!b.querySelector(".sent"))b.insertAdjacentHTML("beforeend",`<div class="sent">${St.sent}</div>`)});
-}
-
-/* ---- student login ---- */
-function loginScreen(){
-  leaveExam();
-  app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Student</span><h2>Exam login</h2><p class="sub2">Enter your name and the code from your teacher.</p>
-  <label class="l" for="gname">Your name</label><input class="fld" id="gname" autocomplete="name" placeholder="Your full name">
-  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN&&JOIN.c||""}" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
-  <p class="gerr" id="gerr"></p><button class="cta-btn start-btn" data-a="glogin"><span class="st"><b>Enter exam</b></span><span class="cta-a">→</span></button></div>`;
-  scrollTo(0,0);
-}
-async function doLogin(){
-  const name=document.getElementById("gname").value.trim().replace(/\s+/g," "),code=document.getElementById("gcode").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,""),e=document.getElementById("gerr");
-  if(!name||!code){e.textContent="Please enter your name and the group code.";return}
-  let g=await store.group(code);
-  if(!g&&JOIN&&JOIN.c==code)g={code:JOIN.c,name:JOIN.n,tenses:JOIN.t,page:JOIN.p,created:0,closed:false};
-  if(!g)g=readExamCode(code);
-  if(!g){e.textContent="Group code not found. Use the link your teacher shared, or check the code.";return}
-  if(g.closed){e.textContent="This exam is closed.";return}
-  const key=code+"_"+ghash(name.toLowerCase()).toString(36);
-  if(await store.done(key,code)){e.textContent="This name has already finished the exam.";return}
-  openGroupExam(g,name,key);
-}
-
-/* ---- teacher page ---- */
-async function teacherScreen(){
-  leaveExam();
-  const gs=(await store.groups()).sort((a,b)=>b.created-a.created);
-  const names=g=>TENSES.filter(t=>g.tenses.includes(t.id)).map(t=>t.name).join(", ");
-  app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Teacher</span><h2>Create a group</h2>
-  <p class="sub2">Make a group, choose the exam, then give the code to your students.</p>
-  <div class="g2"><div><label class="l" for="tn">Group name</label><input class="fld" id="tn" placeholder="e.g. Class 7A"></div>
-  <div><label class="l" for="tc">Student code</label><input class="fld" id="tc" readonly value="Made when you press Create" style="color:var(--mut)"></div></div>
-  <label class="l">Exam tenses (choose one or more)</label>
-  <div class="tgrid">${TENSES.map(t=>`<label class="tg"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
-  <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button></div>
-  <label class="l" for="tp">Pages for students</label>
-  <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
-  <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
-  <div class="panel"><h2>Online sync</h2><p class="sub2">So students on <b>other devices</b> can log in and you can see their scores, paste a free <b>Firebase Realtime Database</b> URL (create a project, then Build &rarr; Realtime Database &rarr; Create in test mode).</p>
-  <label class="l" for="tcloud">Database URL</label><input class="fld" id="tcloud" value="${gesc(CLOUD)}" placeholder="https://your-project-default-rtdb.firebaseio.com">
-  <p class="gerr" id="cerr"></p><button class="btn" data-a="tcloudsave">Save URL</button></div>
-  <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
-  ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
-  <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
-  <div class="gbar"><button class="ghost" data-a="tlink">Share link</button><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
-  scrollTo(0,0);
-}
-async function teacherAction(a,b){
-  const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")];
-  if(a=="tall"){boxes().forEach(x=>x.checked=true);return}
-  if(a=="tnone"){boxes().forEach(x=>x.checked=false);return}
-  
-  if(a=="tmake"){
-    const name=$("tn").value.trim(),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pg=$("tp").value;
-    if(!name){e.textContent="Enter a group name.";return}
-    if(!tenses.length){e.textContent="Choose at least one tense for the exam.";return}
-    let code;do{code=mkExamCode(tenses,pg)}while(await store.group(code));
-    await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
-  }
-  if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
-    if(u&&!/^(https:\/\/|http:\/\/localhost)/.test(u)){e.textContent="The URL must start with https://";return}
-    CLOUD=u;LSg.set("ce_cloud",u);
-    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";const L=location.href.split("#")[0]+"#join="+b64e({d:CLOUD});e.innerHTML=`Connected. Give students THIS link (it connects them automatically, then they type name + code):<input class="fld" readonly value="${gesc(L)}" onfocus="this.select()" style="margin-top:8px">`}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
-    else{e.style.color="var(--mut)";e.textContent="Online sync is off."}
-    const mine=LSg.get("ce_groups")||[];if(CLOUD)for(const g of mine){try{await cj("PUT","groups/"+g.code,g)}catch(x){}}
-    return}
-  const card=b.closest(".gcard"),code=card&&card.dataset.c;if(!code)return;
-  if(a=="tdel"){if(confirm("Delete this group and its results?")){await store.delGroup(code);teacherScreen()}}
-  else if(a=="tclose"){const g=await store.group(code);g.closed=!g.closed;await store.saveGroup(g);teacherScreen()}
-  else if(a=="tlink"){
-    const g=await store.group(code),link=location.href.split("#")[0]+"#join="+b64e({c:g.code,n:g.name,t:g.tenses,p:g.page,d:CLOUD});
-    card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
-    try{await navigator.clipboard.writeText(link);card.querySelector(".rbox .meta").insertAdjacentHTML("afterbegin","<b>Copied!</b> ")}catch(x){}
-  }
-  else if(a=="timport"){
-    const t=prompt("Paste the student's result code:");if(!t)return;
-    try{const x=b64d(t.trim());if(x.c!=code||!x.n)throw 0;
-      await store.saveResult({key:code+"_"+ghash(String(x.n).toLowerCase()).toString(36),code,name:String(x.n),score:+x.s,total:+x.t,at:Date.now()});
-      card.querySelector('[data-a=tres]').click()}
-    catch(e){alert("This result code is not valid for this group.")}
-  }
-  else if(a=="tres"){showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
-}
-let resTimer=null;
-async function showResults(card,code){          // draws the table; repeats every 3 s while open = live results
-  const r=await store.results(code),box=card.querySelector(".rbox");if(!box)return;
-  box.innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length} finished</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`);
-}
-document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
-  if(a=="tologin")nav("login");
-  else if(a=="toteacher")nav("teacher");
-  else if(a=="glogin")doLogin();
-  else if(/^t(all|none|make|res|close|del|link|cloudsave|import)$/.test(a))teacherAction(a,b);
-});
-document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
-
-function route(){const id=location.hash.slice(1);if(id.startsWith("join=")){try{JOIN=b64d(id.slice(5));if(JOIN.d){CLOUD=JOIN.d.replace(/\/+$/,"");LSg.set("ce_cloud",CLOUD)}}catch(e){JOIN=null}loginScreen()}else if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
 addEventListener("hashchange",route);route();
 </script></body></html>
