@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>English Tenses Exam</title>
-<meta name="description" content="Practise English tenses with timed exams.">
-<link rel="icon" href="data:,">
+<title>English Tenses Exam - Class Mode</title>
+<link rel="icon" type="image/png" href="Piece of Cake.png">
+<meta name="theme-color" content="#07050f">
+<!-- <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%2300f0ff'/%3E%3Cstop%20offset='1'%20stop-color='%23ff2bd6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath%20d='M0%200H52L64%2012V64H12L0%2052Z'%20fill='url(%23g)'/%3E%3Cpath%20d='M16%2017H48V26H36V50H28V26H16Z'%20fill='%2305030d'/%3E%3C/svg%3E"> -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap">
 <style>
-:root{--font-body:"Rajdhani","Segoe UI",system-ui,-apple-system,"Ubuntu","Noto Sans","DejaVu Sans","Liberation Sans",Arial,sans-serif;--font-head:"Orbitron","Bahnschrift","Segoe UI","Ubuntu","Noto Sans","DejaVu Sans",Arial,sans-serif;--font-mono:"Share Tech Mono",Consolas,"Cascadia Mono","DejaVu Sans Mono","Liberation Mono","Ubuntu Mono",monospace;color-scheme:light dark;--bg:#f3f4fb;--card:#ffffff;--ink:#1b1f3b;--mut:#6a7090;--bd:#e4e6f3;--ac:#5b5bf0;--ac2:#a259ff;--ok:#16a34a;--okb:#dcfce7;--bad:#dc2626;--badb:#fee2e2;--selb:#ebebff;--sh:0 10px 30px rgba(60,60,140,.12)}
+:root{--font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;--font-head:"Orbitron",sans-serif;--font-mono:"Share Tech Mono",Consolas,monospace;color-scheme:light dark;--bg:#f3f4fb;--card:#ffffff;--ink:#1b1f3b;--mut:#6a7090;--bd:#e4e6f3;--ac:#5b5bf0;--ac2:#a259ff;--ok:#16a34a;--okb:#dcfce7;--bad:#dc2626;--badb:#fee2e2;--selb:#ebebff;--sh:0 10px 30px rgba(60,60,140,.12)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1020;--card:#171a31;--ink:#eef0ff;--mut:#9ba1c9;--bd:#272b4d;--ac:#8b8bff;--ac2:#c084fc;--ok:#4ade80;--okb:#12301f;--bad:#f87171;--badb:#3b1a1f;--selb:#23274d;--sh:0 10px 30px rgba(0,0,0,.4)}}
 :root[data-theme="dark"]{--bg:#0e1020;--card:#171a31;--ink:#eef0ff;--mut:#9ba1c9;--bd:#272b4d;--ac:#8b8bff;--ac2:#c084fc;--ok:#4ade80;--okb:#12301f;--bad:#f87171;--badb:#3b1a1f;--selb:#23274d;--sh:0 10px 30px rgba(0,0,0,.4)}
 *{box-sizing:border-box}
@@ -145,7 +146,7 @@ button{font:inherit;color:inherit}
 .k4{right:2%;top:72%;border-left:5px solid #6366f1;animation-delay:1.35s,2.5s}
 @keyframes chipf{0%,100%{translate:0 0}50%{translate:0 -12px}}
 @media (max-width:920px){.chip{display:none}}
-@media (max-width:520px){.navtag{display:none}}
+@media (max-width:520px){.navtag{padding:4px 9px;font-size:.72rem;white-space:nowrap}.brand{min-width:0;gap:6px}.brand b{font-size:.82rem;letter-spacing:.06em;white-space:nowrap}.nav{gap:8px}}
 /* ---- first page animations ---- */
 body::before{animation:drift 16s ease-in-out infinite alternate}
 body::after{animation:drift 20s ease-in-out infinite alternate-reverse}
@@ -181,7 +182,7 @@ body::after{animation:drift 20s ease-in-out infinite alternate-reverse}
 /* ================= CYBERPUNK THEME =================
    CHANGE COLOURS HERE: --ac (main neon), --ac2 (second neon), --bg (background), --card (panels).
    :root.alt is the second palette used by the round button in the top-right corner. */
-:root,:root:not([data-theme="light"]),:root[data-theme]{--font-body:"Rajdhani","Segoe UI",system-ui,-apple-system,"Ubuntu","Noto Sans","DejaVu Sans","Liberation Sans",Arial,sans-serif;--font-head:"Orbitron","Bahnschrift","Segoe UI","Ubuntu","Noto Sans","DejaVu Sans",Arial,sans-serif;--font-mono:"Share Tech Mono",Consolas,"Cascadia Mono","DejaVu Sans Mono","Liberation Mono","Ubuntu Mono",monospace;--bg:#07050f;--card:#0e0a20;--ink:#e6f7ff;--mut:#8f8ab8;--bd:#2b2060;--ac:#00f0ff;--ac2:#ff2bd6;--ok:#39ff88;--okb:rgba(57,255,136,.12);--bad:#ff3b6b;--badb:rgba(255,59,107,.14);--selb:rgba(0,240,255,.1);--sh:0 0 22px rgba(0,240,255,.12);color-scheme:dark}
+:root,:root:not([data-theme="light"]),:root[data-theme]{--font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;--font-head:"Orbitron",sans-serif;--font-mono:"Share Tech Mono",Consolas,monospace;--bg:#07050f;--card:#0e0a20;--ink:#e6f7ff;--mut:#8f8ab8;--bd:#2b2060;--ac:#00f0ff;--ac2:#ff2bd6;--ok:#39ff88;--okb:rgba(57,255,136,.12);--bad:#ff3b6b;--badb:rgba(255,59,107,.14);--selb:rgba(0,240,255,.1);--sh:0 0 22px rgba(0,240,255,.12);color-scheme:dark}
 :root.alt{--ac:#fcee09;--ac2:#ff2bd6;--selb:rgba(252,238,9,.1);--sh:0 0 22px rgba(252,238,9,.12)}
 body{font-family:var(--font-body);font-weight:500;font-size:17px;background-color:var(--bg);background-image:linear-gradient(color-mix(in srgb,var(--ac) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--ac) 7%,transparent) 1px,transparent 1px);background-size:44px 44px}
 body::before,body::after{opacity:.28}
@@ -248,21 +249,330 @@ h1,h2,h3,.brand,.th b,.go,.btn,.pk b,.clock small{font-family:var(--font-head)}
 .clock{border-radius:2px;border-color:#241a5a;background:#05030d}
 .clock .sg .on,.clock .colon i{filter:drop-shadow(0 0 5px var(--c1))}
 
-/* ---- fallbacks for older Windows/Linux browsers (no color-mix) ---- */
-@supports not (color:color-mix(in srgb,red,blue)){
-body{background-image:linear-gradient(rgba(0,240,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.07) 1px,transparent 1px)}
-.tc{box-shadow:inset 0 0 40px rgba(255,255,255,.07)}
-.tc::before{-webkit-text-stroke:1px rgba(255,255,255,.35)}
-.tc::after{background:linear-gradient(transparent,rgba(255,255,255,.12),transparent)}
-.tc em{border-color:rgba(255,255,255,.25)}
-.tag{background:rgba(0,240,255,.14)}
-.btn,.ghost{background:rgba(0,240,255,.07)}
-.opt:hover{background:rgba(0,240,255,.08)}
-.top{background:rgba(7,5,15,.85)}
+/* ================= MOBILE ================= */
+html{-webkit-text-size-adjust:100%}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+body{min-height:100dvh}
+@media (hover:none){
+  .tc:hover,.tc:focus-visible{transform:none}
+  .tc::after{display:none}
+  .opt:hover,.pk:hover,.btn:hover,.ghost:hover{transform:none}
+  .btn:hover,.ghost:hover{background:color-mix(in srgb,var(--ac) 7%,transparent);color:var(--ac)}
+  .btn.p:hover{color:#05030d;filter:none}
 }
+@media (max-width:640px){
+  body{font-size:16px}
+  body::before,body::after{width:260px;height:260px;filter:blur(60px)}
+  main{padding:12px max(14px,env(safe-area-inset-right)) 28px max(14px,env(safe-area-inset-left))}
+  .theme{top:calc(8px + env(safe-area-inset-top));right:8px;width:38px;height:38px}
+  .nav{padding-right:48px}
+  .logo{width:34px;height:34px;font-size:1rem}
+  .brand{font-size:1rem}
+  .hero{padding:22px 0 28px}
+  .hero h1{font-size:clamp(1.4rem,6.8vw,2rem);letter-spacing:.01em}
+  .hero p{font-size:1rem}
+  .cta{flex-direction:column;gap:14px;margin-top:20px}
+  .cta .btn.big{width:100%;max-width:340px}
+  .stats{gap:8px;margin-top:22px}
+  .stats div{flex:1 1 90px;padding:10px 12px}
+  .stats b{font-size:1.4rem}
+  .grid{grid-template-columns:1fr;gap:18px;padding-bottom:30px}
+  .tc{min-height:250px;padding:22px}
+  .tc::before{font-size:6.5rem}
+  .tc h2{margin:40px 0 6px;font-size:1.15rem}
+  /* exam top bar */
+  .top{margin:0 -14px 14px;padding:calc(10px + env(safe-area-inset-top)) 14px 8px}
+  .th{gap:8px;padding-right:44px;margin-bottom:8px}
+  .th b{font-size:.95rem}
+  .th .ghost{padding:8px 10px;font-size:.72rem}
+  .pct{font-size:.7rem}
+  /* questions */
+  .q{padding:14px}
+  .q p{font-size:1rem;margin-bottom:12px}
+  .opts{grid-template-columns:1fr;gap:8px}
+  .opt{min-height:50px;font-size:1rem;padding:10px 12px}
+  /* bottom navigation stays on screen */
+  .foot{position:sticky;bottom:0;z-index:9;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px -14px 0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(7,5,15,.94);border-top:1px solid var(--ac);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .foot>span{display:none}
+  .foot>span:first-child~.btn{grid-column:auto}
+  .foot>.clock{justify-self:center;align-self:center}
+  .foot>.btn{width:100%;min-height:46px}
+  .dots{grid-column:1/-1;order:-1;justify-content:center;gap:6px}
+  .dot{width:40px;height:38px}
+  /* start screen */
+  .intro{padding:26px 14px;margin-top:14px}
+  .clock.big{padding:12px 14px}
+  .clock.big .sg{width:28px;height:48px}
+  .pks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .pk:first-child{grid-column:1/-1}
+  .pk{min-width:0;padding:10px 4px}
+  .pk b{font-size:.78rem}
+  .intro .btn.big{width:100%}
+  .intro ul{font-size:.95rem}
+  /* results */
+  .res{padding:20px 14px}
+  .ring{width:128px;height:128px}
+  .ring div{width:100px;height:100px;font-size:1.6rem}
+  .res .b .btn{flex:1 1 140px}
+}
+@media (max-width:360px){.th b{display:none}.hero h1{font-size:1.35rem}}
+
+/* ================= SMALL PHONES (about 380px wide) ================= */
+@media (max-width:400px){
+  main{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+  .tag{display:inline-block;max-width:100%;font-size:.66rem;line-height:1.35;letter-spacing:.04em;padding:7px 14px}
+  .hero{padding:18px 0 24px}
+  .hero h1{font-size:clamp(1.2rem,5.9vw,1.55rem);letter-spacing:0}
+  .hero p{font-size:.95rem}
+  .stats b{font-size:1.25rem}
+  .stats span{font-size:.7rem}
+  .tc{padding:20px;min-height:235px}
+  .tc h2{font-size:1.05rem;margin-top:34px}
+  .tc p{font-size:.9rem}
+  .tc em{font-size:.84rem;padding:9px 11px}
+  .top{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
+  .th{gap:6px}
+  .th .ghost{padding:8px 9px}
+  .th b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.9rem}
+  .clock{padding:5px 7px}
+  .sg{width:13px;height:23px}
+  .colon{gap:7px;margin:0 2px}
+  .colon i{width:3px;height:3px}
+  .pct{font-size:.66rem}
+  .q{padding:12px}
+  .q p{font-size:.98rem}
+  .n{width:26px;height:26px;margin-right:8px}
+  .opt{font-size:.95rem;padding:9px 10px;gap:8px}
+  .foot{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
+  .dot{width:38px}
+  .intro{padding:22px 12px}
+  .intro h2{font-size:1.35rem;margin-bottom:16px}
+  .pk b{font-size:.74rem}
+  .pk small{font-size:.66rem}
+  .btn.big{padding:14px 18px;font-size:.88rem}
+  .clock.big{padding:10px 12px}
+  .clock.big .sg{width:26px;height:44px}
+  .res h3{font-size:1.1rem}
+
+}
+
+/* ================= START PRACTISING BUTTON ================= */
+.cta-wrap{display:inline-block;filter:drop-shadow(0 0 12px var(--ac))}
+.cta-btn{all:unset;box-sizing:border-box;position:relative;overflow:hidden;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:16px;padding:19px 38px;font-family:var(--font-head);font-weight:900;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;color:#05030d;background:linear-gradient(90deg,var(--ac),var(--ac2));clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));transition:transform .2s,filter .2s;-webkit-tap-highlight-color:transparent}
+.cta-a{display:inline-block;font-size:1.3rem;line-height:1;animation:ctanudge 1.3s ease-in-out infinite}
+@keyframes ctanudge{50%{transform:translateX(7px)}}
+.cta-btn:hover{transform:scale(1.06);filter:brightness(1.12)}
+.cta-btn:active{transform:scale(.96)}
+.cta-btn:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+@media (max-width:640px){.cta .cta-wrap{width:100%;max-width:340px}.cta-btn{width:100%;padding:17px 18px;font-size:.88rem;letter-spacing:.1em}}
+@media (hover:none){.cta-btn:hover{transform:none;filter:none}}
+
+/* ================= START BUTTON (second page) ================= */
+.intro .cta-wrap{display:block;width:100%;max-width:380px;margin:6px auto 0}
+.intro .cta-btn{width:100%}
+.start-btn{justify-content:space-between;padding:16px 30px}
+.st{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left}
+.st b{font-size:1.05rem;letter-spacing:.12em}
+.st small{font-family:var(--font-mono);font-size:.7rem;font-weight:400;letter-spacing:.05em;text-transform:none;opacity:.8}
+@media (max-width:400px){.start-btn{padding:14px 20px}.st b{font-size:.92rem;letter-spacing:.08em}}
+
+/* ---- logo picture (your PNG) ---- */
+.logo img{display:block;width:100%;height:100%;object-fit:contain}
+.logo:has(img){background:none;clip-path:none;box-shadow:none;width:60px;height:60px}
+@media (max-width:640px){.logo:has(img){width:60px;height:60px}}
+@media (max-width:400px){.logo:has(img){width:60px;height:60px}}
+/* ---- two-letter logo ---- */
+.logo{font-size:.95rem;letter-spacing:-.02em}
+@media (max-width:640px){.logo{font-size:.8rem}}
+
+/* ================= BOTTOM CLOCK (next to Next / Submit) ================= */
+.foot .clock{
+  position:relative;gap:4px;padding:8px 16px 8px 14px;border:2px solid transparent;border-radius:0;
+  background:linear-gradient(#05030d,#05030d) padding-box,linear-gradient(135deg,var(--c1),var(--c2,var(--ac2))) border-box;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  box-shadow:inset 0 0 18px color-mix(in srgb,var(--c1) 28%,transparent);
+  transition:box-shadow .3s}
+.foot .clock::before{content:"TIME";align-self:stretch;display:flex;align-items:center;margin-right:8px;padding-right:10px;border-right:1px solid color-mix(in srgb,var(--c1) 45%,transparent);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.2em;color:var(--c1);opacity:.85;writing-mode:vertical-rl;transform:rotate(180deg)}
+.foot .clock.low{animation:clockwarn 1s ease-in-out infinite}
+@keyframes clockwarn{50%{box-shadow:inset 0 0 30px color-mix(in srgb,var(--c1) 70%,transparent)}}
+@media (min-width:641px){.foot .clock .sg{width:20px;height:36px}.foot .clock .colon{gap:11px}}
+@media (max-width:640px){.foot .clock{padding:6px 10px 6px 8px}.foot .clock::before{margin-right:6px;padding-right:7px;font-size:.55rem}}
+
+/* ================= SEARCH BAR (home page) ================= */
+.cta{margin-top:30px}
+.search{position:relative;display:flex;align-items:center;gap:12px;width:100%;max-width:520px;padding:0 16px;height:58px;border:2px solid transparent;
+  background:linear-gradient(#05030d,#05030d) padding-box,linear-gradient(90deg,var(--ac),var(--ac2)) border-box;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  box-shadow:inset 0 0 22px color-mix(in srgb,var(--ac) 14%,transparent);transition:box-shadow .25s,filter .25s}
+.search:focus-within{box-shadow:inset 0 0 30px color-mix(in srgb,var(--ac) 32%,transparent);filter:drop-shadow(0 0 10px var(--ac))}
+.search svg{flex:none;width:22px;height:22px;fill:none;stroke:var(--ac);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 0 5px var(--ac))}
+.search input{all:unset;flex:1;min-width:0;height:100%;font-family:var(--font-mono);font-size:1.05rem;letter-spacing:.04em;color:var(--ink)}
+.search input::placeholder{color:var(--mut)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.search kbd{flex:none;font-family:var(--font-mono);font-size:.8rem;color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 50%,transparent);padding:2px 9px}
+@media (hover:none){.search kbd{display:none}}
+.tc[hidden]{display:none}
+.grid.filtered .tc:nth-child(even){margin-top:0}
+.none{text-align:center;color:var(--mut);font-family:var(--font-mono);padding:10px 0 60px}
+.none[hidden]{display:none}
+@media (max-width:640px){.cta{margin-top:20px}.search{height:52px;max-width:none}.search input{font-size:1rem}}
+
+/* ---- laptop: keep the bottom bar (with the clock) on screen while scrolling ---- */
+@media (min-width:641px){
+  .foot{position:sticky;bottom:0;z-index:9;margin:20px -16px 0;padding:10px 16px;background:rgba(7,5,15,.94);border-top:1px solid var(--ac);box-shadow:0 -6px 20px -10px var(--ac);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+}
+
+/* ---- card corner: your picture instead of the big number (01-12) ---- */
+.tc::before{content:"";width:8.5rem;height:8.5rem;top:-6px;right:-4px;-webkit-text-stroke:0;background:url("Piece%20of%20Cake.png") center/contain no-repeat;opacity:.6;filter:drop-shadow(0 0 10px var(--c1))}
+@media (max-width:640px){.tc::before{width:6.5rem;height:6.5rem}}
+
+/* ================= CARD CLICK ANIMATION ================= */
+.tc.pick{animation:pickpop .56s cubic-bezier(.3,1.4,.5,1) forwards!important;z-index:5}
+@keyframes pickpop{0%{scale:1;rotate:0deg}30%{scale:.94;rotate:-1deg}100%{scale:1.1;rotate:1.5deg;opacity:1}}
+.grid.leaving .tc:not(.pick){animation:fadeaway .4s ease forwards!important;pointer-events:none}
+@keyframes fadeaway{to{opacity:0;scale:.88;filter:blur(4px)}}
+.wipe{position:fixed;inset:0;z-index:100;display:grid;place-items:center;pointer-events:all;
+  background:linear-gradient(135deg,var(--c1),var(--c2));clip-path:circle(0 at var(--x) var(--y));
+  animation:wipein .56s cubic-bezier(.6,.05,.3,1) forwards}
+.wipe span{font-family:var(--font-head);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.3rem,5vw,2.6rem);text-align:center;padding:0 20px;color:#05030d;opacity:0;animation:wipetxt .56s ease .2s forwards}
+.wipe.out{animation:wipeout .5s ease forwards;clip-path:circle(160vmax at var(--x) var(--y))}
+@keyframes wipein{to{clip-path:circle(160vmax at var(--x) var(--y))}}
+@keyframes wipetxt{to{opacity:1;letter-spacing:.2em}}
+@keyframes wipeout{to{opacity:0}}
+
+/* ================= SECOND PAGE (start screen) ANIMATION ================= */
+.intro.enter>*{animation:up .65s cubic-bezier(.2,.9,.3,1) both}
+.intro.enter>:nth-child(1){animation-delay:.05s}.intro.enter>:nth-child(2){animation-delay:.12s}
+.intro.enter>:nth-child(3){animation-delay:.2s;animation-name:pop}.intro.enter>:nth-child(4){animation-delay:.3s}
+.intro.enter>:nth-child(5){animation-delay:.36s}.intro.enter>:nth-child(6){animation-delay:.46s}
+.intro.enter>:nth-child(7){animation-delay:.55s}
+.pk{transition:all .2s,scale .2s}.pk:active{scale:.94}
+.cta-btn.pressed{animation:pickpop .5s cubic-bezier(.3,1.4,.5,1) forwards}
+
+/* last page has no Submit button: the clock stands alone and the exam ends when it reaches 00:00 */
+@media (max-width:640px){.foot>.clock:last-child{grid-column:1/-1;justify-self:center}}
+
+/* ================= SECOND PAGE: BETTER LAYOUT ================= */
+.intro{max-width:780px;margin:22px auto 0;padding:40px 28px 34px;
+  background:radial-gradient(ellipse 70% 220px at 50% 0,color-mix(in srgb,var(--c1) 20%,transparent),transparent 70%),var(--card)}
+.intro h2{font-size:clamp(1.5rem,5.4vw,2.6rem);margin:16px 0 8px;line-height:1.1}
+.intro .sub{margin:0 auto 16px;max-width:460px;color:var(--mut);font-size:1.1rem}
+.exq{display:inline-block;max-width:100%;padding:10px 18px;font-family:var(--font-mono);font-size:.98rem;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid color-mix(in srgb,var(--c1) 40%,transparent);border-left:3px solid var(--c1)}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px auto 22px;max-width:520px}
+.mini div{padding:12px 6px;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-top:2px solid var(--c1);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}
+.mini b{display:block;font-family:var(--font-head);font-size:1.9rem;line-height:1.1;color:var(--c1);text-shadow:0 0 14px var(--c1)}
+.mini span{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.cw{display:flex;flex-direction:column;align-items:center;gap:10px;margin:8px 0 6px}
+.cw small{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.pkh{margin-top:30px}
+.pk{min-width:112px}
+.intro .rules{max-width:none;margin:28px 0 26px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;counter-reset:r;text-align:left}
+.intro .rules li{counter-increment:r;padding:13px 14px 13px 50px;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-left:3px solid var(--c1);color:var(--ink);font-weight:600;line-height:1.35}
+.intro .rules li::before{content:counter(r,decimal-leading-zero);left:14px;top:12px;width:auto;height:auto;border-radius:0;background:none;font-family:var(--font-mono);font-size:1rem;font-weight:700;color:var(--c1);text-shadow:0 0 10px var(--c1)}
+.intro.enter>:nth-child(3){animation-name:up;animation-delay:.18s}
+.intro.enter>:nth-child(4){animation-delay:.24s}
+.intro.enter>:nth-child(5){animation-name:pop;animation-delay:.3s}
+.intro.enter>:nth-child(6){animation-delay:.4s}
+.intro.enter>:nth-child(7){animation-delay:.48s}
+.intro.enter>:nth-child(8){animation-delay:.54s}
+.intro.enter>:nth-child(9){animation-delay:.62s}
+.intro.enter>:nth-child(10){animation-delay:.7s}
+@media (max-width:640px){.intro{padding:28px 14px 24px}.intro .sub{font-size:1rem}.mini{gap:8px}.mini b{font-size:1.5rem}.mini span{font-size:.62rem}.exq{font-size:.88rem}}
+
+/* ---- clock + Home button together at the bottom of the exam page ---- */
+.ck{display:flex;align-items:center;gap:10px}
+.ck .btn{min-height:46px;padding:0 18px}
+@media (max-width:640px){.ck{justify-content:center;gap:8px}.ck:last-child{grid-column:1/-1}.ck .btn{padding:0 14px}}
+
+/* ---- phone: bottom bar = page dots on top, then clock (left) | Home | Next in one row ---- */
+@media (max-width:640px){
+  .ck{display:contents}
+  .foot{grid-template-columns:auto 1fr 1fr;align-items:center}
+  .foot:not(:has(.btn.p)){grid-template-columns:auto 1fr}
+  .ck .btn{width:100%;min-height:46px;padding:0 8px}
+  .foot .clock{justify-self:start}
+}
+
+/* ---- Home and Next are exactly as tall as the clock ---- */
+.ck{align-items:stretch}
+.ck .btn,.foot>.btn.p{min-height:0;align-self:stretch}
+.foot .clock{align-self:stretch}
+@media (max-width:640px){
+  .foot{align-items:stretch}
+  .dots{align-items:center}
+  .ck .btn,.foot>.btn.p{min-height:0;align-self:stretch}
+}
+
+/* results screen: no Previous / Next buttons, only the page numbers */
+.foot.done{justify-content:center}
+.foot.done>span{display:none}
+
+/* ---- phone: two tense cards per row ---- */
+@media (max-width:640px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-bottom:24px}
+  .tc{min-width:0;min-height:215px;padding:14px 12px;overflow-wrap:anywhere}
+  .tc::before{width:4.2rem;height:4.2rem;top:-2px;right:-2px}
+  .tc small{font-size:.6rem;letter-spacing:.1em}
+  .tc h2{margin:26px 0 5px;font-size:.88rem;letter-spacing:.03em;line-height:1.2}
+  .tc p{font-size:.74rem;line-height:1.3;margin-bottom:8px}
+  .tc em{font-size:.7rem;padding:6px 8px;margin-bottom:10px;line-height:1.3}
+  .tc .row{flex-direction:column;align-items:flex-start;gap:6px;font-size:.62rem}
+  .go{font-size:.62rem;padding:6px 14px}
+}
+
+/* ================= TEACHER / STUDENT CLASS MODE ================= */
+[hidden]{display:none!important}
+.panel{max-width:660px;margin:22px auto;padding:26px 20px;background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--ac);animation:fade .4s ease}
+.panel h2{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px;font-size:1.5rem;text-shadow:0 0 14px var(--ac)}
+.panel p.sub2{margin:0 0 6px;color:var(--mut)}
+.panel label.l{display:block;margin:16px 0 6px;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.fld{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--ink);font-family:var(--font-mono);font-size:1.05rem;border-radius:0}
+.fld:focus{outline:none;border-color:var(--ac);box-shadow:0 0 14px color-mix(in srgb,var(--ac) 35%,transparent)}
+select.fld option{background:#0e0a20;color:#e6f7ff}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
+.tg{display:flex;gap:8px;align-items:center;padding:9px 10px;border:1px solid var(--bd);cursor:pointer;font-weight:600}
+.tg input{accent-color:var(--ac);width:16px;height:16px}
+.tg:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,transparent)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.gerr{color:var(--bad);min-height:1.4em;margin:12px 0 0;font-family:var(--font-mono)}
+.gcode{font-family:var(--font-head);font-size:1.7rem;letter-spacing:.2em;color:var(--ac);text-shadow:0 0 12px var(--ac)}
+.gcard{margin-top:16px;padding:16px;border:1px solid var(--bd);border-left:3px solid var(--ac2);background:rgba(255,255,255,.02)}
+.gcard h3{margin:0;font-family:var(--font-head);font-size:1.05rem;text-transform:uppercase;letter-spacing:.05em}
+.gcard .meta{color:var(--mut);font-size:.92rem;margin:4px 0 10px}
+.gtop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.gtab{width:100%;border-collapse:collapse;margin-top:12px;font-size:.95rem}
+.gtab th,.gtab td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bd)}
+.gtab th{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.hero .cta .btn.big{min-width:210px}
+@media (max-width:560px){.g2{grid-template-columns:1fr}}
+
+/* ================= BETTER BUTTONS ================= */
+.btn,.ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 22px;font-family:var(--font-head);font-size:.78rem;font-weight:700;letter-spacing:.12em;transition:background .18s,color .18s,transform .15s,filter .18s,box-shadow .18s}
+.btn:hover,.ghost:hover{transform:translateY(-2px)}
+.btn:active,.ghost:active{transform:translateY(0) scale(.97)}
+.btn:focus-visible,.ghost:focus-visible,.role:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+.btn.p{box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 40%,transparent) inset}
+.btn.big{min-height:54px;padding:14px 34px;font-size:.9rem}
+.ghost.dng{border-color:var(--bad);color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,transparent)}
+.ghost.dng:hover{background:var(--bad);color:#05030d}
+.gbar{gap:8px}.gbar .ghost{flex:1 1 0;min-width:104px}
+.panel .btn.big,.panel .cta-btn{width:100%}
+.panel .cta-wrap,.panel>.cta-btn{margin-top:6px}
+.th .ghost{min-height:40px;padding:8px 18px}
+/* Student + Teacher side by side */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:580px;margin:0 auto}
+.role{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:132px;padding:18px 12px;text-align:center;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));transition:transform .2s,filter .2s}
+.role i{font-style:normal;font-size:2rem;line-height:1;margin-bottom:4px}
+.role b{font-family:var(--font-head);font-size:1.1rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.role small{font-size:.86rem;font-weight:600;opacity:.85}
+.role.st{color:#05030d;background:linear-gradient(120deg,var(--ac),var(--ac2))}
+.role.te{color:var(--ac);background:linear-gradient(color-mix(in srgb,var(--ac) 10%,var(--bg)),color-mix(in srgb,var(--ac) 10%,var(--bg)));box-shadow:inset 0 0 0 2px var(--ac)}
+.role:hover{transform:translateY(-4px);filter:brightness(1.15)}
+.role:active{transform:scale(.96)}
+@media (max-width:420px){.role{min-height:118px}.role b{font-size:.95rem;letter-spacing:.1em}.role small{font-size:.78rem}.role i{font-size:1.7rem}}
 </style></head>
-<body>
-<noscript><p style="padding:24px;font-family:sans-serif;color:#fff">Please turn on JavaScript to use the exam.</p></noscript><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
+<body><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
 <script>
 /* =====================================================================
    HOW THIS FILE IS ORGANISED  (search for the numbers below)
@@ -283,11 +593,11 @@ const CONFIG={
   secondsPerPage:120,      // time for ONE page (120 = 2 minutes)
   redAtPercent:30,         // timer is RED when this % (or less) of the time is left
   yellowAtPercent:70,      // timer is YELLOW below this %, GREEN above it
-  brand:"TenseMaster", logoLetter:"T",
-  navLabel:"v2.077 // Grammar exam",
+  brand:"PIECE OF CAKE", logoLetter:"PC",
+  logoImages:["Piece of Cake.png"],   // your picture, saved next to this file (first name that exists is used). If none exists the letters above are shown
+  navLabel:"v2.0",
   tagLine:"System online // Grammar practice",
   heroTitle:"Master English", heroWord:"Tenses",
-  heroText:"Choose a tense, answer {total} questions over {pages} pages, and watch your score grow.",
   chips:["I play","She is playing","They played","We will play"]   // floating words (wide screens)
 };
 const TOTAL=CONFIG.pages*CONFIG.perPage, SECS=CONFIG.secondsPerPage;
@@ -387,37 +697,43 @@ const best=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 const pageOf=i=>Math.floor(i/CONFIG.perPage);
 const pageNums=[...Array(CONFIG.pages).keys()];
 
+function nextLogo(img){                 // try the next picture name, or show the letters
+  const i=+img.dataset.i+1;
+  if(i<CONFIG.logoImages.length){img.dataset.i=i;img.src=CONFIG.logoImages[i]}
+  else img.replaceWith(CONFIG.logoLetter);
+}
 function homeScreen(){
   if(S)clearInterval(S.timer);S=null;
-  const text=CONFIG.heroText.replace("{total}",TOTAL).replace("{pages}",CONFIG.pages);
   const stat=(i,n,label)=>`<div style="--i:${i}"><b data-to="${n}">0</b><span>${label}</span></div>`;
   app.innerHTML=`
-  <header class="nav"><div class="brand"><span class="logo">${CONFIG.logoLetter}</span><b>${CONFIG.brand}</b></div><span class="navtag">${CONFIG.navLabel}</span></header>
+  <header class="nav"><div class="brand"><span class="logo"><img src="${CONFIG.logoImages[0]}" data-i="0" alt="" onerror="nextLogo(this)"></span><b>${CONFIG.brand}</b></div><span class="navtag">${CONFIG.navLabel}</span></header>
   <div class="hero">
     ${CONFIG.chips.map((c,i)=>`<span class="chip k${i+1}">${c}</span>`).join("")}
     <span class="tag"><i class="pulse"></i>${CONFIG.tagLine}</span>
     <h1>${CONFIG.heroTitle}<br><span class="ul">${CONFIG.heroWord}</span></h1>
-    <p>${text}</p>
-    <div class="cta"><button class="btn p big" data-a="scroll">Start practising</button><div class="clock badge">${clock(SECS)}<small>per page</small></div></div>
+    <div class="cta"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input id="q" type="search" placeholder="Search tenses…" autocomplete="off" spellcheck="false" aria-label="Search tenses"><kbd>/</kbd></label></div>
+    <div class="cta"><div class="roles"><button class="role st" data-a="tologin"><i>🎓</i><b>Student</b><small>Log in with name + code</small></button><button class="role te" data-a="toteacher"><i>🧑‍🏫</i><b>Teacher</b><small>Create groups &amp; exams</small></button></div></div>
     <div class="stats">${stat(0,TENSES.length,"Tenses")}${stat(1,TOTAL,"Questions each")}${stat(2,TOTAL*TENSES.length,"Total questions")}</div>
   </div>
   <div class="grid">`+TENSES.map((T,k)=>{const b=best("best-"+T.id);
-    return `<button class="tc" style="${cv(T)};--d:${(k%2)*140}ms" data-n="${pad(k+1)}" data-a="open" data-id="${T.id}"><i class="shine"></i><small>Tense ${k+1}</small><h2>${T.name}</h2><p>${T.d}</p><em>${T.ex}</em><div class="row"><span>${b?"Best score "+b+"/"+TOTAL:TOTAL+" questions"}</span><span class="go">Start</span></div></button>`}).join("")+`</div>`;
+    return `<button class="tc" style="${cv(T)};--d:${(k%2)*140}ms" data-n="${pad(k+1)}" data-a="open" data-id="${T.id}"><i class="shine"></i><small>Tense ${k+1}</small><h2>${T.name}</h2><p>${T.d}</p><em>${T.ex}</em><div class="row"><span>${b?"Best score "+b+"/"+TOTAL:TOTAL+" questions"}</span><span class="go">Start</span></div></button>`}).join("")+`</div><p class="none" id="none" hidden>No tenses found. Try another word.</p>`;
   effects();scrollTo(0,0);
 }
 
 function introScreen(){            // the screen with the Start button and page picker
-  const T=S.T,sel=S.sel;
+  const T=S.T,sel=S.sel,fresh=S.fresh;S.fresh=false;
   const pick=(v,label,small)=>`<button class="pk ${sel===v?"on":""}" data-a="sel" data-v="${v}"><b>${label}</b><small>${small}</small></button>`;
   const rules=sel=="all"
-   ?[`${TOTAL} questions on ${CONFIG.pages} pages, ${CONFIG.perPage} per page`,`You have ${MINUTES} minutes for each page`,"When time is up, the next page opens by itself","You cannot go back to a finished page","After each answer you see if it is correct or wrong"]
-   :[`${CONFIG.perPage} questions on page ${sel+1}`,`You have ${MINUTES} minutes for this page`,"When time is up, the exam ends and shows your score","After each answer you see if it is correct or wrong"];
+   ?[`${TOTAL} questions on ${CONFIG.pages} pages, ${CONFIG.perPage} per page`,`You have ${MINUTES} minutes for each page`,"When time is up, the next page opens by itself","The exam ends when time runs out on the last page, or when you answer every question on it","You cannot go back to a finished page","After each answer you see if it is correct or wrong"]
+   :[`${CONFIG.perPage} questions on page ${sel+1}`,`You have ${MINUTES} minutes for this page`,"The exam ends when time is up, or when you answer every question","After each answer you see if it is correct or wrong"];
   app.innerHTML=`<div style="${cv(T)}"><div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>
-  <div class="intro"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><div class="clock big">${clock(SECS)}</div>
-  <div class="pkh">Choose a page</div>
-  <div class="pks">${pick("all","All pages",TOTAL+" questions")}${pageNums.map(i=>pick(i,"Page "+(i+1),"Q "+(i*CONFIG.perPage+1)+"–"+(i+1)*CONFIG.perPage)).join("")}</div>
-  <ul>${rules.map(r=>`<li>${r}</li>`).join("")}</ul>
-  <button class="btn p big" data-a="start">${sel=="all"?"Start Full Exam":"Start Page "+(sel+1)}</button></div></div>`;
+  <div class="intro${fresh?" enter":""}"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><p class="sub">${T.d}</p><div class="exq">${T.ex}</div>
+  <div class="mini"><div><b>${sel=="all"?TOTAL:CONFIG.perPage}</b><span>Questions</span></div><div><b>${sel=="all"?CONFIG.pages:1}</b><span>${sel=="all"?"Pages":"Page"}</span></div><div><b>${MINUTES}</b><span>Min per page</span></div></div>
+  <div class="cw"><small>Time per page</small><div class="clock big">${clock(SECS)}</div></div>
+  <div class="pkh" ${S.group?"hidden":""}>Choose a page</div>
+  <div class="pks" ${S.group?"hidden":""}>${pick("all","All pages",TOTAL+" questions")}${pageNums.map(i=>pick(i,"Page "+(i+1),"Q "+(i*CONFIG.perPage+1)+"–"+(i+1)*CONFIG.perPage)).join("")}</div>
+  <ul class="rules">${rules.map(r=>`<li>${r}</li>`).join("")}</ul>
+  <span class="cta-wrap"><button class="cta-btn start-btn" data-a="start"><span class="st"><b>${sel=="all"?"Start Full Exam":"Start Page "+(sel+1)}</b><small>${sel=="all"?TOTAL+" questions · "+MINUTES+" min per page":CONFIG.perPage+" questions · "+MINUTES+" min"}</small></span><span class="cta-a">→</span></button></span></div></div>`;
 }
 
 function examScreen(){
@@ -426,7 +742,7 @@ function examScreen(){
   const left=done?S.left:secLeft(), first=S.list[0];
   let h=`<div class="top" style="${cv(T)}"><div class="th"><button class="ghost" data-a="home">← Home</button>
     <div style="flex:1;min-width:0"><b>${T.name}</b><br><small>Page ${p+1} of ${CONFIG.pages} · Questions ${p*CONFIG.perPage+1}–${(p+1)*CONFIG.perPage}</small></div>
-    <div id="clk" class="clock ${timerColor(left)}">${clock(left)}</div></div>
+    </div>
     <div class="bar"><i style="width:${cnt/tot*100}%"></i></div><div class="pct">${cnt}/${tot} answered · ${MINUTES} minutes per page</div></div>
     <div style="${cv(T)}">${S.note&&!done?`<div class="note">${S.note}</div>`:""}`;
   if(done){                                       // result box
@@ -434,7 +750,7 @@ function examScreen(){
     h+=`<div class="res"><div class="ring" style="--p:${sc/tot*100}"><div><span>${sc}<small>out of ${tot}</small></span></div></div>
     <h3>${S.timeout?"Time is up! ":""}${sc>=tot*.9?"Excellent work!":sc>=tot*.7?"Great job!":sc>=tot*.5?"Good effort!":"Keep practising!"}</h3>
     <span style="color:var(--mut)">Review your answers below: green is correct, red is your mistake.</span>
-    <div class="b"><button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button></div></div>`;
+    <div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
   }
   for(let k=0;k<CONFIG.perPage;k++){              // the questions of this page
     const n=p*CONFIG.perPage+k,q=Q[n],a=ans[n],show=done||a!==undefined;
@@ -443,10 +759,11 @@ function examScreen(){
       return `<button class="opt ${c}" data-a="pick" data-n="${n}" data-j="${j}"><span class="l">${"ABCD"[j]}</span>${o}</button>`}).join("")+`</div>`+
     (show?`<div class="fb ${a===q.a?"good":"no"}">${a===undefined?"Not answered. Correct answer: "+q.o[q.a]:a===q.a?"Correct! Well done.":"Wrong. The correct answer is: "+q.o[q.a]}</div>`:"")+`</section>`;
   }
-  h+=`<div class="foot">${done?`<button class="btn" data-a="prev" ${p==first?"disabled":""}>← Previous</button>`:"<span></span>"}<div class="dots">`+
+  h+=`<div class="foot${done?" done":""}"><span></span><div class="dots">`+
     S.list.map(i=>{const full=done?[...Array(CONFIG.perPage).keys()].every(k=>ans[i*CONFIG.perPage+k]!==undefined):i<p;
       return `<button class="btn dot ${i==p?"on":full?"full":done?"":"todo"}" ${done?`data-a="go" data-p="${i}"`:'tabindex="-1"'}>${i+1}</button>`}).join("")+`</div>`+
-    (p<S.last?`<button class="btn p" data-a="next">Next →</button>`:done?`<button class="btn" disabled>Next →</button>`:`<button class="btn p" data-a="submit">Submit (${cnt}/${tot})</button>`)+`</div></div>`;
+    `<div class="ck"><div id="clk2" class="clock ${timerColor(left)}">${clock(left)}</div><button class="btn" data-a="home">← Home</button></div>`+
+    (!done&&p<S.last?`<button class="btn p" data-a="next">Next →</button>`:"")+`</div></div>`;
   app.innerHTML=h;
 }
 
@@ -456,7 +773,7 @@ const scoreOf=()=>S.Q.reduce((x,q,i)=>x+(S.list.includes(pageOf(i))&&S.ans[i]===
 function openExam(id,run,sel){                    // go to the start screen of a tense
   const T=TENSES.find(x=>x.id==id);if(!T)return homeScreen();
   if(S)clearInterval(S.timer);
-  S={T,run:run||0,sel:sel===undefined?"all":sel,p:0,ans:{},done:false,started:false};
+  S={T,run:run||0,sel:sel===undefined?"all":sel,p:0,ans:{},done:false,started:false,fresh:true};
   S.Q=build(T,S.run);examScreen();scrollTo(0,0);
 }
 function startExam(){
@@ -465,31 +782,67 @@ function startExam(){
 }
 function tick(){                                   // runs 4 times a second while the timer is on
   if(!S||S.done)return;
-  const l=secLeft(),c=document.getElementById("clk");
-  if(c){c.innerHTML=clock(l);c.classList.toggle("low",l<=RED_AT);c.classList.toggle("mid",l>RED_AT&&l<=YELLOW_AT)}
+  const l=secLeft();
+  ["clk","clk2"].forEach(id=>{const c=document.getElementById(id);   // top clock + clock next to Next/Submit
+    if(c){c.innerHTML=clock(l);c.classList.toggle("low",l<=RED_AT);c.classList.toggle("mid",l>RED_AT&&l<=YELLOW_AT)}});
   if(l<=0)nextPage(true);
 }
 function nextPage(timeUp){                         // go to next page, or finish after the last one
   if(S.p<S.last){S.note=timeUp?`Time is up for page ${S.p+1}. Page ${S.p+2} has started.`:"";S.p++;S.end=Date.now()+SECS*1000;examScreen();scrollTo(0,0)}
   else{S.timeout=timeUp;finishExam()}
 }
+function autoFinish(){                             // last page fully answered -> end the exam after a short pause (so you still see the last answer)
+  if(S.done||S.fin||S.p!==S.last)return;
+  const base=S.last*CONFIG.perPage;
+  if(![...Array(CONFIG.perPage).keys()].every(k=>S.ans[base+k]!==undefined))return;
+  S.fin=true;S.note="All questions answered. Finishing the exam…";const me=S;
+  setTimeout(()=>{if(S===me&&!S.done)finishExam()},1500);
+}
 function finishExam(){
   clearInterval(S.timer);S.left=secLeft();S.done=true;S.p=S.list[0];
   const sc=scoreOf(),key="best-"+S.T.id+(S.sel=="all"?"":"-p"+S.sel);
-  try{if(sc>(+localStorage.getItem(key)||0))localStorage.setItem(key,sc)}catch(e){}
+  if(S.group)saveGroupResult(S,sc);else try{if(sc>(+localStorage.getItem(key)||0))localStorage.setItem(key,sc)}catch(e){}
   examScreen();scrollTo(0,0);
+}
+
+/* ---- click animation on a tense card: card pops, others fade, colour wipe grows from the click, then the exam opens ---- */
+let leaving=false;
+function openWithFx(b,e){
+  if(leaving)return;
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){location.hash=b.dataset.id;return}
+  leaving=true;
+  const r=b.getBoundingClientRect(),x=e.clientX||r.left+r.width/2,y=e.clientY||r.top+r.height/2;
+  const T=TENSES.find(t=>t.id==b.dataset.id);
+  b.classList.add("pick");document.querySelector(".grid").classList.add("leaving");
+  const w=document.createElement("div");w.className="wipe";
+  w.style.cssText=`--x:${x}px;--y:${y}px;--c1:${T.c1};--c2:${T.c2}`;
+  w.innerHTML=`<span>${T.name}</span>`;document.body.appendChild(w);
+  setTimeout(()=>{location.hash=b.dataset.id;scrollTo(0,0);w.classList.add("out");
+    setTimeout(()=>{w.remove();leaving=false},500)},560);
+}
+
+function startWithFx(b,e){                          // second page: colour wipe, then the exam starts
+  if(leaving)return;
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){startExam();return}
+  leaving=true;
+  const r=b.getBoundingClientRect(),x=e.clientX||r.left+r.width/2,y=e.clientY||r.top+r.height/2,T=S.T;
+  b.classList.add("pressed");
+  const w=document.createElement("div");w.className="wipe";
+  w.style.cssText=`--x:${x}px;--y:${y}px;--c1:${T.c1};--c2:${T.c2}`;
+  w.innerHTML=`<span>Get ready!</span>`;document.body.appendChild(w);
+  setTimeout(()=>{startExam();w.classList.add("out");setTimeout(()=>{w.remove();leaving=false},500)},560);
 }
 
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
   if(a=="theme"){document.documentElement.classList.toggle("alt");return}            // switch neon colours
   if(a=="scroll"){document.querySelector(".grid").scrollIntoView({behavior:"smooth"});return}
-  if(a=="open"){location.hash=b.dataset.id;return}
-  if(a=="home"){location.hash="";if(!location.hash)homeScreen();return}
+  if(a=="open"){openWithFx(b,e);return}
+  if(a=="home"){if(S&&S.group){clearInterval(S.timer);S=null;nav("login");return}location.hash="";if(!location.hash)homeScreen();return}
   if(!S)return;
   if(a=="sel"){S.sel=b.dataset.v=="all"?"all":+b.dataset.v;examScreen();return}
-  if(a=="start"){startExam();return}
-  if(a=="pick"){const n=+b.dataset.n;if(S.done||S.ans[n]!==undefined)return;S.ans[n]=+b.dataset.j;const y=scrollY;examScreen();scrollTo(0,y);return}
+  if(a=="start"){startWithFx(b,e);return}
+  if(a=="pick"){const n=+b.dataset.n;if(S.done||S.ans[n]!==undefined)return;S.ans[n]=+b.dataset.j;autoFinish();const y=scrollY;examScreen();scrollTo(0,y);return}
   if(a=="submit"){finishExam();return}
   if(a=="retry"){openExam(S.T.id,S.run+1,S.sel);return}
   if(a=="go")S.p=+b.dataset.p;
@@ -514,6 +867,134 @@ document.addEventListener("pointermove",e=>{          // 3D tilt of cards under 
 document.addEventListener("pointerout",e=>{const c=e.target.closest&&e.target.closest(".tc");
   if(c&&!c.contains(e.relatedTarget)){c.style.removeProperty("--rx");c.style.removeProperty("--ry")}});
 
-function route(){const id=location.hash.slice(1);id?openExam(id):homeScreen()}   // #ps opens Present Simple, empty = home
+function filterTenses(v){                          // search bar: hide cards that do not match
+  v=v.trim().toLowerCase();let n=0;
+  document.querySelectorAll(".tc").forEach((c,i)=>{const T=TENSES[i];
+    const hit=!v||(T.name+" "+T.d+" "+T.ex).toLowerCase().includes(v);c.hidden=!hit;if(hit)n++});
+  const g=document.querySelector(".grid"),no=document.getElementById("none");
+  if(g)g.classList.toggle("filtered",!!v);if(no)no.hidden=n>0;
+}
+document.addEventListener("input",e=>{if(e.target.id=="q")filterTenses(e.target.value)});
+document.addEventListener("keydown",e=>{const q=document.getElementById("q");        // press / to jump to the search bar
+  if(e.key=="/"&&q&&document.activeElement!==q){e.preventDefault();q.focus()}
+  else if(e.key=="Escape"&&q&&document.activeElement===q){q.value="";filterTenses("");q.blur()}});
+/* =====================================================================
+   9. CLASS MODE - teacher creates groups, students log in with name + code
+   Data is saved in this browser (localStorage). If the page runs inside
+   Claude with the shared database on, it is saved there too.
+   ===================================================================== */
+let gdb=null;
+const LSg={get:k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const store={
+ async groups(){if(gdb){try{return (await gdb.collection("groups").get()).docs.map(d=>d.data())}catch(e){}}return LSg.get("ce_groups")||[]},
+ async group(c){if(gdb){try{const d=await gdb.collection("groups").doc(c).get();if(d.exists)return d.data()}catch(e){}}return (LSg.get("ce_groups")||[]).find(g=>g.code==c)||null},
+ async saveGroup(g){if(gdb){try{await gdb.collection("groups").doc(g.code).set(g)}catch(e){}}const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a)},
+ async delGroup(c){if(gdb){try{await gdb.collection("groups").doc(c).delete()}catch(e){}}LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c))},
+ async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(gdb){try{const d=(await gdb.collection("results").where("code","==",c).get()).docs.map(x=>x.data()),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
+ async saveResult(r){if(gdb){try{await gdb.collection("results").doc(r.key).set(r)}catch(e){}}const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a)},
+ async done(k){if(gdb){try{if((await gdb.collection("results").doc(k).get()).exists)return true}catch(e){}}return !!(LSg.get("ce_res")||[]).find(x=>x.key==k)}
+};
+if(window.claude&&claude.use)claude.use("db").then(d=>{gdb=d}).catch(()=>{});
+
+const nav=h=>{if(location.hash.slice(1)==h)route();else location.hash=h};
+const gesc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ghash=x=>{let h=7;for(const c of x)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
+const mkCode=()=>{const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s};
+const leaveExam=()=>{if(S){clearInterval(S.timer);S=null}};
+const topBar=()=>`<div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>`;
+
+function buildGroup(g,ts){            // same code = same questions for every student of the group
+  const r=mulberry(ghash(g.code)),list=[];
+  for(let i=0;i<TOTAL;i++){
+    const t=ts[i%ts.length],s=SUBJECTS[Math.floor(r()*SUBJECTS.length)],v=VERBS[Math.floor(r()*VERBS.length)],right=t.f(s,v);
+    const wrong=[...new Set(TENSES.filter(x=>x!==t&&!clash(t,x)).map(x=>x.f(s,v)))].filter(x=>x!==right).sort(()=>r()-.5).slice(0,3);
+    const o=[right,...wrong].sort(()=>r()-.5);
+    list.push({q:`${s} ___ (${v[0]}) ${v[5]} ${t.t[Math.floor(r()*t.t.length)]}.`,o,a:o.indexOf(right)});
+  }
+  return list;
+}
+function openGroupExam(g,name,key){
+  const ts=TENSES.filter(t=>g.tenses.includes(t.id));
+  const P={id:"grp",name:g.name,d:ts.map(t=>t.name).join(" · "),ex:"Student: "+name,c1:ts[0].c1,c2:ts[0].c2};
+  S={T:P,run:0,sel:g.page,p:0,ans:{},done:false,started:false,fresh:true,group:g,student:name,key};
+  S.Q=buildGroup(g,ts);examScreen();scrollTo(0,0);
+}
+function saveGroupResult(St,sc){
+  const tot=St.list.length*CONFIG.perPage;
+  store.saveResult({key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()});
+}
+
+/* ---- student login ---- */
+function loginScreen(){
+  leaveExam();
+  app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Student</span><h2>Exam login</h2><p class="sub2">Enter your name and the code from your teacher.</p>
+  <label class="l" for="gname">Your name</label><input class="fld" id="gname" autocomplete="name" placeholder="Your full name">
+  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
+  <p class="gerr" id="gerr"></p><button class="cta-btn start-btn" data-a="glogin"><span class="st"><b>Enter exam</b></span><span class="cta-a">→</span></button></div>`;
+  scrollTo(0,0);
+}
+async function doLogin(){
+  const name=document.getElementById("gname").value.trim().replace(/\s+/g," "),code=document.getElementById("gcode").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,""),e=document.getElementById("gerr");
+  if(!name||!code){e.textContent="Please enter your name and the group code.";return}
+  const g=await store.group(code);
+  if(!g){e.textContent="Group code not found. Ask your teacher.";return}
+  if(g.closed){e.textContent="This exam is closed.";return}
+  const key=code+"_"+name.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+  if(await store.done(key)){e.textContent="This name has already finished the exam.";return}
+  openGroupExam(g,name,key);
+}
+
+/* ---- teacher page ---- */
+async function teacherScreen(){
+  leaveExam();
+  const gs=(await store.groups()).sort((a,b)=>b.created-a.created);
+  const names=g=>TENSES.filter(t=>g.tenses.includes(t.id)).map(t=>t.name).join(", ");
+  app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Teacher</span><h2>Create a group</h2>
+  <p class="sub2">Make a group, choose the exam, then give the code to your students.</p>
+  <div class="g2"><div><label class="l" for="tn">Group name</label><input class="fld" id="tn" placeholder="e.g. Class 7A"></div>
+  <div><label class="l" for="tc">Student code</label><input class="fld" id="tc" maxlength="8" value="${mkCode()}" style="text-transform:uppercase;letter-spacing:.2em"></div></div>
+  <label class="l">Exam tenses (choose one or more)</label>
+  <div class="tgrid">${TENSES.map(t=>`<label class="tg"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
+  <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button><button class="ghost" data-a="tcode">New code</button></div>
+  <label class="l" for="tp">Pages for students</label>
+  <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
+  <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
+  <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
+  ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
+  <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
+  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  scrollTo(0,0);
+}
+async function teacherAction(a,b){
+  const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")];
+  if(a=="tall"){boxes().forEach(x=>x.checked=true);return}
+  if(a=="tnone"){boxes().forEach(x=>x.checked=false);return}
+  if(a=="tcode"){$("tc").value=mkCode();return}
+  if(a=="tmake"){
+    const name=$("tn").value.trim(),code=$("tc").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,""),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pg=$("tp").value;
+    if(!name){e.textContent="Enter a group name.";return}
+    if(code.length<4){e.textContent="The code needs at least 4 letters or numbers.";return}
+    if(!tenses.length){e.textContent="Choose at least one tense for the exam.";return}
+    if(await store.group(code)){e.textContent="That code is already used. Press New code.";return}
+    await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
+  }
+  const card=b.closest(".gcard"),code=card&&card.dataset.c;if(!code)return;
+  if(a=="tdel"){if(confirm("Delete this group and its results?")){await store.delGroup(code);teacherScreen()}}
+  else if(a=="tclose"){const g=await store.group(code);g.closed=!g.closed;await store.saveGroup(g);teacherScreen()}
+  else if(a=="tres"){
+    const r=await store.results(code);
+    card.querySelector(".rbox").innerHTML=r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`;
+  }
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
+  if(a=="tologin")nav("login");
+  else if(a=="toteacher")nav("teacher");
+  else if(a=="glogin")doLogin();
+  else if(/^t(all|none|code|make|res|close|del)$/.test(a))teacherAction(a,b);
+});
+document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
+
+function route(){const id=location.hash.slice(1);if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
 addEventListener("hashchange",route);route();
 </script></body></html>
