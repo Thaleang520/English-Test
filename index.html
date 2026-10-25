@@ -953,7 +953,7 @@ function loginScreen(){
   leaveExam();
   app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Student</span><h2>Exam login</h2><p class="sub2">Enter your name and the code from your teacher.</p>
   <label class="l" for="gname">Your name</label><input class="fld" id="gname" autocomplete="name" placeholder="Your full name">
-  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN?JOIN.c:""}" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
+  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN&&JOIN.c||""}" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
   <p class="gerr" id="gerr"></p><button class="cta-btn start-btn" data-a="glogin"><span class="st"><b>Enter exam</b></span><span class="cta-a">→</span></button></div>`;
   scrollTo(0,0);
 }
@@ -1007,9 +1007,9 @@ async function teacherAction(a,b){
     await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
   }
   if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
-    if(u&&!/^https:\/\/.+/.test(u)){e.textContent="The URL must start with https://";return}
+    if(u&&!/^(https:\/\/|http:\/\/localhost)/.test(u)){e.textContent="The URL must start with https://";return}
     CLOUD=u;LSg.set("ce_cloud",u);
-    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";e.textContent="Connected. For students who only type name + code, also paste this URL into DEFAULT_CLOUD near the top of section 9 in the file and re-upload it."}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
+    if(u){try{await cj("GET","groups");e.style.color="var(--ok)";const L=location.href.split("#")[0]+"#join="+b64e({d:CLOUD});e.innerHTML=`Connected. Give students THIS link (it connects them automatically, then they type name + code):<input class="fld" readonly value="${gesc(L)}" onfocus="this.select()" style="margin-top:8px">`}catch(x){e.style.color="var(--bad)";e.textContent="Cannot reach this database. Check the URL and that rules allow read/write (test mode)."}}
     else{e.style.color="var(--mut)";e.textContent="Online sync is off."}
     const mine=LSg.get("ce_groups")||[];if(CLOUD)for(const g of mine){try{await cj("PUT","groups/"+g.code,g)}catch(x){}}
     return}
@@ -1028,10 +1028,12 @@ async function teacherAction(a,b){
       card.querySelector('[data-a=tres]').click()}
     catch(e){alert("This result code is not valid for this group.")}
   }
-  else if(a=="tres"){
-    const r=await store.results(code);
-    card.querySelector(".rbox").innerHTML=r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`;
-  }
+  else if(a=="tres"){showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
+}
+let resTimer=null;
+async function showResults(card,code){          // draws the table; repeats every 3 s while open = live results
+  const r=await store.results(code),box=card.querySelector(".rbox");if(!box)return;
+  box.innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length} finished</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`);
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
@@ -1042,6 +1044,6 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
-function route(){const id=location.hash.slice(1);if(id.startsWith("join=")){try{JOIN=b64d(id.slice(5));if(JOIN.d)CLOUD=JOIN.d.replace(/\/+$/,"")}catch(e){JOIN=null}loginScreen()}else if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
+function route(){const id=location.hash.slice(1);if(id.startsWith("join=")){try{JOIN=b64d(id.slice(5));if(JOIN.d){CLOUD=JOIN.d.replace(/\/+$/,"");LSg.set("ce_cloud",CLOUD)}}catch(e){JOIN=null}loginScreen()}else if(id=="teacher")teacherScreen();else if(id=="login")loginScreen();else id?openExam(id):homeScreen()}   // #teacher, #login, #ps = Present Simple, empty = home
 addEventListener("hashchange",route);route();
 </script></body></html>
