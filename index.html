@@ -811,7 +811,7 @@ function examScreen(){
     h+=`<div class="res"><div class="ring" style="--p:${sc/tot*100}"><div><span>${sc}<small>out of ${tot}</small></span></div></div>
     <h3>${S.timeout?"Time is up! ":""}${sc>=tot*.9?"Excellent work!":sc>=tot*.7?"Great job!":sc>=tot*.5?"Good effort!":"Keep practising!"}</h3>
     <span style="color:var(--mut)">Review your answers below: green is correct, red is your mistake.</span>
-    ${S.sent?`<div class="sent">${S.sent}</div>`:""}<div class="b">${S.group?`<button class="btn p" data-a="home">Finish</button>`:`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
+    ${S.sent?`<div class="sent">${S.sent}</div>`:""}<div class="b">${S.group?"":`<button class="btn p" data-a="retry">Try again</button><button class="btn" data-a="home">Other tenses</button>`}</div></div>`;
   }
   for(let k=0;k<CONFIG.perPage;k++){              // the questions of this page
     const n=p*CONFIG.perPage+k,q=Q[n],a=ans[n],show=done||a!==undefined;
@@ -899,7 +899,8 @@ document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
   if(a=="copyres"){const v=b.dataset.v,inp=b.parentElement.querySelector("input");
     (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).catch(()=>{inp.select();try{document.execCommand("copy")}catch(x){}});
-    b.textContent="Copied ✔";setTimeout(()=>{b.textContent="Copy code"},2000);return}
+    b.textContent="Copied ✔";
+    setTimeout(()=>{if(S&&S.group){clearInterval(S.timer);S=null}nav("login")},700);return}      // Finish = copy the code, then leave the exam
   if(a=="theme"){document.documentElement.classList.toggle("alt");return}            // switch neon colours
   if(a=="scroll"){document.querySelector(".grid").scrollIntoView({behavior:"smooth"});return}
   if(a=="open"){openWithFx(b,e);return}
@@ -1025,7 +1026,7 @@ function saveGroupResult(St,sc){
   let copied=false;try{navigator.clipboard.writeText(rc);copied=true}catch(e){}      // the result code is copied the moment the student finishes
   store.saveResult(r).then(st=>{
     St.sent=(st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."}</p>`)+
-     `<p>Result code${copied?" (copied ✔)":""}:</p><div class="lnk"><input class="fld" readonly value="${rc}" onfocus="this.select()"><button class="btn p" data-a="copyres" data-v="${rc}">Copy code</button></div>`;
+     `<p>Your result code${copied?" (copied ✔)":""}. Press Finish to copy it again and leave:</p><div class="lnk"><input class="fld" readonly value="${rc}" onfocus="this.select()"><button class="btn p" data-a="copyres" data-v="${rc}">Finish</button></div>`;
     const b=document.querySelector(".res");if(b&&S===St&&!b.querySelector(".sent"))b.insertAdjacentHTML("beforeend",`<div class="sent">${St.sent}</div>`)});
 }
 
