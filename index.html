@@ -581,6 +581,57 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
 .mbox .fld{display:block;width:100%;margin-bottom:16px}
 .mbtn{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .mbtn .btn{min-height:44px;padding:0 18px}
+.panel{max-width:760px}
+.panel h2{margin-top:10px}
+.gcard.new{animation:newg 2.4s ease both}
+@keyframes newg{0%,60%{border-color:var(--ok);box-shadow:0 0 26px rgba(57,255,136,.55)}100%{box-shadow:none}}
+/* ---- Create a group panel ---- */
+.cg{border-left-color:var(--ac2)}
+.step{display:flex;align-items:center;gap:12px;margin:24px 0 10px}
+.step i{flex:none;width:32px;height:32px;display:grid;place-items:center;font-style:normal;font-family:var(--font-head);font-weight:900;color:#05030d;background:linear-gradient(135deg,var(--ac),var(--ac2));clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)}
+.step b{font-family:var(--font-head);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase}
+.step span{margin-left:auto;font-family:var(--font-mono);font-size:.8rem;color:var(--ac)}
+.cg .tgrid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.cg .tg{position:relative;padding:11px 12px 11px 16px;background:rgba(255,255,255,.03);transition:background .15s,border-color .15s,transform .15s}
+.cg .tg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tc);opacity:.7}
+.cg .tg:hover{transform:translateX(3px)}
+.cg .tg:has(input:checked){border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,transparent);box-shadow:inset 0 0 16px color-mix(in srgb,var(--tc) 18%,transparent)}
+.cg .tg:has(input:checked)::before{opacity:1;box-shadow:0 0 10px var(--tc)}
+.cg .tg input{accent-color:var(--tc)}
+.cg .gbar{margin-top:12px}
+.cg .gbar .ghost{flex:0 1 auto;min-width:130px}
+.cg #tp{cursor:pointer}
+/* ---- Start screen (second page) ---- */
+.intro{position:relative;overflow:hidden;max-width:820px}
+.intro::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,var(--c1),var(--c2),transparent);box-shadow:0 0 18px var(--c1)}
+.intro h2{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--c1) 55%,transparent))}
+.intro .tag{background:color-mix(in srgb,var(--c1) 16%,transparent);color:var(--c1)}
+.exq{position:relative;display:flex;flex-direction:column;gap:4px;align-items:center;padding:14px 26px;font-size:1.08rem}
+.exq small{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--c1)}
+.mini{max-width:560px;gap:14px}
+.mini div{position:relative;padding:16px 8px 12px;background:linear-gradient(180deg,color-mix(in srgb,var(--c1) 10%,transparent),rgba(255,255,255,.02))}
+.mini div::before{display:block;font-size:1.2rem;margin-bottom:4px}
+.mini div:nth-child(1)::before{content:"❓"}.mini div:nth-child(2)::before{content:"📄"}.mini div:nth-child(3)::before{content:"⏱️"}
+.cw{margin:22px 0 10px}
+.cw .clock.big{padding:18px 30px;box-shadow:inset 0 0 22px rgba(0,0,0,.7),0 0 28px -6px var(--c1)}
+.pkh{display:flex;align-items:center;gap:14px;justify-content:center;color:var(--c1)}
+.pkh::before,.pkh::after{content:"";flex:1;max-width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--c1))}
+.pkh::after{transform:scaleX(-1)}
+.pks{gap:12px}
+.pk{min-width:118px;padding:12px 18px;transition:all .2s}
+.pk b{letter-spacing:.06em}
+.pk:hover{box-shadow:0 0 18px -4px var(--c1)}
+.pk.on{box-shadow:0 0 22px -2px var(--c1)}
+.intro .rules{margin:30px 0 28px}
+.intro .rules li{transition:transform .2s,border-color .2s,background .2s}
+.intro .rules li:hover{transform:translateX(4px);background:color-mix(in srgb,var(--c1) 8%,transparent)}
+.intro .cta-wrap{filter:drop-shadow(0 0 16px var(--c1))}
+.intro .start-btn{background:linear-gradient(90deg,var(--c1),var(--c2));padding:18px 34px}
+.intro .cta-a{font-size:1.6rem}
+@media (max-width:640px){.mini{gap:8px}.mini div{padding:12px 4px 10px}.exq{padding:12px 16px;font-size:.95rem}.pk{min-width:0;padding:10px 4px}.intro .rules li{padding-left:46px}}
+.lnk{display:flex;gap:8px;align-items:stretch}.lnk .fld{flex:1;min-width:0;font-size:.8rem}.lnk .btn{flex:none;white-space:nowrap}
+@media (max-width:480px){.lnk{flex-direction:column}}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));translate:-50% 0;z-index:300;max-width:92vw;padding:14px 18px;background:var(--card);color:var(--ink);border:1px solid var(--ok);border-left:4px solid var(--ok);box-shadow:0 0 24px rgba(57,255,136,.35);font-weight:700;animation:down .4s ease both}
 </style></head>
 <body><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
 <script>
@@ -737,7 +788,7 @@ function introScreen(){            // the screen with the Start button and page 
    ?[`${TOTAL} questions on ${CONFIG.pages} pages, ${CONFIG.perPage} per page`,`You have ${MINUTES} minutes for each page`,"When time is up, the next page opens by itself","The exam ends when time runs out on the last page, or when you answer every question on it","You cannot go back to a finished page","After each answer you see if it is correct or wrong"]
    :[`${CONFIG.perPage} questions on page ${sel+1}`,`You have ${MINUTES} minutes for this page`,"The exam ends when time is up, or when you answer every question","After each answer you see if it is correct or wrong"];
   app.innerHTML=`<div style="${cv(T)}"><div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>
-  <div class="intro${fresh?" enter":""}"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><p class="sub">${T.d}</p><div class="exq">${T.ex}</div>
+  <div class="intro${fresh?" enter":""}"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><p class="sub">${T.d}</p><div class="exq"><small>Example</small>${T.ex}</div>
   <div class="mini"><div><b>${sel=="all"?TOTAL:CONFIG.perPage}</b><span>Questions</span></div><div><b>${sel=="all"?CONFIG.pages:1}</b><span>${sel=="all"?"Pages":"Page"}</span></div><div><b>${MINUTES}</b><span>Min per page</span></div></div>
   <div class="cw"><small>Time per page</small><div class="clock big">${clock(SECS)}</div></div>
   <div class="pkh" ${S.group?"hidden":""}>Choose a page</div>
@@ -773,7 +824,8 @@ function examScreen(){
     S.list.map(i=>{const full=done?[...Array(CONFIG.perPage).keys()].every(k=>ans[i*CONFIG.perPage+k]!==undefined):i<p;
       return `<button class="btn dot ${i==p?"on":full?"full":done?"":"todo"}" ${done?`data-a="go" data-p="${i}"`:'tabindex="-1"'}>${i+1}</button>`}).join("")+`</div>`+
     `<div class="ck"><div id="clk2" class="clock ${timerColor(left)}">${clock(left)}</div><button class="btn" data-a="home">← Home</button></div>`+
-    (!done&&p<S.last?`<button class="btn p" data-a="next">Next →</button>`:"")+`</div></div>`;
+    (!done&&p<S.last?`<button class="btn p" data-a="next">Next →</button>`:"")+
+    (S.group&&!done?`<button class="btn p" data-a="submit">Finish</button>`:"")+`</div></div>`;
   app.innerHTML=h;
 }
 
@@ -845,6 +897,9 @@ function startWithFx(b,e){                          // second page: colour wipe,
 
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
+  if(a=="copyres"){const v=b.dataset.v,inp=b.parentElement.querySelector("input");
+    (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).catch(()=>{inp.select();try{document.execCommand("copy")}catch(x){}});
+    b.textContent="Copied ✔";setTimeout(()=>{b.textContent="Copy code"},2000);return}
   if(a=="theme"){document.documentElement.classList.toggle("alt");return}            // switch neon colours
   if(a=="scroll"){document.querySelector(".grid").scrollIntoView({behavior:"smooth"});return}
   if(a=="open"){openWithFx(b,e);return}
@@ -887,6 +942,9 @@ function filterTenses(v){                          // search bar: hide cards tha
   if(g)g.classList.toggle("filtered",!!v);if(no)no.hidden=n>0;
 }
 document.addEventListener("input",e=>{if(e.target.id=="q")filterTenses(e.target.value)});
+const tcount=()=>{const c=document.getElementById("tcount");if(c)c.textContent=document.querySelectorAll(".tgrid input:checked").length+" selected"};
+document.addEventListener("change",e=>{if(e.target.closest&&e.target.closest(".tgrid"))tcount()});
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("[data-a=tall],[data-a=tnone]"))setTimeout(tcount,0)});
 document.addEventListener("keydown",e=>{const q=document.getElementById("q");        // press / to jump to the search bar
   if(e.key=="/"&&q&&document.activeElement!==q){e.preventDefault();q.focus()}
   else if(e.key=="Escape"&&q&&document.activeElement===q){q.value="";filterTenses("");q.blur()}});
@@ -906,7 +964,17 @@ const store={
  async groups(){if(CLOUD){try{return vals(await cj("GET","groups"))}catch(e){}}return LSg.get("ce_groups")||[]},
  async group(c){if(CLOUD){try{const g=await cj("GET","groups/"+c);if(g)return g}catch(e){}}return (LSg.get("ce_groups")||[]).find(g=>g.code==c)||null},
  async saveGroup(g){const a=(LSg.get("ce_groups")||[]).filter(x=>x.code!=g.code);a.push(g);LSg.set("ce_groups",a);if(CLOUD){try{await cj("PUT","groups/"+g.code,g)}catch(e){}}},
- async delGroup(c){LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c));if(CLOUD){try{await cj("DELETE","groups/"+c);await cj("DELETE","results/"+c)}catch(e){}}},
+ async delGroup(c){
+  LSg.set("ce_groups",(LSg.get("ce_groups")||[]).filter(g=>g.code!=c));
+  LSg.set("ce_res",(LSg.get("ce_res")||[]).filter(r=>r.code!=c));      // clear every result of this group stored on this device
+  if(CLOUD){try{await cj("DELETE","results/"+c)}catch(e){}try{await cj("DELETE","groups/"+c)}catch(e){}}   // clear all student results online, then the group
+ },
+ async purgeOrphans(){                                                   // student devices: remove saved results of groups the teacher has deleted
+  if(!CLOUD)return;
+  try{const ok=new Set(vals(await cj("GET","groups")).map(g=>g.code));
+   const a=LSg.get("ce_res")||[],keep=a.filter(r=>ok.has(r.code));
+   if(keep.length!=a.length)LSg.set("ce_res",keep);}catch(e){}
+ },
  async results(c){let a=(LSg.get("ce_res")||[]).filter(r=>r.code==c);if(CLOUD){try{const d=vals(await cj("GET","results/"+c)),k=new Set(d.map(x=>x.key));a=d.concat(a.filter(x=>!k.has(x.key)))}catch(e){}}return a.sort((x,y)=>y.score-x.score)},
  async saveResult(r){const a=(LSg.get("ce_res")||[]).filter(x=>x.key!=r.key);a.push(r);LSg.set("ce_res",a);if(CLOUD){try{await cj("PUT","results/"+r.code+"/"+r.key.slice(r.code.length+1),r);return"ok"}catch(e){return"fail"}}return"local"},
  async done(k,c){if((LSg.get("ce_res")||[]).find(x=>x.key==k))return true;if(CLOUD){try{if(await cj("GET","results/"+c+"/"+k.slice(c.length+1)))return true}catch(e){}}return false}
@@ -953,9 +1021,11 @@ function openGroupExam(g,name,key){
 }
 function saveGroupResult(St,sc){
   const tot=St.list.length*CONFIG.perPage;
-  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,at:Date.now()},rc=b64e({c:r.code,n:r.name,s:sc,t:tot});
+  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,left:St.left,at:Date.now()},rc=b64e({c:r.code,n:r.name,s:sc,t:tot,l:St.left});
+  let copied=false;try{navigator.clipboard.writeText(rc);copied=true}catch(e){}      // the result code is copied the moment the student finishes
   store.saveResult(r).then(st=>{
-    St.sent=st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."} Send this <b>result code</b> to your teacher:</p><input class="fld" readonly value="${rc}" onfocus="this.select()">`;
+    St.sent=(st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."}</p>`)+
+     `<p>Result code${copied?" (copied ✔)":""}:</p><div class="lnk"><input class="fld" readonly value="${rc}" onfocus="this.select()"><button class="btn p" data-a="copyres" data-v="${rc}">Copy code</button></div>`;
     const b=document.querySelector(".res");if(b&&S===St&&!b.querySelector(".sent"))b.insertAdjacentHTML("beforeend",`<div class="sent">${St.sent}</div>`)});
 }
 
@@ -982,28 +1052,32 @@ async function doLogin(){
 }
 
 /* ---- teacher page ---- */
-async function teacherScreen(){
+const linkOf=g=>location.href.split("#")[0]+"#join="+b64e({c:g.code,n:g.name,t:g.tenses,p:g.page,d:CLOUD});
+async function teacherScreen(focus){      // focus: undefined = go to top, true = stay where you are, "CODE" = jump to that group in My groups
+  const keepY=scrollY;
   leaveExam();
   const gs=(await store.groups()).sort((a,b)=>b.created-a.created);
   const names=g=>TENSES.filter(t=>g.tenses.includes(t.id)).map(t=>t.name).join(", ");
-  app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Teacher</span><h2>Create a group</h2>
-  <p class="sub2">Make a group, choose the exam, then give the code to your students.</p>
-  <div class="g2"><div><label class="l" for="tn">Group name</label><input class="fld" id="tn" placeholder="e.g. Class 7A"></div>
-  <div><label class="l" for="tc">Student code</label><input class="fld" id="tc" readonly value="Made when you press Create" style="color:var(--mut)"></div></div>
-  <label class="l">Exam tenses (choose one or more)</label>
-  <div class="tgrid">${TENSES.map(t=>`<label class="tg"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
+  app.innerHTML=`${topBar()}<div class="panel cg"><span class="tag">Teacher</span><h2>Create a group</h2>
+  <p class="sub2">Make a group, choose the exam, then send the link to your students.</p>
+  <div class="step"><i>1</i><b>Group name</b></div>
+  <input class="fld" id="tn" placeholder="e.g. Class 7A" autocomplete="off">
+  <div class="step"><i>2</i><b>Exam tenses</b><span id="tcount">0 selected</span></div>
+  <div class="tgrid">${TENSES.map(t=>`<label class="tg" style="--tc:${t.c1}"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
   <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button></div>
-  <label class="l" for="tp">Pages for students</label>
+  <div class="step"><i>3</i><b>Pages for students</b></div>
   <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
   <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
-  <div class="panel"><h2>Online sync</h2><p class="sub2">So students on <b>other devices</b> can log in and you can see their scores, paste a free <b>Firebase Realtime Database</b> URL (create a project, then Build &rarr; Realtime Database &rarr; Create in test mode).</p>
-  <label class="l" for="tcloud">Database URL</label><input class="fld" id="tcloud" value="${gesc(CLOUD)}" placeholder="https://your-project-default-rtdb.firebaseio.com">
-  <p class="gerr" id="cerr"></p><button class="btn" data-a="tcloudsave">Save URL</button></div>
   <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
   ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
   <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
-  <div class="gbar"><button class="ghost" data-a="tlink">Share link</button><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
-  scrollTo(0,0);
+  <label class="l">Student link (tap Copy, then send it to your students)</label>
+  <div class="lnk"><input class="fld" readonly value="${gesc(linkOf(g))}" onfocus="this.select()"><button class="btn p" data-a="tcopy">Copy link</button></div>
+  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  if(focus===true)scrollTo(0,keepY);
+  else if(typeof focus=="string"){const c=document.querySelector(`.gcard[data-c="${focus}"]`);
+    if(c){c.classList.add("new");c.scrollIntoView({behavior:"smooth",block:"center"})}}
+  else scrollTo(0,0);
 }
 async function teacherAction(a,b){
   const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")];
@@ -1015,7 +1089,7 @@ async function teacherAction(a,b){
     if(!name){e.textContent="Enter a group name.";return}
     if(!tenses.length){e.textContent="Choose at least one tense for the exam.";return}
     let code;do{code=mkExamCode(tenses,pg)}while(await store.group(code));
-    await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen();return;
+    await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen(code);return;
   }
   if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
     if(u&&!/^(https:\/\/|http:\/\/localhost)/.test(u)){e.textContent="The URL must start with https://";return}
@@ -1025,8 +1099,12 @@ async function teacherAction(a,b){
     const mine=LSg.get("ce_groups")||[];if(CLOUD)for(const g of mine){try{await cj("PUT","groups/"+g.code,g)}catch(x){}}
     return}
   const card=b.closest(".gcard"),code=card&&card.dataset.c;if(!code)return;
-  if(a=="tdel"){if(await askBox("Delete this group and its results?",{ok:"Delete",cancel:"Cancel"})){await store.delGroup(code);teacherScreen()}}
-  else if(a=="tclose"){const g=await store.group(code);g.closed=!g.closed;await store.saveGroup(g);teacherScreen()}
+  if(a=="tcopy"){
+    const inp=card.querySelector(".lnk input");inp.select();inp.setSelectionRange(0,99999);
+    let ok=false;try{await navigator.clipboard.writeText(inp.value);ok=true}catch(x){try{ok=document.execCommand("copy")}catch(y){}}
+    b.textContent=ok?"Copied ✔":"Press Copy on keyboard";setTimeout(()=>{b.textContent="Copy link"},2000);return}
+  if(a=="tdel"){if(await askBox("Delete this group and its results?",{ok:"Delete",cancel:"Cancel"})){await store.delGroup(code);teacherScreen(true)}}
+  else if(a=="tclose"){const g=await store.group(code);g.closed=!g.closed;await store.saveGroup(g);teacherScreen(true)}
   else if(a=="tlink"){
     const g=await store.group(code),link=location.href.split("#")[0]+"#join="+b64e({c:g.code,n:g.name,t:g.tenses,p:g.page,d:CLOUD});
     card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
@@ -1035,7 +1113,7 @@ async function teacherAction(a,b){
   else if(a=="timport"){
     const t=await askBox("Paste the student's result code:",{ok:"Add",cancel:"Cancel",input:true,ph:"Result code"});if(!t)return;
     try{const x=b64d(t.trim());if(x.c!=code||!x.n)throw 0;
-      await store.saveResult({key:code+"_"+ghash(String(x.n).toLowerCase()).toString(36),code,name:String(x.n),score:+x.s,total:+x.t,at:Date.now()});
+      await store.saveResult({key:code+"_"+ghash(String(x.n).toLowerCase()).toString(36),code,name:String(x.n),score:+x.s,total:+x.t,left:x.l===undefined?undefined:+x.l,at:Date.now()});
       card.querySelector('[data-a=tres]').click()}
     catch(e){askBox("This result code is not valid for this group.",{ok:"OK",cancel:"Close"})}
   }
@@ -1057,16 +1135,36 @@ function askBox(msg,o){
   });
 }
 let resTimer=null;
+/* ---- teacher phone alert: while the Teacher page is open, a message pops up (with sound + vibration) every time a student finishes ---- */
+const seen={};
+function toast(msg){
+  const t=document.createElement("div");t.className="toast";t.innerHTML=msg;document.body.appendChild(t);
+  try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}
+  try{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.08;o.start();o.stop(c.currentTime+.18)}catch(e){}
+  setTimeout(()=>t.remove(),6000);
+}
+async function watchResults(){
+  if(!document.querySelector(".gcard"))return;                 // only on the Teacher page
+  const gs=await store.groups();
+  for(const g of gs){
+    const r=await store.results(g.code),k=g.code,first=!(k in seen);
+    if(!first){const old=seen[k];r.filter(x=>!old.has(x.key)).forEach(x=>toast("✔ <b>"+gesc(x.name)+"</b> finished "+gesc(g.name)+": "+x.score+"/"+x.total+" ("+Math.round(x.score/x.total*100)+"%)"))}
+    seen[k]=new Set(r.map(x=>x.key));
+  }
+  document.querySelectorAll(".gcard").forEach(c=>{const b=c.querySelector(".rbox table");if(b&&seen[c.dataset.c])showResults(c,c.dataset.c)});
+}
+setInterval(()=>{watchResults().catch(()=>{})},4000);
+store.purgeOrphans();
 async function showResults(card,code){          // draws the table; repeats every 3 s while open = live results
   const r=await store.results(code),box=card.querySelector(".rbox");if(!box)return;
-  box.innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length} finished</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`);
+  box.innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length} finished</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th><th>Time left</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td><td>${typeof x.left=="number"?pad(Math.floor(x.left/60))+":"+pad(x.left%60):"–"}</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`);
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|make|res|close|del|link|cloudsave|import)$/.test(a))teacherAction(a,b);
+  else if(/^t(all|none|make|res|close|del|link|copy|cloudsave|import)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
