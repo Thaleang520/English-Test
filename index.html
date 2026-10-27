@@ -981,10 +981,7 @@ function startWithFx(b,e){                          // second page: colour wipe,
 
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
-  if(a=="copyres"){const v=b.dataset.v,inp=b.parentElement.querySelector("input");
-    (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).catch(()=>{inp.select();try{document.execCommand("copy")}catch(x){}});
-    b.textContent="Copied ✔";
-    setTimeout(()=>{if(S&&S.group){clearInterval(S.timer);S=null}nav("login")},700);return}      // Finish = copy the code, then leave the exam
+  if(a=="finish"){if(S&&S.group){clearInterval(S.timer);S=null}nav("login");return}      // Finish = copy the code, then leave the exam
   if(a=="theme"){document.documentElement.classList.toggle("alt");return}            // switch neon colours
   if(a=="scroll"){document.querySelector(".grid").scrollIntoView({behavior:"smooth"});return}
   if(a=="open"){openWithFx(b,e);return}
@@ -1107,11 +1104,10 @@ function openGroupExam(g,name,key){
 }
 function saveGroupResult(St,sc){
   const tot=St.list.length*CONFIG.perPage;
-  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,left:St.left,at:Date.now()},rc=b64e({c:r.code,n:r.name,s:sc,t:tot,l:St.left});
-  let copied=false;try{navigator.clipboard.writeText(rc);copied=true}catch(e){}      // the result code is copied the moment the student finishes
+  const r={key:St.key,code:St.group.code,name:St.student,score:sc,total:tot,left:St.left,at:Date.now()};
   store.saveResult(r).then(st=>{
     St.sent=(st=="ok"?"<p>✔ Your result was sent to your teacher.</p>":`<p>${st=="local"?"Your result is saved on this device only.":"⚠ Could not send your result online."}</p>`)+
-     `<p>Your result code${copied?" (copied ✔)":""}. Press Finish to copy it again and leave:</p><div class="lnk"><input class="fld" readonly value="${rc}" onfocus="this.select()"><button class="btn p" data-a="copyres" data-v="${rc}">Finish</button></div>`;
+     `<div class="lnk"><button class="btn p" data-a="finish">Finish</button></div>`;
     const b=document.querySelector(".res");if(b&&S===St&&!b.querySelector(".sent"))b.insertAdjacentHTML("beforeend",`<div class="sent">${St.sent}</div>`)});
 }
 
@@ -1159,7 +1155,7 @@ async function teacherScreen(focus){      // focus: undefined = go to top, true 
   <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
   <label class="l">Student link (tap Copy, then send it to your students)</label>
   <div class="lnk"><input class="fld" readonly value="${gesc(linkOf(g))}" onfocus="this.select()"><button class="btn p" data-a="tcopy">Copy link</button></div>
-  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
   if(focus===true)scrollTo(0,keepY);
   else if(typeof focus=="string"){const c=document.querySelector(`.gcard[data-c="${focus}"]`);
     if(c){c.classList.add("new");c.scrollIntoView({behavior:"smooth",block:"center"})}}
@@ -1195,13 +1191,6 @@ async function teacherAction(a,b){
     const g=await store.group(code),link=location.href.split("#")[0]+"#join="+b64e({c:g.code,n:g.name,t:g.tenses,p:g.page,d:CLOUD});
     card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
     try{await navigator.clipboard.writeText(link);card.querySelector(".rbox .meta").insertAdjacentHTML("afterbegin","<b>Copied!</b> ")}catch(x){}
-  }
-  else if(a=="timport"){
-    const t=await askBox("Paste the student's result code:",{ok:"Add",cancel:"Cancel",input:true,ph:"Result code"});if(!t)return;
-    try{const x=b64d(t.trim());if(x.c!=code||!x.n)throw 0;
-      await store.saveResult({key:code+"_"+ghash(String(x.n).toLowerCase()).toString(36),code,name:String(x.n),score:+x.s,total:+x.t,left:x.l===undefined?undefined:+x.l,at:Date.now()});
-      card.querySelector('[data-a=tres]').click()}
-    catch(e){askBox("This result code is not valid for this group.",{ok:"OK",cancel:"Close"})}
   }
   else if(a=="tres"){showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
 }
@@ -1250,7 +1239,7 @@ document.addEventListener("click",e=>{
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|make|res|close|del|link|copy|cloudsave|import)$/.test(a))teacherAction(a,b);
+  else if(/^t(all|none|make|res|close|del|link|copy|cloudsave)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
