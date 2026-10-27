@@ -778,7 +778,28 @@ function mulberry(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1
 /* HARDER EXAMS: wrong options are mostly the tenses students confuse with the right one (its "neighbours") */
 const NEAR={ps:["pc","pp","pas"],pc:["ps","pac","fc"],pas:["pp","pac","pap"],pac:["pas","pc","papc"],pp:["pas","ppc","ps"],fs:["fc","fp","ps"],ppc:["pp","pc","papc"],pap:["pas","pp","papc"],papc:["pap","ppc","pac"],fc:["fs","pc","fpc"],fp:["fs","pp","fpc"],fpc:["fp","ppc","fc"],
  pcs:["pc","ps","pp"],pps:["pp","pc","ps"],fsps:["fc","fp","pc"],ppps:["pas","ps","pc"],cn2:["fs","ps","pas"],cn3:["pas","pp","pap"],fst:["ps","pc","fs"],pcps:["ppc","papc","pc"]};
+/* HARDEST TRAPS: same tense but a WRONG FORM (bad agreement, past instead of participle, missing "been" ...) */
+function traps(s,v,right){
+  const t=[],sw={am:["is","are"],is:["am","are"],are:["am","is"],was:["were"],were:["was"],has:["have"],have:["has"]};
+  const w=right.split(" ")[0];
+  if(sw[w]){const ok=sw[w].filter(x=>!(w=="is"&&x=="are"&&false));t.push(...ok.map(x=>x+right.slice(w.length)))}
+  if(v[3]!==v[4]){
+    if(right.endsWith(" "+v[4]))t.push(right.slice(0,-v[4].length)+v[3]);
+    else if(right===v[3])t.push(v[4]);
+  }
+  if(right===v[1])t.push(v[0]);
+  else if(right===v[0])t.push(v[1]);
+  if(right.startsWith("will ")&&right.endsWith(v[0]))t.push("will "+v[1],"will to "+v[0]);
+  if(right.startsWith("would ")&&right.endsWith(v[0]))t.push("would "+v[1]);
+  if(right.includes(" been "))t.push(right.replace(" been "," "));
+  return [...new Set(t)].filter(x=>x!==right);
+}
 function near(T,s,v,right,r,n){
+  const tr=traps(s,v,right).sort(()=>r()-.5).slice(0,r()<.5?2:1);   // 1-2 wrong-form traps in every question
+  const base=near0(T,s,v,right,r,n);
+  return [...new Set([...tr,...base])].filter(x=>x!==right).slice(0,n);
+}
+function near0(T,s,v,right,r,n){
   const pool=TENSES.filter(x=>x!==T&&!x.cl&&!clash(T,x)),nr=NEAR[T.id]||[];
   const f=l=>[...new Set(l.sort(()=>r()-.5).map(x=>x.f(s,v)))].filter(x=>x!==right);
   const a=f(pool.filter(x=>nr.includes(x.id))),b=f(pool.filter(x=>!nr.includes(x.id))).filter(x=>!a.includes(x));
@@ -791,10 +812,11 @@ function mixedQ(T,s,v,i,r){                 // mixed tenses: TWO blanks, every o
   const o=[pr(r1,c.a),pr(r1,w2[0]),pr(w1[0],c.a),pr(w1[1],w2[1])].sort(()=>r()-.5);
   return {q:`${s} ___ (${v[0]}) ${v[5]} ${c.x}.`,o,a:o.indexOf(pr(r1,c.a))};
 }
+const IRR=VERBS.filter(v=>!/ed$/.test(v[3]));   // irregular verbs: much easier to get wrong
 function build(T,run){                       // returns TOTAL questions: {q, o:[options], a:index of correct}
   const rnd=mulberry(T.seed*977+run),list=[];
   for(let i=0;i<TOTAL;i++){
-    const s=SUBJECTS[(i+T.seed)%SUBJECTS.length], v=VERBS[(i*7+T.seed)%VERBS.length], right=T.f(s,v);
+    const s=SUBJECTS[(i+T.seed)%SUBJECTS.length], v=(i%10<7?IRR:VERBS)[(i*7+T.seed)%(i%10<7?IRR:VERBS).length], right=T.f(s,v);
     if(T.cl){list.push(mixedQ(T,s,v,i,rnd));continue}
     const wrong=near(T,s,v,right,rnd,3);
     const options=[right,...wrong].sort(()=>rnd()-.5);
