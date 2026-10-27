@@ -630,6 +630,14 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
 @media (max-width:640px){.mini{gap:8px}.mini div{padding:12px 4px 10px}.exq{padding:12px 16px;font-size:.95rem}.pk{min-width:0;padding:10px 4px}.intro .rules li{padding-left:46px}}
 .lnk{display:flex;gap:8px;align-items:stretch}.lnk .fld{flex:1;min-width:0;font-size:.8rem}.lnk .btn{flex:none;white-space:nowrap}
 @media (max-width:480px){.lnk{flex-direction:column}}
+/* ---- structure blocks on the home cards ---- */
+.tc em .stl{display:block;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c2);margin-bottom:8px}
+.sf{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.sf i{font-style:normal;color:var(--mut);font-size:.8rem}
+.sp{font-family:var(--font-mono);font-weight:400;font-size:.84rem;line-height:1.3;padding:3px 8px;border:1px solid color-mix(in srgb,var(--c1) 55%,transparent);color:var(--c1);background:color-mix(in srgb,var(--c1) 10%,transparent)}
+.sp.s{color:#05030d;background:var(--c1);border-color:var(--c1);font-weight:700}
+.sp.k{color:var(--c2);border-color:var(--c2);background:color-mix(in srgb,var(--c2) 12%,transparent);text-transform:uppercase;font-size:.72rem;letter-spacing:.06em}
+@media (max-width:640px){.tc em .stl{font-size:.52rem;margin-bottom:5px}.sf{gap:3px}.sf i{font-size:.62rem}.sp{font-size:.62rem;padding:2px 4px}.sp.k{font-size:.56rem}}
 .toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));translate:-50% 0;z-index:300;max-width:92vw;padding:14px 18px;background:var(--card);color:var(--ink);border:1px solid var(--ok);border-left:4px solid var(--ok);box-shadow:0 0 24px rgba(57,255,136,.35);font-weight:700;animation:down .4s ease both}
 </style></head>
 <body><button class="theme" data-a="theme" aria-label="Toggle dark mode"></button><main id="app"></main>
@@ -756,6 +764,11 @@ const TENSES=[
 {id:"pcps",name:"Past Perfect Continuous + Past Simple",c1:"#ff6ec7",c2:"#ffe600",d:"A long action in progress, then a past event happened.",ex:"She had been playing for two hours before the rain stopped.",t:[],cl:[{x:"for two hours before the rain ___ (stop)",a:"stopped",w:["stops","has stopped","was stopping"]},{x:"all day before the teacher ___ (come)",a:"came",w:["comes","has come","was coming"]},{x:"for a long time before the match ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"for an hour before the bell ___ (ring)",a:"rang",w:["rings","has rung","was ringing"]}],f:(s,v)=>"had been "+v[2]}
 ];
 TENSES.forEach((T,i)=>T.seed=i+1);   // gives every tense its own question order
+/* STRUCTURE shown on the home cards (S = subject, V1 = base verb, V2 = past, V3 = past participle) */
+const STRUCT={ps:"S + V1 / V-s",pc:"S + am/is/are + V-ing",pas:"S + V2",pac:"S + was/were + V-ing",pp:"S + have/has + V3",fs:"S + will + V1",ppc:"S + have/has + been + V-ing",pap:"S + had + V3",papc:"S + had been + V-ing",fc:"S + will be + V-ing",fp:"S + will have + V3",fpc:"S + will have been + V-ing",
+ pcs:"S + was/were + V-ing + when + S + V2",pps:"S + V2 + after + S + had + V3",fsps:"S + will + V1 + if + S + V-s/V1",ppps:"S + have/has + V3 + since + S + V2",cn2:"S + would + V1 + if + S + V2",cn3:"S + would have + V3 + if + S + had + V3",fst:"S + will + V1 + when + S + V-s/V1",pcps:"S + had been + V-ing + before + S + V2"};
+TENSES.forEach(T=>T.st=(STRUCT[T.id]||"").replace(/\bS\b/g,"Sub"));   // S = subject, shown as "Sub"
+const stHTML=T=>T.st.split(" + ").map(t=>`<b class="sp ${t=="Sub"?"s":/^(when|if|after|since|before)$/.test(t)?"k":"v"}">${t}</b>`).join("<i>+</i>");   // structure as coloured blocks
 // Tenses that can BOTH be right in the same sentence never appear together as options:
 const CLASH={pap:["pas","pac","papc"],papc:["pap","pac","pas"],ppc:["pp"],fs:["fc","fp"],fp:["fpc","fs"],fpc:["fp"],pcs:["pas","pap","papc"],pps:["pap","pac","papc"],fsps:["ps","fc","fp","fpc"],ppps:["ppc"],fst:["fc","fp","fpc"],pcps:["pap","pac","pas","pp"]};
 const clash=(a,b)=>(CLASH[a.id]||[]).includes(b.id)||(CLASH[b.id]||[]).includes(a.id);
@@ -826,7 +839,7 @@ function homeScreen(){
     <div class="stats">${stat(0,TENSES.length,"Tenses")}${stat(1,TOTAL,"Questions each")}${stat(2,TOTAL*TENSES.length,"Total questions")}</div>
   </div>
   <div class="grid">`+TENSES.map((T,k)=>{const b=best("best-"+T.id);
-    return `<button class="tc" style="${cv(T)};--d:${(k%2)*140}ms" data-n="${pad(k+1)}" data-a="open" data-id="${T.id}"><i class="shine"></i><small>Tense ${k+1}</small><h2>${T.name}</h2><p>${T.d}</p><em>${T.ex}</em><div class="row"><span>${b?"Best score "+b+"/"+TOTAL:TOTAL+" questions"}</span><span class="go">Start</span></div></button>`}).join("")+`</div><p class="none" id="none" hidden>No tenses found. Try another word.</p>`;
+    return `<button class="tc" style="${cv(T)};--d:${(k%2)*140}ms" data-n="${pad(k+1)}" data-a="open" data-id="${T.id}"><i class="shine"></i><small>Tense ${k+1}</small><h2>${T.name}</h2><p>${T.d}</p><em><span class="stl">Structure</span><span class="sf">${stHTML(T)}</span></em><div class="row"><span>${b?"Best score "+b+"/"+TOTAL:TOTAL+" questions"}</span><span class="go">Start</span></div></button>`}).join("")+`</div><p class="none" id="none" hidden>No tenses found. Try another word.</p>`;
   effects();scrollTo(0,0);
 }
 
@@ -987,7 +1000,7 @@ document.addEventListener("pointerout",e=>{const c=e.target.closest&&e.target.cl
 function filterTenses(v){                          // search bar: hide cards that do not match
   v=v.trim().toLowerCase();let n=0;
   document.querySelectorAll(".tc").forEach((c,i)=>{const T=TENSES[i];
-    const hit=!v||(T.name+" "+T.d+" "+T.ex).toLowerCase().includes(v);c.hidden=!hit;if(hit)n++});
+    const hit=!v||(T.name+" "+T.d+" "+T.ex+" "+T.st).toLowerCase().includes(v);c.hidden=!hit;if(hit)n++});
   const g=document.querySelector(".grid"),no=document.getElementById("none");
   if(g)g.classList.toggle("filtered",!!v);if(no)no.hidden=n>0;
 }
