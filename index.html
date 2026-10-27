@@ -1183,45 +1183,9 @@ async function teacherAction(a,b){
     if(hit.length){
       box.innerHTML=`<p class="meta">Found ${hit.length} for “${gesc(nm.trim())}”</p><table class="gtab"><tr><th>Student</th><th>Score</th><th>%</th><th>Time left</th><th>Finished</th></tr>${hit.map(x=>`<tr><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td><td>${typeof x.left=="number"?pad(Math.floor(x.left/60))+":"+pad(x.left%60):"–"}</td><td>${x.at?new Date(x.at).toLocaleString():"–"}</td></tr>`).join("")}</table><button class="ghost" data-a="tres" style="margin-top:10px">Show all students</button>`;
       return}
-    const g0=await store.group(code),total=((g0&&g0.page)=="all"||!g0?CONFIG.pages:1)*CONFIG.perPage;
-    if(!await askBox("No result found for “"+nm.trim()+"” on this device"+(CLOUD?" or online":"")+". The student's score is not here yet. Enter it by hand?",{ok:"Enter score",cancel:"Close"}))return;
-    const v=await resultBox(total,nm.trim());if(!v)return;
-    try{
-      let name,score,tot,left;
-      if(v.code){const x=b64d(v.code.trim());if(x.c!=code||!x.n)throw 0;name=String(x.n);score=+x.s;tot=+x.t;left=x.l===undefined?undefined:+x.l}
-      else{name=v.name;score=v.score;tot=v.total}
-      await store.saveResult({key:code+"_"+ghash(name.toLowerCase()).toString(36),code,name,score,total:tot,left,at:Date.now()});
-      card.querySelector('[data-a=tres]').click()}
-    catch(e){askBox("This result code is not valid for this group.",{ok:"OK",cancel:"Close"})}
+    box.innerHTML=`<p class="meta">No result found for “${gesc(nm.trim())}”. Check the spelling (use the name the student typed)${CLOUD?"":". Online sync is off, so only results on this device can be found"}.</p><button class="ghost" data-a="tres" style="margin-top:10px">Show all students</button>`;
   }
   else if(a=="tres"){showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
-}
-/* ---- teacher: add a result by typing the student's name + score (or paste a result code) ---- */
-function resultBox(total,pre){
-  return new Promise(res=>{
-    const w=document.createElement("div");w.className="mbk";
-    w.innerHTML=`<div class="mbox" role="dialog" aria-modal="true"><p>Add a student's result</p>
-    <label class="l" for="rbn">Student name (same name the student types)</label><input class="fld" id="rbn" autocomplete="off" placeholder="Student name" value="${gesc(pre||"")}">
-    <div style="display:flex;gap:10px"><div style="flex:1"><label class="l" for="rbs">Score</label><input class="fld" id="rbs" type="number" inputmode="numeric" min="0" max="${total}" placeholder="0"></div>
-    <div style="flex:1"><label class="l" for="rbt">Out of</label><input class="fld" id="rbt" type="number" inputmode="numeric" min="1" value="${total}"></div></div>
-    <label class="l" for="rbc">Or paste a result code instead</label><input class="fld" id="rbc" autocomplete="off" spellcheck="false" placeholder="Result code (optional)">
-    <div class="meta" id="rbe" style="color:var(--bad);min-height:1.2em;margin:-6px 0 12px"></div>
-    <div class="mbtn"><button class="btn" data-m="0">Cancel</button><button class="btn p" data-m="1">Add</button></div></div>`;
-    document.body.appendChild(w);
-    const q=i=>w.querySelector("#"+i),done=v=>{w.remove();document.removeEventListener("keydown",kd,true);res(v)};
-    const submit=()=>{
-      const c=q("rbc").value.trim();if(c){done({code:c});return}
-      const name=q("rbn").value.trim().replace(/\s+/g," "),sc=q("rbs").value.trim(),tt=q("rbt").value.trim(),e=q("rbe");
-      if(!name){e.textContent="Enter the student's name.";q("rbn").focus();return}
-      if(sc===""||!/^\d+$/.test(sc)){e.textContent="Enter the score as a whole number.";q("rbs").focus();return}
-      if(!/^\d+$/.test(tt)||+tt<1){e.textContent="Enter the total number of questions.";q("rbt").focus();return}
-      if(+sc>+tt){e.textContent="The score cannot be higher than the total.";q("rbs").focus();return}
-      done({name,score:+sc,total:+tt});
-    };
-    const kd=e=>{if(e.key=="Escape"){e.preventDefault();done(null)}else if(e.key=="Enter"){e.preventDefault();submit()}};
-    w.addEventListener("click",e=>{const m=e.target.closest("[data-m]");if(m){if(m.dataset.m=="1")submit();else done(null)}else if(e.target===w)done(null)});
-    document.addEventListener("keydown",kd,true);q("rbn").focus();
-  });
 }
 /* ---- question box inside the page (browser pop-ups such as confirm() are blocked in many phone apps) ---- */
 function askBox(msg,o){
