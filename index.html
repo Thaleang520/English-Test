@@ -578,8 +578,6 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
 .mbox p{margin:0 0 16px;font-size:1.15rem;line-height:1.4;color:var(--ink)}
 .mbox .fld{display:block;width:100%;margin-bottom:16px}
-.mbox label.l{display:block;margin:0 0 6px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
-.mbox .fld[type=number]{-moz-appearance:textfield}
 .mbtn{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .mbtn .btn{min-height:44px;padding:0 18px}
 .panel{max-width:760px}
@@ -1139,7 +1137,7 @@ async function teacherScreen(focus){      // focus: undefined = go to top, true 
   <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
   <label class="l">Student link (tap Copy, then send it to your students)</label>
   <div class="lnk"><input class="fld" readonly value="${gesc(linkOf(g))}" onfocus="this.select()"><button class="btn p" data-a="tcopy">Copy link</button></div>
-  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
+  <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
   if(focus===true)scrollTo(0,keepY);
   else if(typeof focus=="string"){const c=document.querySelector(`.gcard[data-c="${focus}"]`);
     if(c){c.classList.add("new");c.scrollIntoView({behavior:"smooth",block:"center"})}}
@@ -1176,7 +1174,43 @@ async function teacherAction(a,b){
     card.querySelector(".rbox").innerHTML=`<p class="meta">Send this link to your students. They open it and enter their name${CLOUD?"":" (no online sync: scores stay on the student's device)"}.</p><input class="fld" readonly value="${gesc(link)}" onfocus="this.select()">`;
     try{await navigator.clipboard.writeText(link);card.querySelector(".rbox .meta").insertAdjacentHTML("afterbegin","<b>Copied!</b> ")}catch(x){}
   }
-  else if(a=="tres"){showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
+  else if(a=="timport"){
+    const g=await store.group(code),per=CONFIG.perPage,tot=(g&&g.page!="all"?1:CONFIG.pages)*per;
+    const r=await addResultBox(tot);if(!r)return;
+    if(!r.rc&&r.name.trim()&&r.score===""){                 // name only: look the student up and show name, score, time, %
+      const q=r.name.trim().replace(/\s+/g," ").toLowerCase(),found=(await store.results(code)).filter(x=>String(x.name).toLowerCase().includes(q));
+      if(!found.length){askBox("No finished result found for \""+r.name.trim()+"\" on this device/group. Type the score too, or paste the student's result code.",{ok:"OK",cancel:"Close"});return}
+      resFilter[code]=q;card.querySelector('[data-a=tres]').click();return}
+    let name,score,total=tot,left;
+    if(r.rc){
+      try{const x=b64d(r.rc.replace(/\s+/g,"").replace(/^["']|["']$/g,""));if(x.c!=code||!x.n)throw 0;
+        name=String(x.n);score=+x.s;total=+x.t;left=x.l===undefined?undefined:+x.l}
+      catch(e){askBox("This result code is not valid for this group.",{ok:"OK",cancel:"Close"});return}
+    }else{
+      name=r.name.trim().replace(/\s+/g," ");score=Math.round(+r.score);total=Math.round(+r.total)||tot;
+      if(!name||!(score>=0)||score>total){askBox("Enter the student's name and a score between 0 and "+total+".",{ok:"OK",cancel:"Close"});return}
+    }
+    await store.saveResult({key:code+"_"+ghash(name.toLowerCase()).toString(36),code,name,score,total,left,at:Date.now()});
+    card.querySelector('[data-a=tres]').click()}
+  else if(a=="tres"){if(b.dataset.all)delete resFilter[code];showResults(card,code);clearInterval(resTimer);resTimer=setInterval(()=>{if(!document.body.contains(card))clearInterval(resTimer);else showResults(card,code)},3000)}
+}
+/* ---- teacher: add a result by typing the student's name + score (or by pasting the result code) ---- */
+function addResultBox(tot){
+  return new Promise(res=>{
+    const w=document.createElement("div");w.className="mbk";
+    w.innerHTML=`<div class="mbox" role="dialog" aria-modal="true"><p>Find or add a student's result</p>
+    <input class="fld" id="arn" placeholder="Student name" autocomplete="off" style="margin-bottom:10px">
+    <div style="display:flex;gap:10px;margin-bottom:10px"><input class="fld" id="ars" type="number" min="0" inputmode="numeric" placeholder="Score (optional)" style="margin:0"><input class="fld" id="art" type="number" min="1" inputmode="numeric" value="${tot}" style="margin:0"></div>
+    <p class="meta" style="font-size:.9rem;margin:0 0 8px">Name only = show that student's name, score, time and %. Add a score to enter it by hand, or paste the result code (next to the student's Finish button):</p>
+    <input class="fld" id="arc" placeholder="Result code" autocomplete="off" spellcheck="false">
+    <div class="mbtn"><button class="btn" data-m="0">Cancel</button><button class="btn p" data-m="1">Add</button></div></div>`;
+    document.body.appendChild(w);
+    const q=i=>w.querySelector("#"+i),done=v=>{w.remove();res(v)};
+    w.addEventListener("click",e=>{const m=e.target.closest("[data-m]");
+      if(m)done(m.dataset.m=="1"?{name:q("arn").value,score:q("ars").value,total:q("art").value,rc:q("arc").value.trim()}:null);
+      else if(e.target===w)done(null)});
+    q("arn").focus();
+  });
 }
 /* ---- question box inside the page (browser pop-ups such as confirm() are blocked in many phone apps) ---- */
 function askBox(msg,o){
@@ -1210,15 +1244,14 @@ async function watchResults(){
     if(!first){const old=seen[k];r.filter(x=>!old.has(x.key)).forEach(x=>toast("✔ <b>"+gesc(x.name)+"</b> finished "+gesc(g.name)+": "+x.score+"/"+x.total+" ("+Math.round(x.score/x.total*100)+"%)"))}
     seen[k]=new Set(r.map(x=>x.key));
   }
-  document.querySelectorAll(".gcard").forEach(c=>{const b=c.querySelector(".rbox .rtab");if(b&&seen[c.dataset.c])showResults(c,c.dataset.c)});
+  document.querySelectorAll(".gcard").forEach(c=>{const b=c.querySelector(".rbox table");if(b&&seen[c.dataset.c])showResults(c,c.dataset.c)});
 }
 setInterval(()=>{watchResults().catch(()=>{})},4000);
 store.purgeOrphans();
+const resFilter={};
 async function showResults(card,code){          // draws the table; repeats every 3 s while open = live results
-  const all=await store.results(code),box=card.querySelector(".rbox");if(!box)return;
-  if(!box.querySelector(".rtab")){box.innerHTML=`<input class="fld rsearch" placeholder="Type a student name to filter" autocomplete="off" style="margin-bottom:10px"><div class="rtab"></div>`;box.querySelector(".rsearch").addEventListener("input",()=>showResults(card,code))}
-  const q=box.querySelector(".rsearch").value.trim().toLowerCase(),r=q?all.filter(x=>String(x.name).toLowerCase().includes(q)):all;
-  box.querySelector(".rtab").innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length}${q?" found":" finished"}</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th><th>Time left</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td><td>${typeof x.left=="number"?pad(Math.floor(x.left/60))+":"+pad(x.left%60):"–"}</td></tr>`).join("")}</table>`:`<p class="meta">${q?"No student with this name.":"No student has finished yet."}</p>`);
+  const all=await store.results(code),fq=resFilter[code],r=fq?all.filter(x=>String(x.name).toLowerCase().includes(fq)):all,box=card.querySelector(".rbox");if(!box)return;
+  box.innerHTML=`<p class="meta">● Live${CLOUD?"":" (this device only. Turn on Online sync to see other devices)"} · ${r.length} finished${fq?` · showing "${gesc(fq)}" <button class="ghost" data-a="tres" data-all="1">Show all</button>`:""}</p>`+(r.length?`<table class="gtab"><tr><th>#</th><th>Student</th><th>Score</th><th>%</th><th>Time left</th></tr>${r.map((x,i)=>`<tr><td>${i+1}</td><td>${gesc(x.name)}</td><td>${x.score}/${x.total}</td><td>${Math.round(x.score/x.total*100)}%</td><td>${typeof x.left=="number"?pad(Math.floor(x.left/60))+":"+pad(x.left%60):"–"}</td></tr>`).join("")}</table>`:`<p class="meta">No student has finished yet.</p>`);
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
