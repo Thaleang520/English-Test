@@ -75,7 +75,7 @@ button{font:inherit;color:inherit}
 .opt.bad{border-color:var(--bad);background:var(--badb);color:var(--bad)}
 .opt.bad .l{background:var(--bad);color:#fff;border-color:var(--bad)}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap}
-.dots{display:flex;gap:8px}
+.dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .dot{width:38px;height:38px;border-radius:50%;padding:0}
 .dot.full{border-color:var(--c1);color:var(--c1)}
 .dot.on{color:#fff;border:0;background:linear-gradient(135deg,var(--c1),var(--c2))}
@@ -630,6 +630,10 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
 @media (max-width:640px){.mini{gap:8px}.mini div{padding:12px 4px 10px}.exq{padding:12px 16px;font-size:.95rem}.pk{min-width:0;padding:10px 4px}.intro .rules li{padding-left:46px}}
 .lnk{display:flex;gap:8px;align-items:stretch}.lnk .fld{flex:1;min-width:0;font-size:.8rem}.lnk .btn{flex:none;white-space:nowrap}
 @media (max-width:480px){.lnk{flex-direction:column}}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}
+.cg .pgrid .tg{position:relative;padding:11px 12px 11px 16px;background:rgba(255,255,255,.03)}
+.cg .pgrid .tg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac);opacity:.7}
+.cg .pgrid .tg:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,transparent)}
 /* ---- structure blocks on the home cards ---- */
 .tc em .stl{display:block;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--c2);margin-bottom:8px}
 .sf{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
@@ -656,7 +660,7 @@ select.fld option{background:#0e0a20;color:#e6f7ff}
 
 /* ---------- 1. SETTINGS ---------- */
 const CONFIG={
-  pages:5,                 // pages in one exam
+  pages:10,                // pages in one exam
   perPage:10,              // questions on each page
   secondsPerPage:120,      // time for ONE page (120 = 2 minutes)
   redAtPercent:30,         // timer is RED when this % (or less) of the time is left
@@ -741,27 +745,27 @@ const has=s=>he(s)?"has":"have";
    f     (subject, verb) => the CORRECT answer
    To add a tense: copy one line, change everything, add a comma. Done.  */
 const TENSES=[
-{id:"ps",  name:"Present Simple",  c1:"#39ff88",c2:"#00f0ff",d:"Habits, routines and facts.",ex:"She plays football every day.",t:["every day","every morning","on Sundays","every weekend"],f:(s,v)=>he(s)?v[1]:v[0]},
-{id:"pc",  name:"Present Continuous",c1:"#00b3ff",c2:"#7a5cff",d:"Actions happening now.",ex:"He is playing football now.",t:["right now","at the moment","now"],f:(s,v)=>be(s)+" "+v[2]},
-{id:"pas", name:"Past Simple",     c1:"#ff9a00",c2:"#ff2b6b",d:"Finished actions in the past.",ex:"She played football yesterday.",t:["yesterday","last week","two days ago","last night"],f:(s,v)=>v[3]},
-{id:"pac", name:"Past Continuous", c1:"#b44cff",c2:"#ff2bd6",d:"Actions in progress in the past.",ex:"He was playing at 8 last night.",t:["at 8 last night","at this time yesterday","all evening yesterday"],f:(s,v)=>was(s)+" "+v[2]},
-{id:"pp",  name:"Present Perfect", c1:"#ff2b4a",c2:"#ffd400",d:"Past actions with a link to now.",ex:"She has played football already.",t:["already","just","so far"],f:(s,v)=>has(s)+" "+v[4]},
-{id:"fs",  name:"Future Simple",   c1:"#00f0ff",c2:"#9dff00",d:"Predictions and decisions with will.",ex:"He will play football tomorrow.",t:["tomorrow","next week","next year","soon"],f:(s,v)=>"will "+v[0]},
-{id:"ppc", name:"Present Perfect Continuous",c1:"#00ffa3",c2:"#00b3ff",d:"Actions that started in the past and continue until now.",ex:"She has been playing football for two hours.",t:["for two hours","all day long","since early morning"],f:(s,v)=>has(s)+" been "+v[2]},
-{id:"pap", name:"Past Perfect",    c1:"#ff6ec7",c2:"#7a5cff",d:"An action finished before another past action.",ex:"He had played football before it rained.",t:["before the teacher arrived","before I called","by the time we got there"],f:(s,v)=>"had "+v[4]},
-{id:"papc",name:"Past Perfect Continuous",c1:"#ffe600",c2:"#ff8a00",d:"A longer action in progress before a past moment.",ex:"She had been playing for two hours before it rained.",t:["for two hours before the rain stopped","all day before he arrived","for a long time before she left"],f:(s,v)=>"had been "+v[2]},
-{id:"fc",  name:"Future Continuous",c1:"#00e5ff",c2:"#2979ff",d:"Actions in progress at a time in the future.",ex:"He will be playing football at 8 tomorrow.",t:["at 8 tomorrow","this time tomorrow","at noon next Monday"],f:(s,v)=>"will be "+v[2]},
-{id:"fp",  name:"Future Perfect",  c1:"#c6ff00",c2:"#00e676",d:"Actions finished before a time in the future.",ex:"She will have played football by Friday.",t:["by tomorrow evening","by next Friday","by the end of the year"],f:(s,v)=>"will have "+v[4]},
-{id:"fpc", name:"Future Perfect Continuous",c1:"#ff1744",c2:"#d500f9",d:"How long an action will have lasted by a future time.",ex:"He will have been playing for two hours by noon.",t:["for two hours by noon tomorrow","for a year by next June","for ten years by 2030"],f:(s,v)=>"will have been "+v[2]},
+{id:"ps",  name:"Present Simple",  c1:"#39ff88",c2:"#00f0ff",d:"Habits, routines and facts.",ex:"She plays football every day.",t:["every day","every morning","on Sundays","every weekend","every evening","twice a week","on Fridays","every summer","once a month"],f:(s,v)=>he(s)?v[1]:v[0]},
+{id:"pc",  name:"Present Continuous",c1:"#00b3ff",c2:"#7a5cff",d:"Actions happening now.",ex:"He is playing football now.",t:["right now","at the moment","now","at this moment","this very minute","at present","at this very second","as we speak"],f:(s,v)=>be(s)+" "+v[2]},
+{id:"pas", name:"Past Simple",     c1:"#ff9a00",c2:"#ff2b6b",d:"Finished actions in the past.",ex:"She played football yesterday.",t:["yesterday","last week","two days ago","last night","last month","last summer","a week ago","last Friday","in 2019"],f:(s,v)=>v[3]},
+{id:"pac", name:"Past Continuous", c1:"#b44cff",c2:"#ff2bd6",d:"Actions in progress in the past.",ex:"He was playing at 8 last night.",t:["at 8 last night","at this time yesterday","all evening yesterday","at 9 yesterday morning","at noon yesterday","at 6 last Sunday","at midnight last night","at this time last week"],f:(s,v)=>was(s)+" "+v[2]},
+{id:"pp",  name:"Present Perfect", c1:"#ff2b4a",c2:"#ffd400",d:"Past actions with a link to now.",ex:"She has played football already.",t:["already","just","so far","recently","lately","many times","several times","more than once"],f:(s,v)=>has(s)+" "+v[4]},
+{id:"fs",  name:"Future Simple",   c1:"#00f0ff",c2:"#9dff00",d:"Predictions and decisions with will.",ex:"He will play football tomorrow.",t:["tomorrow","next week","next year","soon","next month","tomorrow morning","in two days","next Friday","one day"],f:(s,v)=>"will "+v[0]},
+{id:"ppc", name:"Present Perfect Continuous",c1:"#00ffa3",c2:"#00b3ff",d:"Actions that started in the past and continue until now.",ex:"She has been playing football for two hours.",t:["for two hours","all day long","since early morning","for three weeks","since last Monday","since 6 o'clock","all morning","for the whole week"],f:(s,v)=>has(s)+" been "+v[2]},
+{id:"pap", name:"Past Perfect",    c1:"#ff6ec7",c2:"#7a5cff",d:"An action finished before another past action.",ex:"He had played football before it rained.",t:["before the teacher arrived","before I called","by the time we got there","before the bell rang","before the film started","by the time she came","before we left","before the rain began"],f:(s,v)=>"had "+v[4]},
+{id:"papc",name:"Past Perfect Continuous",c1:"#ffe600",c2:"#ff8a00",d:"A longer action in progress before a past moment.",ex:"She had been playing for two hours before it rained.",t:["for two hours before the rain stopped","all day before he arrived","for a long time before she left","for three days before the storm ended","all afternoon before the match started","for a long time before he answered","for a month before the exam began","all morning before the bell rang"],f:(s,v)=>"had been "+v[2]},
+{id:"fc",  name:"Future Continuous",c1:"#00e5ff",c2:"#2979ff",d:"Actions in progress at a time in the future.",ex:"He will be playing football at 8 tomorrow.",t:["at 8 tomorrow","this time tomorrow","at noon next Monday","at 9 tomorrow morning","at this time next week","at midnight tonight","at 5 next Friday","this time next year"],f:(s,v)=>"will be "+v[2]},
+{id:"fp",  name:"Future Perfect",  c1:"#c6ff00",c2:"#00e676",d:"Actions finished before a time in the future.",ex:"She will have played football by Friday.",t:["by tomorrow evening","by next Friday","by the end of the year","by next Monday","by the end of the week","by 10 o'clock tonight","by the end of next month","by July"],f:(s,v)=>"will have "+v[4]},
+{id:"fpc", name:"Future Perfect Continuous",c1:"#ff1744",c2:"#d500f9",d:"How long an action will have lasted by a future time.",ex:"He will have been playing for two hours by noon.",t:["for two hours by noon tomorrow","for a year by next June","for ten years by 2030","for three hours by evening","for a month by next Friday","for two years by December","for five years by 2035","for a week by Sunday"],f:(s,v)=>"will have been "+v[2]},
 /* ---- MIXED TENSES: two tenses in one sentence. The blank is one of them, the time clause already shows the other ---- */
-{id:"pcs", name:"Past Continuous + Past Simple",c1:"#ff7a00",c2:"#ff2bd6",d:"A long action interrupted by a short action.",ex:"She was playing football when the phone rang.",t:[],cl:[{x:"when the phone ___ (ring)",a:"rang",w:["rings","has rung","was ringing"]},{x:"when the teacher ___ (come) in",a:"came",w:["comes","has come","was coming"]},{x:"when it ___ (start) to rain",a:"started",w:["starts","has started","was starting"]},{x:"when the lights ___ (go) out",a:"went",w:["goes","has gone","was going"]}],f:(s,v)=>was(s)+" "+v[2]},
-{id:"pps", name:"Past Simple + Past Perfect",c1:"#7dff3a",c2:"#00c2ff",d:"Two past actions: the first one was already finished.",ex:"She watched TV after she had finished the homework.",t:[],cl:[{x:"after the guests ___ (leave)",a:"had left",w:["left","have left","were leaving"]},{x:"after the rain ___ (stop)",a:"had stopped",w:["stopped","has stopped","was stopping"]},{x:"after the bell ___ (ring)",a:"had rung",w:["rang","has rung","was ringing"]},{x:"after the film ___ (end)",a:"had ended",w:["ended","has ended","was ending"]}],f:(s,v)=>v[3]},
-{id:"fsps",name:"Future Simple + Present Simple",c1:"#00d9ff",c2:"#b44cff",d:"First conditional: if + present, will + verb.",ex:"He will play football if it does not rain.",t:[],cl:[{x:"if it ___ (rain) tomorrow",a:"rains",w:["will rain","rained","is raining"]},{x:"if the teacher ___ (agree)",a:"agrees",w:["will agree","agreed","is agreeing"]},{x:"if the weather ___ (be) good",a:"is",w:["will be","was","has been"]},{x:"if the shop ___ (open) early",a:"opens",w:["will open","opened","is opening"]}],f:(s,v)=>"will "+v[0]},
-{id:"ppps",name:"Present Perfect + Past Simple",c1:"#ff3d71",c2:"#ffb400",d:"Since + a finished past moment: the action continues until now.",ex:"She has played football since she moved here.",t:[],cl:[{x:"since the school ___ (open)",a:"opened",w:["opens","has opened","was opening"]},{x:"since the class ___ (begin)",a:"began",w:["begins","has begun","was beginning"]},{x:"since the club ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"since the shop ___ (close)",a:"closed",w:["closes","has closed","was closing"]}],f:(s,v)=>has(s)+" "+v[4]},
-{id:"cn2", name:"Second Conditional",c1:"#ffd400",c2:"#ff2b6b",d:"Unreal present: if + past simple, would + verb.",ex:"She would play football if she had time.",t:[],cl:[{x:"if she ___ (have) time",a:"had",w:["has","will have","would have"]},{x:"if the weather ___ (be) warmer",a:"were",w:["is","will be","would be"]},{x:"if they ___ (know) the answer",a:"knew",w:["know","will know","would know"]},{x:"if the shop ___ (open) earlier",a:"opened",w:["opens","will open","would open"]}],f:(s,v)=>"would "+v[0]},
-{id:"cn3", name:"Third Conditional",c1:"#b44cff",c2:"#00e5ff",d:"Unreal past: if + past perfect, would have + past participle.",ex:"He would have played football if he had had time.",t:[],cl:[{x:"if the weather ___ (be) better",a:"had been",w:["was","has been","would have been"]},{x:"if she ___ (know) the answer",a:"had known",w:["knew","has known","would have known"]},{x:"if we ___ (leave) earlier",a:"had left",w:["left","have left","would have left"]},{x:"if the bus ___ (come) on time",a:"had come",w:["came","has come","would have come"]}],f:(s,v)=>"would have "+v[4]},
-{id:"fst", name:"Future Simple + Time Clause",c1:"#39ff88",c2:"#ff9a00",d:"Will + verb, but present simple after when, after, before.",ex:"He will play football after the lesson finishes.",t:[],cl:[{x:"when the teacher ___ (arrive)",a:"arrives",w:["will arrive","arrived","is arriving"]},{x:"after the lesson ___ (finish)",a:"finishes",w:["will finish","finished","is finishing"]},{x:"before the bus ___ (leave)",a:"leaves",w:["will leave","left","is leaving"]},{x:"as soon as the rain ___ (stop)",a:"stops",w:["will stop","stopped","is stopping"]}],f:(s,v)=>"will "+v[0]},
-{id:"pcps",name:"Past Perfect Continuous + Past Simple",c1:"#ff6ec7",c2:"#ffe600",d:"A long action in progress, then a past event happened.",ex:"She had been playing for two hours before the rain stopped.",t:[],cl:[{x:"for two hours before the rain ___ (stop)",a:"stopped",w:["stops","has stopped","was stopping"]},{x:"all day before the teacher ___ (come)",a:"came",w:["comes","has come","was coming"]},{x:"for a long time before the match ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"for an hour before the bell ___ (ring)",a:"rang",w:["rings","has rung","was ringing"]}],f:(s,v)=>"had been "+v[2]}
+{id:"pcs", name:"Past Continuous + Past Simple",c1:"#ff7a00",c2:"#ff2bd6",d:"A long action interrupted by a short action.",ex:"She was playing football when the phone rang.",t:[],cl:[{x:"when the phone ___ (ring)",a:"rang",w:["rings","has rung","was ringing"]},{x:"when the teacher ___ (come) in",a:"came",w:["comes","has come","was coming"]},{x:"when it ___ (start) to rain",a:"started",w:["starts","has started","was starting"]},{x:"when the lights ___ (go) out",a:"went",w:["goes","has gone","was going"]},{x:"when the door ___ (open)",a:"opened",w:["opens","has opened","was opening"]},{x:"when the alarm ___ (sound)",a:"sounded",w:["sounds","has sounded","was sounding"]},{x:"when the bus ___ (arrive)",a:"arrived",w:["arrives","has arrived","was arriving"]},{x:"when the storm ___ (begin)",a:"began",w:["begins","has begun","was beginning"]},{x:"when the power ___ (fail)",a:"failed",w:["fails","has failed","was failing"]}],f:(s,v)=>was(s)+" "+v[2]},
+{id:"pps", name:"Past Simple + Past Perfect",c1:"#7dff3a",c2:"#00c2ff",d:"Two past actions: the first one was already finished.",ex:"She watched TV after she had finished the homework.",t:[],cl:[{x:"after the guests ___ (leave)",a:"had left",w:["left","have left","were leaving"]},{x:"after the rain ___ (stop)",a:"had stopped",w:["stopped","has stopped","was stopping"]},{x:"after the bell ___ (ring)",a:"had rung",w:["rang","has rung","was ringing"]},{x:"after the film ___ (end)",a:"had ended",w:["ended","has ended","was ending"]},{x:"after the bus ___ (leave)",a:"had left",w:["left","has left","was leaving"]},{x:"after the lesson ___ (end)",a:"had ended",w:["ended","has ended","was ending"]},{x:"after the sun ___ (set)",a:"had set",w:["set","has set","was setting"]},{x:"after the doors ___ (close)",a:"had closed",w:["closed","have closed","were closing"]},{x:"after the storm ___ (pass)",a:"had passed",w:["passed","has passed","was passing"]}],f:(s,v)=>v[3]},
+{id:"fsps",name:"Future Simple + Present Simple",c1:"#00d9ff",c2:"#b44cff",d:"First conditional: if + present, will + verb.",ex:"He will play football if it does not rain.",t:[],cl:[{x:"if it ___ (rain) tomorrow",a:"rains",w:["will rain","rained","is raining"]},{x:"if the teacher ___ (agree)",a:"agrees",w:["will agree","agreed","is agreeing"]},{x:"if the weather ___ (be) good",a:"is",w:["will be","was","has been"]},{x:"if the shop ___ (open) early",a:"opens",w:["will open","opened","is opening"]},{x:"if the bus ___ (come) late",a:"comes",w:["will come","came","is coming"]},{x:"if it ___ (snow)",a:"snows",w:["will snow","snowed","is snowing"]},{x:"if the team ___ (win)",a:"wins",w:["will win","won","is winning"]},{x:"if he ___ (call) me",a:"calls",w:["will call","called","is calling"]},{x:"if the boss ___ (say) yes",a:"says",w:["will say","said","is saying"]}],f:(s,v)=>"will "+v[0]},
+{id:"ppps",name:"Present Perfect + Past Simple",c1:"#ff3d71",c2:"#ffb400",d:"Since + a finished past moment: the action continues until now.",ex:"She has played football since she moved here.",t:[],cl:[{x:"since the school ___ (open)",a:"opened",w:["opens","has opened","was opening"]},{x:"since the class ___ (begin)",a:"began",w:["begins","has begun","was beginning"]},{x:"since the club ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"since the shop ___ (close)",a:"closed",w:["closes","has closed","was closing"]},{x:"since the bridge ___ (open)",a:"opened",w:["opens","has opened","was opening"]},{x:"since the hotel ___ (close)",a:"closed",w:["closes","has closed","was closing"]},{x:"since the band ___ (form)",a:"formed",w:["forms","has formed","was forming"]},{x:"since the company ___ (move)",a:"moved",w:["moves","has moved","was moving"]},{x:"since the library ___ (reopen)",a:"reopened",w:["reopens","has reopened","was reopening"]}],f:(s,v)=>has(s)+" "+v[4]},
+{id:"cn2", name:"Second Conditional",c1:"#ffd400",c2:"#ff2b6b",d:"Unreal present: if + past simple, would + verb.",ex:"She would play football if she had time.",t:[],cl:[{x:"if she ___ (have) time",a:"had",w:["has","will have","would have"]},{x:"if the weather ___ (be) warmer",a:"were",w:["is","will be","would be"]},{x:"if they ___ (know) the answer",a:"knew",w:["know","will know","would know"]},{x:"if the shop ___ (open) earlier",a:"opened",w:["opens","will open","would open"]},{x:"if he ___ (study) harder",a:"studied",w:["studies","will study","would study"]},{x:"if we ___ (live) near",a:"lived",w:["live","will live","would live"]},{x:"if the bus ___ (come) earlier",a:"came",w:["comes","will come","would come"]},{x:"if they ___ (have) a car",a:"had",w:["have","will have","would have"]},{x:"if she ___ (win) the lottery",a:"won",w:["wins","will win","would win"]}],f:(s,v)=>"would "+v[0]},
+{id:"cn3", name:"Third Conditional",c1:"#b44cff",c2:"#00e5ff",d:"Unreal past: if + past perfect, would have + past participle.",ex:"He would have played football if he had had time.",t:[],cl:[{x:"if the weather ___ (be) better",a:"had been",w:["was","has been","would have been"]},{x:"if she ___ (know) the answer",a:"had known",w:["knew","has known","would have known"]},{x:"if we ___ (leave) earlier",a:"had left",w:["left","have left","would have left"]},{x:"if the bus ___ (come) on time",a:"had come",w:["came","has come","would have come"]},{x:"if he ___ (study) harder",a:"had studied",w:["studied","has studied","would have studied"]},{x:"if the driver ___ (see) the sign",a:"had seen",w:["saw","has seen","would have seen"]},{x:"if they ___ (take) the map",a:"had taken",w:["took","have taken","would have taken"]},{x:"if the team ___ (win) the game",a:"had won",w:["won","has won","would have won"]},{x:"if she ___ (wake) up early",a:"had woken",w:["woke","has woken","would have woken"]}],f:(s,v)=>"would have "+v[4]},
+{id:"fst", name:"Future Simple + Time Clause",c1:"#39ff88",c2:"#ff9a00",d:"Will + verb, but present simple after when, after, before.",ex:"He will play football after the lesson finishes.",t:[],cl:[{x:"when the teacher ___ (arrive)",a:"arrives",w:["will arrive","arrived","is arriving"]},{x:"after the lesson ___ (finish)",a:"finishes",w:["will finish","finished","is finishing"]},{x:"before the bus ___ (leave)",a:"leaves",w:["will leave","left","is leaving"]},{x:"as soon as the rain ___ (stop)",a:"stops",w:["will stop","stopped","is stopping"]},{x:"when the film ___ (end)",a:"ends",w:["will end","ended","is ending"]},{x:"until the bell ___ (ring)",a:"rings",w:["will ring","rang","is ringing"]},{x:"once the guests ___ (arrive)",a:"arrive",w:["will arrive","arrived","are arriving"]},{x:"as soon as the bus ___ (come)",a:"comes",w:["will come","came","is coming"]},{x:"before the class ___ (begin)",a:"begins",w:["will begin","began","is beginning"]}],f:(s,v)=>"will "+v[0]},
+{id:"pcps",name:"Past Perfect Continuous + Past Simple",c1:"#ff6ec7",c2:"#ffe600",d:"A long action in progress, then a past event happened.",ex:"She had been playing for two hours before the rain stopped.",t:[],cl:[{x:"for two hours before the rain ___ (stop)",a:"stopped",w:["stops","has stopped","was stopping"]},{x:"all day before the teacher ___ (come)",a:"came",w:["comes","has come","was coming"]},{x:"for a long time before the match ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"for an hour before the bell ___ (ring)",a:"rang",w:["rings","has rung","was ringing"]},{x:"for three hours before the bus ___ (come)",a:"came",w:["comes","has come","was coming"]},{x:"all morning before the shop ___ (open)",a:"opened",w:["opens","has opened","was opening"]},{x:"for a week before the exam ___ (start)",a:"started",w:["starts","has started","was starting"]},{x:"for two days before the storm ___ (end)",a:"ended",w:["ends","has ended","was ending"]},{x:"for ages before the film ___ (begin)",a:"began",w:["begins","has begun","was beginning"]}],f:(s,v)=>"had been "+v[2]}
 ];
 TENSES.forEach((T,i)=>T.seed=i+1);   // gives every tense its own question order
 /* STRUCTURE shown on the home cards (S = subject, V1 = base verb, V2 = past, V3 = past participle) */
@@ -819,6 +823,8 @@ const cv=T=>`--c1:${T.c1};--c2:${T.c2}`;
 const best=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 const pageOf=i=>Math.floor(i/CONFIG.perPage);
 const pageNums=[...Array(CONFIG.pages).keys()];
+const normPages=p=>{const a=Array.isArray(p)?[...new Set(p.map(Number))].filter(i=>i>=0&&i<CONFIG.pages).sort((x,y)=>x-y):(p===undefined||p===null||p==="all")?[...pageNums]:[+p];return a.length?a:[...pageNums]};
+const pgLabel=p=>{const a=normPages(p);return a.length==CONFIG.pages?"All pages":(a.length==1?"Page ":"Pages ")+a.map(x=>x+1).join(", ")};
 
 function nextLogo(img){                 // try the next picture name, or show the letters
   const i=+img.dataset.i+1;
@@ -844,19 +850,19 @@ function homeScreen(){
 }
 
 function introScreen(){            // the screen with the Start button and page picker
-  const T=S.T,sel=S.sel,fresh=S.fresh;S.fresh=false;
-  const pick=(v,label,small)=>`<button class="pk ${sel===v?"on":""}" data-a="sel" data-v="${v}"><b>${label}</b><small>${small}</small></button>`;
-  const rules=sel=="all"
-   ?[`${TOTAL} questions on ${CONFIG.pages} pages, ${CONFIG.perPage} per page`,`You have ${MINUTES} minutes for each page`,"When time is up, the next page opens by itself","The exam ends when time runs out on the last page, or when you answer every question on it","You cannot go back to a finished page","After each answer you see if it is correct or wrong"]
-   :[`${CONFIG.perPage} questions on page ${sel+1}`,`You have ${MINUTES} minutes for this page`,"The exam ends when time is up, or when you answer every question","After each answer you see if it is correct or wrong"];
+  const T=S.T,sel=S.sel,fresh=S.fresh,n=sel.length,all=n==CONFIG.pages,qn=n*CONFIG.perPage;S.fresh=false;
+  const pick=(v,label,small)=>`<button class="pk ${(v==="all"?all:sel.includes(v))?"on":""}" data-a="sel" data-v="${v}"><b>${label}</b><small>${small}</small></button>`;
+  const rules=n>1
+   ?[`${qn} questions on ${n} pages, ${CONFIG.perPage} per page`,`You have ${MINUTES} minutes for each page`,"When time is up, the next page opens by itself","The exam ends when time runs out on the last page, or when you answer every question on it","You cannot go back to a finished page","After each answer you see if it is correct or wrong"]
+   :[`${CONFIG.perPage} questions on page ${sel[0]+1}`,`You have ${MINUTES} minutes for this page`,"The exam ends when time is up, or when you answer every question","After each answer you see if it is correct or wrong"];
   app.innerHTML=`<div style="${cv(T)}"><div class="th" style="padding-top:6px"><button class="ghost" data-a="home">← Home</button></div>
   <div class="intro${fresh?" enter":""}"><span class="tag">Ready?</span><h2>${T.name} Exam</h2><p class="sub">${T.d}</p><div class="exq"><small>Example</small>${T.ex}</div>
-  <div class="mini"><div><b>${sel=="all"?TOTAL:CONFIG.perPage}</b><span>Questions</span></div><div><b>${sel=="all"?CONFIG.pages:1}</b><span>${sel=="all"?"Pages":"Page"}</span></div><div><b>${MINUTES}</b><span>Min per page</span></div></div>
+  <div class="mini"><div><b>${qn}</b><span>Questions</span></div><div><b>${n}</b><span>${n>1?"Pages":"Page"}</span></div><div><b>${MINUTES}</b><span>Min per page</span></div></div>
   <div class="cw"><small>Time per page</small><div class="clock big">${clock(SECS)}</div></div>
-  <div class="pkh" ${S.group?"hidden":""}>Choose a page</div>
+  <div class="pkh" ${S.group?"hidden":""}>Choose pages (tap more than one)</div>
   <div class="pks" ${S.group?"hidden":""}>${pick("all","All pages",TOTAL+" questions")}${pageNums.map(i=>pick(i,"Page "+(i+1),"Q "+(i*CONFIG.perPage+1)+"–"+(i+1)*CONFIG.perPage)).join("")}</div>
   <ul class="rules">${rules.map(r=>`<li>${r}</li>`).join("")}</ul>
-  <span class="cta-wrap"><button class="cta-btn start-btn" data-a="start"><span class="st"><b>${sel=="all"?"Start Full Exam":"Start Page "+(sel+1)}</b><small>${sel=="all"?TOTAL+" questions · "+MINUTES+" min per page":CONFIG.perPage+" questions · "+MINUTES+" min"}</small></span><span class="cta-a">→</span></button></span></div></div>`;
+  <span class="cta-wrap"><button class="cta-btn start-btn" data-a="start"><span class="st"><b>${all?"Start Full Exam":n==1?"Start Page "+(sel[0]+1):"Start "+n+" Pages"}</b><small>${n>1?qn+" questions · "+MINUTES+" min per page":CONFIG.perPage+" questions · "+MINUTES+" min"}</small></span><span class="cta-a">→</span></button></span></div></div>`;
 }
 
 function examScreen(){
@@ -897,11 +903,11 @@ const scoreOf=()=>S.Q.reduce((x,q,i)=>x+(S.list.includes(pageOf(i))&&S.ans[i]===
 function openExam(id,run,sel){                    // go to the start screen of a tense
   const T=TENSES.find(x=>x.id==id);if(!T)return homeScreen();
   if(S)clearInterval(S.timer);
-  S={T,run:run||0,sel:sel===undefined?"all":sel,p:0,ans:{},done:false,started:false,fresh:true};
+  S={T,run:run||0,sel:sel===undefined?[0]:normPages(sel),p:0,ans:{},done:false,started:false,fresh:true};
   S.Q=build(T,S.run);examScreen();scrollTo(0,0);
 }
 function startExam(){
-  S.list=S.sel=="all"?pageNums:[S.sel];S.last=S.list[S.list.length-1];S.p=S.list[0];
+  S.list=normPages(S.sel);S.last=S.list[S.list.length-1];S.p=S.list[0];
   S.started=true;S.end=Date.now()+SECS*1000;S.timer=setInterval(tick,250);examScreen();scrollTo(0,0);
 }
 function tick(){                                   // runs 4 times a second while the timer is on
@@ -912,7 +918,7 @@ function tick(){                                   // runs 4 times a second whil
   if(l<=0)nextPage(true);
 }
 function nextPage(timeUp){                         // go to next page, or finish after the last one
-  if(S.p<S.last){S.note=timeUp?`Time is up for page ${S.p+1}. Page ${S.p+2} has started.`:"";S.p++;S.end=Date.now()+SECS*1000;examScreen();scrollTo(0,0)}
+  if(S.p<S.last){S.note=timeUp?`Time is up for page ${S.p+1}. Page ${S.p+2} has started.`:"";S.p=S.list[S.list.indexOf(S.p)+1];S.end=Date.now()+SECS*1000;examScreen();scrollTo(0,0)}
   else{S.timeout=timeUp;finishExam()}
 }
 function autoFinish(){                             // last page fully answered -> end the exam after a short pause (so you still see the last answer)
@@ -924,7 +930,7 @@ function autoFinish(){                             // last page fully answered -
 }
 function finishExam(){
   clearInterval(S.timer);S.left=secLeft();S.done=true;S.p=S.list[0];
-  const sc=scoreOf(),key="best-"+S.T.id+(S.sel=="all"?"":"-p"+S.sel);
+  const sc=scoreOf(),key="best-"+S.T.id+(S.sel.length==CONFIG.pages?"":"-p"+S.sel.join("_"));
   if(S.group)saveGroupResult(S,sc);else try{if(sc>(+localStorage.getItem(key)||0))localStorage.setItem(key,sc)}catch(e){}
   examScreen();scrollTo(0,0);
 }
@@ -968,7 +974,13 @@ document.addEventListener("click",e=>{
   if(a=="open"){openWithFx(b,e);return}
   if(a=="home"){if(S&&S.group){clearInterval(S.timer);S=null;nav("login");return}location.hash="";if(!location.hash)homeScreen();return}
   if(!S)return;
-  if(a=="sel"){S.sel=b.dataset.v=="all"?"all":+b.dataset.v;examScreen();return}
+  if(a=="sel"){const v=b.dataset.v;
+    if(v=="all")S.sel=[...pageNums];
+    else{const i=+v;
+      if(S.sel.length==CONFIG.pages)S.sel=[i];
+      else if(S.sel.includes(i)){if(S.sel.length>1)S.sel=S.sel.filter(x=>x!=i)}
+      else S.sel=[...S.sel,i].sort((x,y)=>x-y)}
+    examScreen();return}
   if(a=="start"){startWithFx(b,e);return}
   if(a=="pick"){const n=+b.dataset.n;if(S.done||S.ans[n]!==undefined)return;S.ans[n]=+b.dataset.j;autoFinish();const y=scrollY;examScreen();scrollTo(0,y);return}
   if(a=="submit"){
@@ -976,8 +988,8 @@ document.addEventListener("click",e=>{
     finishExam();return}
   if(a=="retry"){openExam(S.T.id,S.run+1,S.sel);return}
   if(a=="go")S.p=+b.dataset.p;
-  else if(a=="next"){if(!S.done){nextPage(false);return}S.p=Math.min(S.last,S.p+1)}
-  else if(a=="prev")S.p=Math.max(S.list[0],S.p-1);
+  else if(a=="next"){if(!S.done){nextPage(false);return}S.p=S.list[Math.min(S.list.length-1,S.list.indexOf(S.p)+1)]}
+  else if(a=="prev")S.p=S.list[Math.max(0,S.list.indexOf(S.p)-1)];
   examScreen();scrollTo(0,0);
 });
 
@@ -1005,9 +1017,9 @@ function filterTenses(v){                          // search bar: hide cards tha
   if(g)g.classList.toggle("filtered",!!v);if(no)no.hidden=n>0;
 }
 document.addEventListener("input",e=>{if(e.target.id=="q")filterTenses(e.target.value)});
-const tcount=()=>{const c=document.getElementById("tcount");if(c)c.textContent=document.querySelectorAll(".tgrid input:checked").length+" selected"};
-document.addEventListener("change",e=>{if(e.target.closest&&e.target.closest(".tgrid"))tcount()});
-document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("[data-a=tall],[data-a=tnone]"))setTimeout(tcount,0)});
+const tcount=()=>{const c=document.getElementById("tcount"),d=document.getElementById("pcount");if(c)c.textContent=document.querySelectorAll(".tgrid input:checked").length+" selected";if(d)d.textContent=document.querySelectorAll(".pgrid input:checked").length+" selected"};
+document.addEventListener("change",e=>{if(e.target.closest&&e.target.closest(".tgrid,.pgrid"))tcount()});
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("[data-a=tall],[data-a=tnone],[data-a=pall],[data-a=pnone]"))setTimeout(tcount,0)});
 document.addEventListener("keydown",e=>{const q=document.getElementById("q");        // press / to jump to the search bar
   if(e.key=="/"&&q&&document.activeElement!==q){e.preventDefault();q.focus()}
   else if(e.key=="Escape"&&q&&document.activeElement===q){q.value="";filterTenses("");q.blur()}});
@@ -1050,13 +1062,21 @@ const gesc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"
 const ghash=x=>{let h=7;for(const c of x)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0};
 const ALPH="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 /* The code itself carries the exam: 12 bits = tenses, 3 bits = page, 15 bits = random. Any device can read it, no database needed. */
-function mkExamCode(ids,page){
-  let mask=0,ext=0;TENSES.forEach((t,i)=>{if(ids.includes(t.id)){if(i<12)mask|=1<<i;else ext|=1<<(i-12)}});
-  const pv=page=="all"?7:+page,n=((mask<<18)|(pv<<15)|(ext<<7)|Math.floor(Math.random()*128))>>>0;
-  let c="";for(let i=5;i>=0;i--)c+=ALPH[(n>>>(i*5))&31];return c;
+function mkExamCode(ids,pages){
+  let mask=0,ext=0,pm=0;TENSES.forEach((t,i)=>{if(ids.includes(t.id)){if(i<12)mask|=1<<i;else ext|=1<<(i-12)}});
+  normPages(pages).forEach(i=>pm|=1<<i);
+  const n=mask*268435456+ext*1048576+pm*1024+Math.floor(Math.random()*1024);   // 12 + 8 + 10 + 10 bits = 8 characters
+  let c="";for(let i=7;i>=0;i--)c+=ALPH[Math.floor(n/Math.pow(32,i))%32];return c;
 }
 function readExamCode(c){
-  if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c))return null;
+  if(/^[A-HJ-NP-Z2-9]{8}$/.test(c)){
+    let n=0;for(const ch of c)n=n*32+ALPH.indexOf(ch);
+    const pm=Math.floor(n/1024)%1024,ext=Math.floor(n/1048576)%256,mask=Math.floor(n/268435456)%4096;
+    if((!mask&&!ext)||!pm)return null;
+    const pages=pageNums.filter(i=>pm&(1<<i));
+    return {code:c,name:"Class exam",tenses:TENSES.filter((t,i)=>i<12?mask&(1<<i):ext&(1<<(i-12))).map(t=>t.id),page:pages.length==CONFIG.pages?"all":pages,created:0,closed:false};
+  }
+  if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c))return null;      // old 6-character codes still work
   let n=0;for(const ch of c)n=n*32+ALPH.indexOf(ch);
   const mask=Math.floor(n/262144)&4095,pv=Math.floor(n/32768)&7,ext=Math.floor(n/128)&255;
   if((!mask&&!ext)||(pv>4&&pv!=7))return null;
@@ -1080,7 +1100,7 @@ function buildGroup(g,ts){            // same code = same questions for every st
 function openGroupExam(g,name,key){
   const ts=TENSES.filter(t=>g.tenses.includes(t.id));
   const P={id:"grp",name:g.name,d:ts.map(t=>t.name).join(" · "),ex:"Student: "+name,c1:ts[0].c1,c2:ts[0].c2};
-  S={T:P,run:0,sel:g.page,p:0,ans:{},done:false,started:false,fresh:true,group:g,student:name,key};
+  S={T:P,run:0,sel:normPages(g.page),p:0,ans:{},done:false,started:false,fresh:true,group:g,student:name,key};
   S.Q=buildGroup(g,ts);examScreen();scrollTo(0,0);
 }
 function saveGroupResult(St,sc){
@@ -1098,7 +1118,7 @@ function loginScreen(){
   leaveExam();
   app.innerHTML=`${topBar()}<div class="panel"><span class="tag">Student</span><h2>Exam login</h2><p class="sub2">Enter your name and the code from your teacher.</p>
   <label class="l" for="gname">Your name</label><input class="fld" id="gname" autocomplete="name" placeholder="Your full name">
-  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN&&JOIN.c||""}" placeholder="ABC123" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
+  <label class="l" for="gcode">Group code</label><input class="fld" id="gcode" maxlength="8" value="${JOIN&&JOIN.c||""}" placeholder="ABC12345" style="text-transform:uppercase;letter-spacing:.2em" autocapitalize="characters">
   <p class="gerr" id="gerr"></p><button class="cta-btn start-btn" data-a="glogin"><span class="st"><b>Enter exam</b></span><span class="cta-a">→</span></button></div>`;
   scrollTo(0,0);
 }
@@ -1129,12 +1149,13 @@ async function teacherScreen(focus){      // focus: undefined = go to top, true 
   <div class="step"><i>2</i><b>Exam tenses</b><span id="tcount">0 selected</span></div>
   <div class="tgrid">${TENSES.map(t=>`<label class="tg" style="--tc:${t.c1}"><input type="checkbox" value="${t.id}">${t.name}</label>`).join("")}</div>
   <div class="gbar"><button class="ghost" data-a="tall">Select all</button><button class="ghost" data-a="tnone">Clear</button></div>
-  <div class="step"><i>3</i><b>Pages for students</b></div>
-  <select class="fld" id="tp"><option value="all">All pages (${TOTAL} questions)</option>${pageNums.map(i=>`<option value="${i}">Page ${i+1} only (${CONFIG.perPage} questions)</option>`).join("")}</select>
+  <div class="step"><i>3</i><b>Pages for students (pick any pages)</b><span id="pcount">1 selected</span></div>
+  <div class="pgrid">${pageNums.map(i=>`<label class="tg" style="--tc:var(--ac)"><input type="checkbox" value="${i}"${i==0?" checked":""}>Page ${i+1}</label>`).join("")}</div>
+  <div class="gbar"><button class="ghost" data-a="pall">All pages</button><button class="ghost" data-a="pnone">Clear</button></div>
   <p class="gerr" id="terr"></p><button class="btn p big" data-a="tmake">Create group</button></div>
   <div class="panel"><h2>My groups</h2>${gs.length?"":`<p class="sub2">No groups yet.</p>`}
   ${gs.map(g=>`<div class="gcard" data-c="${g.code}"><div class="gtop"><h3>${gesc(g.name)}${g.closed?" (closed)":""}</h3><span class="gcode">${g.code}</span></div>
-  <div class="meta">${gesc(names(g))} · ${g.page=="all"?"All pages":"Page "+(+g.page+1)}</div>
+  <div class="meta">${gesc(names(g))} · ${pgLabel(g.page)}</div>
   <label class="l">Student link (tap Copy, then send it to your students)</label>
   <div class="lnk"><input class="fld" readonly value="${gesc(linkOf(g))}" onfocus="this.select()"><button class="btn p" data-a="tcopy">Copy link</button></div>
   <div class="gbar"><button class="ghost" data-a="tres">Results</button><button class="ghost" data-a="timport">Add result code</button><button class="ghost" data-a="tclose">${g.closed?"Reopen":"Close"}</button><button class="ghost dng" data-a="tdel">Delete</button></div><div class="rbox"></div></div>`).join("")}</div>`;
@@ -1144,16 +1165,19 @@ async function teacherScreen(focus){      // focus: undefined = go to top, true 
   else scrollTo(0,0);
 }
 async function teacherAction(a,b){
-  const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")];
+  const $=id=>document.getElementById(id),boxes=()=>[...document.querySelectorAll(".tgrid input")],pboxes=()=>[...document.querySelectorAll(".pgrid input")];
   if(a=="tall"){boxes().forEach(x=>x.checked=true);return}
   if(a=="tnone"){boxes().forEach(x=>x.checked=false);return}
+  if(a=="pall"){pboxes().forEach(x=>x.checked=true);return}
+  if(a=="pnone"){pboxes().forEach(x=>x.checked=false);return}
   
   if(a=="tmake"){
-    const name=$("tn").value.trim(),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pg=$("tp").value;
+    const name=$("tn").value.trim(),tenses=boxes().filter(x=>x.checked).map(x=>x.value),e=$("terr"),pages=pboxes().filter(x=>x.checked).map(x=>+x.value),pg=pages.length==CONFIG.pages?"all":pages;
     if(!name){e.textContent="Enter a group name.";return}
     if(!tenses.length){e.textContent="Choose at least one tense for the exam.";return}
+    if(!pages.length){e.textContent="Choose at least one page.";return}
     let code;do{code=mkExamCode(tenses,pg)}while(await store.group(code));
-    await store.saveGroup({code,name,tenses,page:pg=="all"?"all":+pg,created:Date.now(),closed:false});teacherScreen(code);return;
+    await store.saveGroup({code,name,tenses,page:pg,created:Date.now(),closed:false});teacherScreen(code);return;
   }
   if(a=="tcloudsave"){let u=$("tcloud").value.trim().replace(/\/+$/,"");const e=$("cerr");
     if(u&&!/^(https:\/\/|http:\/\/localhost)/.test(u)){e.textContent="The URL must start with https://";return}
@@ -1228,7 +1252,7 @@ document.addEventListener("click",e=>{
   if(a=="tologin")nav("login");
   else if(a=="toteacher")nav("teacher");
   else if(a=="glogin")doLogin();
-  else if(/^t(all|none|make|res|close|del|link|copy|cloudsave|import)$/.test(a))teacherAction(a,b);
+  else if(/^(t(all|none|make|res|close|del|link|copy|cloudsave|import)|pall|pnone)$/.test(a))teacherAction(a,b);
 });
 document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.id=="gcode")doLogin()});
 
