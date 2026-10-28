@@ -865,7 +865,7 @@ function examScreen(){
   const left=done?S.left:secLeft(), first=S.list[0];
   let h=`<div class="top" style="${cv(T)}"><div class="th"><button class="ghost" data-a="home">← Home</button>
     <div style="flex:1;min-width:0"><b>${T.name}</b><br><small>Page ${p+1} of ${CONFIG.pages} · Questions ${p*CONFIG.perPage+1}–${(p+1)*CONFIG.perPage}</small></div>
-    ${S.group&&!done?`<button class="btn p" data-a="submit">Finish exam</button>`:""}</div>
+    </div>
     <div class="bar"><i style="width:${cnt/tot*100}%"></i></div><div class="pct">${cnt}/${tot} answered · ${MINUTES} minutes per page</div></div>
     <div style="${cv(T)}">${S.note&&!done?`<div class="note">${S.note}</div>`:""}`;
   if(done){                                       // result box
